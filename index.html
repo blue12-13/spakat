@@ -1,0 +1,5359 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <title>sori ganggu</title>
+</head>
+<body>
+  <h1>
+    
+  </h1>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CLASS IXH</title>
+  <style>
+    :root {
+      --bg: #4aa3df;
+      --card: #f7f9fc;
+      --text: #24356f;
+      --muted: #66758f;
+      --line: #d7e0ec;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(180deg, #6eb8ea, #3f97d6);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .app { max-width: 480px; margin: 0 auto; padding: 18px 14px 32px; }
+    .topbar { display: flex; align-items: center; gap: 10px; min-height: 46px; }
+    h1 { color: white; font-size: 30px; line-height: 1; }
+    .sub { color: rgba(255,255,255,.9); font-size: 13px; margin-top: 4px; }
+    .back {
+      width: 40px; height: 40px; border: none; border-radius: 12px;
+      background: white; color: var(--text); font-size: 20px; cursor: pointer;
+    }
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+    .tab {
+      border: none; border-radius: 999px; padding: 9px 8px;
+      background: rgba(255,255,255,.22); color: white; font-weight: 700; cursor: pointer;
+    }
+    .tab.active { background: white; color: var(--text); }
+    .card {
+      background: var(--card); border-radius: 26px;
+      box-shadow: 0 10px 24px rgba(20, 58, 102, .16); padding: 6px 16px;
+    }
+    .head { display: flex; justify-content: space-between; color: #7d8cac; font-size: 17px; padding: 12px 0 4px; }
+    .item { padding: 16px 0 18px; }
+    .item + .item { border-top: 1px solid var(--line); }
+    .nama { font-size: 20px; font-weight: 800; }
+    .isi {
+      margin-top: 8px; color: var(--muted); font-size: 16px; line-height: 1.45;
+      white-space: pre-wrap; user-select: text; -webkit-user-select: text;
+    }
+    .isi.kosong { color: #a9b6cb; }
+    .salin {
+      margin-top: 10px; border: none; border-radius: 10px;
+      background: #e7eef8; color: var(--text); font-weight: 700; padding: 8px 12px; cursor: pointer;
+    }
+    .section-title { color: white; text-align: center; font-size: 34px; margin: 4px 0 12px; }
+    .day { display: grid; grid-template-columns: 92px 1fr auto; gap: 8px; padding: 14px 0; align-items: start; }
+    .day + .day { border-top: 1px solid var(--line); }
+    .day strong { font-size: 18px; }
+    .slot { display: grid; gap: 7px; font-size: 16px; }
+    .time { text-align: right; }
+    .list { display: flex; flex-direction: column; gap: 12px; }
+    .pick {
+      width: 100%; border: none; background: var(--card); color: var(--text);
+      border-radius: 18px; box-shadow: 0 8px 20px rgba(20, 58, 102, .14);
+      padding: 18px; display: flex; justify-content: space-between; align-items: center;
+      text-align: left; cursor: pointer;
+    }
+    .pick b { display: block; font-size: 18px; }
+    .pick span { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+    .lembar {
+      background: white; border-radius: 22px; min-height: 70vh;
+      box-shadow: 0 10px 24px rgba(20, 58, 102, .16); padding: 20px;
+    }
+    .lembar .isi { color: #243047; font-size: 17px; min-height: 48vh; }
+    .toast {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      background: #1d2b52; color: white; border-radius: 999px; padding: 10px 14px;
+      opacity: 0; transition: .2s ease;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <button class="back" id="backBtn" hidden aria-label="Kembali">←</button>
+      <div>
+        <h1 id="title">CLASS IXH</h1>
+        <p class="sub" id="subtitle">tulis tugas dan catatan di kode</p>
+      </div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="tugas">Tugas</button>
+      <button class="tab" data-tab="jadwal">Jadwal</button>
+      <button class="tab" data-tab="catatan">Rangkuman</button>
+    </div>
+    <div id="content"></div>
+  </div>
+  <div class="toast" id="toast">Tersalin</div>
+
+  <div id="sumber-tugas" hidden>
+    <div data-id="bindo">
+      <!-- TULIS TUGAS B.INDO DI BAWAH INI -->
+
+      <!-- SELESAI TUGAS B.INDO -->
+    </div>
+    <div data-id="bing">
+      <!-- TULIS TUGAS B.ING DI BAWAH INI -->
+merangkum/menulis foto yg dikirim kiki di grup
+      <!-- SELESAI TUGAS B.ING -->
+    </div>
+    <div data-id="bjawa">
+      <!-- TULIS TUGAS B.JAWA DI BAWAH INI -->
+      penampilan drama/crita dengan kelompok masing² pada rabu besok/7/10/26
+      <!-- SELESAI TUGAS B.JAWA -->
+    </div>
+    <div data-id="ipa">
+      <!-- TULIS TUGAS IPA DI BAWAH INI -->
+
+      <!-- SELESAI TUGAS IPA -->
+    </div>
+    <div data-id="ips">
+      <!-- TULIS TUGAS IPS DI BAWAH INI -->
+
+      <!-- SELESAI TUGAS IPS -->
+    </div>
+    <div data-id="mtk">
+      <!-- TULIS TUGAS MTK DI BAWAH INI -->
+mengerjakan lks halaman 68 nomor.5 dan 7
+      <!-- SELESAI TUGAS MTK -->
+    </div>
+    <div data-id="pag">
+      <!-- TULIS TUGAS PAG DI BAWAH INI -->
+      menulis tentang kasih sayang yg sudah di kirim di grup. usahakan selesai sampai rabu besok
+      <!-- SELESAI TUGAS PAG -->
+    </div>
+    <div data-id="pan">
+      <!-- TULIS TUGAS PAN DI BAWAH INI -->
+
+      <!-- SELESAI TUGAS PAN -->
+    </div>
+    <div data-id="penjas">
+      <!-- TULIS TUGAS PENJAS DI BAWAH INI -->
+berenang gaya punggung pada hari jumat dengan 9C
+      <!-- SELESAI TUGAS PENJAS -->
+    </div>
+    <div data-id="tik">
+      <!-- TULIS TUGAS TIK DI BAWAH INI -->
+      mencari 10 akun brita di instagram dan 10 situs brita sampai selasa dan membuat brita seperti jurnalis. di uplod di instagram tag @spentuci.official #mediapers9H
+      <!-- SELESAI TUGAS TIK -->
+    </div>
+    <div data-id="sbd">
+      <!-- TULIS TUGAS SBD DI BAWAH INI -->
+
+      <!-- SELESAI TUGAS SBD -->
+    </div>
+  </div>
+
+  <div id="nama-materi" hidden>
+    <!--
+      GANTI NAMA SATU KOTAK SAJA DI SINI.
+      Setiap pelajaran punya 10 nama sendiri.
+      Ubah tulisan di antara tanda > dan < .
+      Jangan mengganti lewat cari-ganti semua, karena dulu tulisannya sama jadi ikut terganti.
+      Contoh hanya B.INDO kotak pertama: materi B.INDO 1 diganti Puisi
+    -->
+    <div data-id="bindo">
+      <!-- GANTI NAMA MATERI B.INDO SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">DEMI KELUARGA</span>
+      <span data-no="1">BUKU² BERCERITA</span>
+      <span data-no="2">KOMUNIKASI UJUNG JARI</span>
+      <span data-no="3">materi B.INDO 4</span>
+      <span data-no="4">materi B.INDO 5</span>
+      <span data-no="5">materi B.INDO 6</span>
+      <span data-no="6">materi B.INDO 7</span>
+      <span data-no="7">materi B.INDO 8</span>
+      <span data-no="8">materi B.INDO 9</span>
+      <span data-no="9">materi B.INDO 10</span>
+    </div>
+    <div data-id="bing">
+      <!-- GANTI NAMA MATERI B.ING SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">CELEBRATORY EXPRSSION</span>
+      <span data-no="1">DECISIVE EXPRSSION</span>
+      <span data-no="2">REPORT TEXT</span>
+      <span data-no="3">PASSIVE VOICE</span>
+      <span data-no="4">CONTINVOUS TENSES</span>
+      <span data-no="5">PERESENT AND PAST PRFRCT TENSES</span>
+      <span data-no="6">CONJUNTION</span>
+      <span data-no="7">QUESTION TAG</span>
+      <span data-no="8">DAILY EXPRESSION</span>
+      <span data-no="9">materi B.ING 10</span>
+    </div>
+    <div data-id="bjawa">
+      <!-- GANTI NAMA MATERI B.JAWA SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">CERITA WAYANG RAMAYANA LAKON ANOMAN DUTA</span>
+      <span data-no="1">AKSARA JAWA REKAN DAN MURDA</span>
+      <span data-no="2">GEGURITAN</span>
+      <span data-no="3">SERAT WULANGREH PUPUH DURMA</span>
+      <span data-no="4">SERAT WULANGREH PUPUH DHANDHANGGULA</span>
+      <span data-no="5">TEKS SESORAH</span>
+      <span data-no="6">TEKS SANDHIWARA</span>
+      <span data-no="7">TEKS DESKRIPSI UPACARA ADAT</span>
+      <span data-no="8">materi B.JAWA 9</span>
+      <span data-no="9">materi B.JAWA 10</span>
+    </div>
+    <div data-id="ipa">
+      <!-- GANTI NAMA MATERI IPA SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">TEKANAN ZAT PADAT</span>
+      <span data-no="1">TEKANAN ZAT CAIR</span>
+      <span data-no="2">TEKANAN ZAT GAS</span>
+      <span data-no="3">HUKUM PASCAL</span>
+      <span data-no="4">HUKUM ARCHIMEDES</span>
+      <span data-no="5">BEJANA BRHUBUNGAN</span>
+      <span data-no="6">KELISTRIKAN</span>
+      <span data-no="7">materi IPA 8</span>
+      <span data-no="8">materi IPA 9</span>
+      <span data-no="9">materi IPA 10</span>
+    </div>
+    <div data-id="ips">
+      <!-- GANTI NAMA MATERI IPS SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">PERKEMBANGAN EKONOMI DIGITAL</span>
+      <span data-no="1">MANUSIA DAN PRUBAHA</span>
+      <span data-no="2">materi IPS 3</span>
+      <span data-no="3">materi IPS 4</span>
+      <span data-no="4">materi IPS 5</span>
+      <span data-no="5">materi IPS 6</span>
+      <span data-no="6">materi IPS 7</span>
+      <span data-no="7">materi IPS 8</span>
+      <span data-no="8">materi IPS 9</span>
+      <span data-no="9">materi IPS 10</span>
+    </div>
+    <div data-id="mtk">
+      <!-- GANTI NAMA MATERI MTK SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">BILANGAN BERPANGKAT DAN BENTUK AKAR</span>
+      <span data-no="1">TRANSFORMASI GEOMETRI</span>
+      <span data-no="2">KESEBANGUNAN DAN KONGRUENSI</span>
+      <span data-no="3">materi MTK 4</span>
+      <span data-no="4">materi MTK 5</span>
+      <span data-no="5">materi MTK 6</span>
+      <span data-no="6">materi MTK 7</span>
+      <span data-no="7">materi MTK 8</span>
+      <span data-no="8">materi MTK 9</span>
+      <span data-no="9">materi MTK 10</span>
+    </div>
+    <div data-id="pag">
+      <!-- GANTI NAMA MATERI PAG SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">SEMANGAT KEILMUAN</span>
+      <span data-no="1">IMAN KEPADA HARI AKHIR</span>
+      <span data-no="2">KASIH SAYANG TRHADAP SESAMA</span>
+      <span data-no="3">PENYEMBELIHAN HEWAN KURBAN DAN AKIKAH</span>
+      <span data-no="4">PERADABAN DINASTI SAFAWI</span>
+      <span data-no="5">materi PAG 6</span>
+      <span data-no="6">materi PAG 7</span>
+      <span data-no="7">materi PAG 8</span>
+      <span data-no="8">materi PAG 9</span>
+      <span data-no="9">materi PAG 10</span>
+    </div>
+    <div data-id="pan">
+      <!-- GANTI NAMA MATERI PAN SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">HUBUANGAN PANCASILA & UUDNRI T1945 BTI & NKRI</span>
+      <span data-no="1">HAK & KEWAJIBAN WARGA NEGARA</span>
+      <span data-no="2">KEMERDEKAAN BERPENDAPAT</span>
+      <span data-no="3">materi PAN 4</span>
+      <span data-no="4">materi PAN 5</span>
+      <span data-no="5">materi PAN 6</span>
+      <span data-no="6">materi PAN 7</span>
+      <span data-no="7">materi PAN 8</span>
+      <span data-no="8">materi PAN 9</span>
+      <span data-no="9">materi PAN 10</span>
+    </div>
+    <div data-id="penjas">
+      <!-- GANTI NAMA MATERI PENJAS SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">BOLA VOLI</span>
+      <span data-no="1">TENIS MEJA</span>
+      <span data-no="2">LEMPAR CAKRAM</span>
+      <span data-no="3">KEBUGARAN JASMANI</span>
+      <span data-no="4">RENANG G.PUNGGUNG</span>
+      <span data-no="5">materi PENJAS 6</span>
+      <span data-no="6">materi PENJAS 7</span>
+      <span data-no="7">materi PENJAS 8</span>
+      <span data-no="8">materi PENJAS 9</span>
+      <span data-no="9">materi PENJAS 10</span>
+    </div>
+    <div data-id="tik">
+      <!-- GANTI NAMA MATERI TIK SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">MEDIA PERS DIGITAL</span>
+      <span data-no="1">INFORMASI PRIBADI & HUKUM PRIVASI</span>
+      <span data-no="2">PSEUDOCODE</span>
+      <span data-no="3">materi TIK 4</span>
+      <span data-no="4">materi TIK 5</span>
+      <span data-no="5">materi TIK 6</span>
+      <span data-no="6">materi TIK 7</span>
+      <span data-no="7">materi TIK 8</span>
+      <span data-no="8">materi TIK 9</span>
+      <span data-no="9">materi TIK 10</span>
+    </div>
+    <div data-id="sbd">
+      <!-- GANTI NAMA MATERI SBD SAJA. Ubah tulisan di antara > dan < -->
+      <span data-no="0">KONSEP KREASI TARI</span>
+      <span data-no="1">EKSPLORASI GERAK TARI</span>
+      <span data-no="2">materi SBD 3</span>
+      <span data-no="3">materi SBD 4</span>
+      <span data-no="4">materi SBD 5</span>
+      <span data-no="5">materi SBD 6</span>
+      <span data-no="6">materi SBD 7</span>
+      <span data-no="7">materi SBD 8</span>
+      <span data-no="8">materi SBD 9</span>
+      <span data-no="9">materi SBD 10</span>
+    </div>
+  </div>
+
+  <div id="sumber-catatan" hidden>
+    <div data-id="bindo-0">
+      <!-- TULIS CATATAN B.INDO MATERI 1 DI BAWAH INI -->
+A. Memahami Isi Teks Deskripsi
+1. Pengertian
+
+Teks deskripsi adalah teks yang menggambarkan suatu objek secara jelas, rinci, dan seolah-olah pembaca dapat melihat, mendengar, atau merasakan objek tersebut.
+
+Objek yang dideskripsikan dapat berupa:
+
+orang/tokoh,
+tempat,
+benda,
+hewan,
+tumbuhan,
+suasana,
+atau suatu peristiwa.
+2. Tujuan
+
+Tujuan teks deskripsi adalah memberikan gambaran yang jelas kepada pembaca mengenai suatu objek sehingga pembaca dapat membayangkan objek tersebut.
+
+3. Ciri-ciri
+Menggambarkan objek secara khusus dan rinci.
+Menggunakan banyak kata sifat.
+Menggambarkan keadaan yang dapat ditangkap oleh pancaindra.
+Membuat pembaca seolah-olah melihat atau merasakan objek.
+Fokus pada satu objek atau bagian tertentu.
+4. Struktur
+
+Umumnya terdiri atas:
+
+Identifikasi → mengenalkan objek yang akan dideskripsikan.
+Deskripsi bagian → menjelaskan ciri, bagian, sifat, atau keadaan objek secara rinci.
+Simpulan/kesan → berisi kesan atau gambaran umum terhadap objek jika diperlukan.
+B. Mengidentifikasi Sudut Pandang dalam Teks Deskripsi
+
+Sudut pandang adalah posisi atau cara penulis dalam menyampaikan suatu teks.
+
+1. Sudut pandang orang pertama
+
+Penulis seolah-olah terlibat langsung dalam teks.
+
+Ciri:
+
+menggunakan aku, saya, kami, kita.
+
+Contoh:
+
+Aku melihat taman itu sangat indah.
+
+2. Sudut pandang orang ketiga
+
+Penulis berada di luar objek atau tokoh yang dideskripsikan.
+
+Ciri:
+
+menggunakan dia, ia, mereka, atau nama orang.
+
+Contoh:
+
+Rina memiliki rambut panjang dan hitam.
+
+Cara menentukan:
+
+Cari kata ganti yang digunakan dan lihat dari posisi siapa objek tersebut digambarkan.
+
+C. Memahami Konjungsi dalam Teks Deskripsi
+
+Konjungsi adalah kata yang berfungsi menghubungkan kata, kelompok kata, klausa, atau kalimat.
+
+Jenis dan contoh:
+
+1. Penambahan
+
+dan
+serta
+
+Contoh:
+
+Rumah itu besar dan bersih.
+
+2. Pilihan
+
+atau
+
+Contoh:
+
+Kamu dapat memilih teh atau kopi.
+
+3. Pertentangan
+
+tetapi
+namun
+sedangkan
+
+Contoh:
+
+Rumahnya kecil, tetapi sangat nyaman.
+
+4. Sebab
+
+karena
+sebab
+
+Contoh:
+
+Taman itu indah karena banyak bunga.
+
+5. Akibat
+
+sehingga
+maka
+
+Contoh:
+
+Hujan turun deras sehingga halaman menjadi basah.
+
+6. Urutan/waktu
+
+kemudian
+lalu
+setelah itu
+sebelum
+
+Contoh:
+
+Ia masuk ke rumah, kemudian duduk di ruang tamu.
+
+Fungsi konjungsi
+
+Konjungsi membuat hubungan antargagasan menjadi jelas dan padu.
+
+D. Menelaah Konjungsi dalam Teks Deskripsi Berupa Lirik Lagu
+
+Dalam lirik lagu, konjungsi digunakan untuk menghubungkan kata atau kalimat sehingga gagasan dan perasaan dalam lirik menjadi lebih runtut.
+
+Contohnya:
+
+dan → menghubungkan dua hal.
+tetapi → menunjukkan pertentangan.
+karena → menunjukkan sebab.
+sehingga → menunjukkan akibat.
+ketika → menunjukkan waktu.
+Cara menelaah:
+Temukan kata penghubung dalam lirik.
+Tentukan jenis konjungsinya.
+Perhatikan hubungan antara bagian sebelum dan sesudah konjungsi.
+Jelaskan fungsi konjungsi tersebut dalam lirik.
+E. Penggunaan Kosakata Serapan dari Bahasa Daerah dan Bahasa Asing
+
+Kosakata serapan adalah kata yang berasal dari bahasa lain kemudian digunakan dalam bahasa Indonesia.
+
+Sumbernya dapat berasal dari:
+
+1. Bahasa daerah
+
+Contoh:
+
+batik
+amuk
+angklung
+pempek
+2. Bahasa asing
+
+Contoh:
+
+komputer → dari computer
+televisi → dari television
+internet → dari internet
+musik → dari music
+
+Kosakata tersebut dapat mengalami penyesuaian ejaan atau pengucapan ketika digunakan dalam bahasa Indonesia.
+
+Fungsi kosakata serapan
+memperkaya kosakata bahasa Indonesia,
+memudahkan penyebutan suatu konsep atau benda,
+menyesuaikan perkembangan ilmu pengetahuan dan budaya.
+F. Memahami Kohesi dan Koherensi dalam Teks Deskripsi
+
+Ini bagian yang sering bikin ketuker. 😭
+
+1. Kohesi
+
+Kohesi = hubungan antarunsur bahasa dalam teks.
+
+Artinya, bagian-bagian teks saling terhubung melalui penggunaan kata atau unsur bahasa.
+
+Contoh:
+
+Rina memiliki seekor kucing. Hewan itu sangat lucu.
+
+Kata “hewan itu” merujuk pada kucing sehingga kedua kalimat saling terhubung.
+
+Kohesi dapat dibentuk melalui:
+
+konjungsi,
+kata ganti,
+kata rujukan,
+pengulangan kata,
+penggunaan kata yang berkaitan.
+2. Koherensi
+
+Koherensi = hubungan antargagasan atau makna dalam teks sehingga logis.
+
+Contoh:
+
+Hujan turun sangat deras. Oleh karena itu, jalanan menjadi basah.
+
+Hubungannya masuk akal: hujan → jalan menjadi basah.
+
+Perbedaan paling gampang:
+Kohesi	Koherensi
+Hubungan bahasa	Hubungan makna/gagasan
+Dilihat dari unsur teks	Dilihat dari kelogisan isi
+Contoh: kata “itu”, “dan”, “kemudian”	Contoh: sebab → akibat
+
+🧠 Ingat:
+
+Kohesi = nyambung katanya
+Koherensi = nyambung pikirannya
+
+G. Memahami Deskripsi Visual dalam Infografik
+
+Infografik adalah penyajian informasi menggunakan kombinasi teks dan unsur visual seperti gambar, ikon, simbol, angka, diagram, atau grafik.
+
+Unsur infografik:
+Judul → menunjukkan topik.
+Teks → memberikan penjelasan.
+Gambar/ilustrasi → membantu menggambarkan informasi.
+Ikon/simbol → menyederhanakan informasi.
+Data/angka → menunjukkan informasi kuantitatif.
+Grafik/diagram → membantu membandingkan data.
+Warna dan tata letak → membuat informasi lebih mudah dibaca.
+Tujuan infografik
+menyampaikan informasi secara singkat dan jelas,
+mempermudah pembaca memahami data,
+membuat informasi lebih menarik,
+membantu pembaca melihat hubungan atau perbandingan data.
+Cara memahami infografik:
+Baca judul.
+Perhatikan gambar dan simbol.
+Baca teks dan angka yang tersedia.
+Perhatikan hubungan antarbagian.
+Tarik informasi atau kesimpulan utama.
+🔥 RANGKUMAN SUPER INTI
+
+Teks deskripsi → menggambarkan objek secara jelas dan rinci.
+
+Sudut pandang → posisi penulis dalam menyampaikan teks:
+
+orang pertama: aku/saya
+orang ketiga: dia/ia/nama tokoh
+
+Konjungsi → kata penghubung seperti dan, atau, tetapi, karena, sehingga, kemudian.
+
+Kosakata serapan → kata dari bahasa daerah atau asing yang digunakan dalam bahasa Indonesia.
+
+Kohesi → hubungan antarbahasa/unsur teks.
+
+Koherensi → hubungan antargagasan/makna yang logis.
+
+Infografik → informasi yang disajikan dengan teks + visual seperti gambar, simbol, grafik, dan angka.
+      <!-- SELESAI CATATAN B.INDO MATERI 1 -->
+    </div>
+    <div data-id="bindo-1">
+      <!-- TULIS CATATAN B.INDO MATERI 2 DI BAWAH INI -->
+BUKU-BUKU BERCERITA
+A. Memahami Isi Teks Deskripsi
+
+Memahami isi teks deskripsi berarti menemukan dan memahami informasi yang disampaikan dalam teks, termasuk objek yang digambarkan, ciri-cirinya, serta gagasan utama.
+
+B. Mengamati Proses Penyerapan Kosakata Bahasa Indonesia
+
+Kosakata bahasa Indonesia dapat berasal dari bahasa daerah maupun bahasa asing. Proses penyerapan dapat menyebabkan penyesuaian ejaan, pengucapan, atau bentuk kata agar sesuai dengan bahasa Indonesia.
+
+Contoh:
+
+computer → komputer
+television → televisi
+C. Memperoleh Informasi dari Teks Prosedur
+
+Teks prosedur berisi langkah-langkah untuk melakukan atau membuat sesuatu.
+
+Informasi yang dapat ditemukan:
+
+tujuan,
+alat dan bahan,
+langkah-langkah,
+hasil yang ingin dicapai.
+D. Mencermati Teks Prosedur Berupa Infografik
+
+Teks prosedur dapat disajikan dalam bentuk infografik, yaitu gabungan teks dan visual.
+
+Saat membaca infografik, perhatikan:
+
+judul,
+gambar/simbol,
+urutan langkah,
+keterangan,
+informasi penting.
+E. Membaca Nyaring Teks
+
+Membaca nyaring adalah membaca teks dengan suara yang terdengar jelas sehingga dapat dipahami oleh orang lain.
+
+Hal yang perlu diperhatikan:
+
+lafal,
+intonasi,
+jeda,
+volume suara,
+kecepatan membaca.
+F. Mempraktikkan Prosedur Membuat Poster
+
+Poster adalah media yang menggabungkan gambar dan tulisan untuk menyampaikan informasi atau ajakan.
+
+Langkah umum:
+
+Menentukan tema dan tujuan.
+Menentukan informasi utama.
+Membuat rancangan/tata letak.
+Menambahkan gambar dan tulisan.
+Memilih warna dan huruf yang mudah dibaca.
+Memeriksa kembali isi poster.
+G. Mempraktikkan Prosedur Wawancara
+
+Wawancara adalah kegiatan memperoleh informasi dengan cara mengajukan pertanyaan kepada narasumber.
+
+Tahapannya:
+
+Menentukan topik dan tujuan.
+Menentukan narasumber.
+Menyiapkan pertanyaan.
+Melakukan wawancara dengan sopan.
+Mencatat atau merekam informasi.
+Menyusun hasil wawancara.
+H. Menganalisis Teks Prosedur
+
+Menganalisis teks prosedur berarti memahami tujuan, struktur, isi, langkah-langkah, dan kebahasaan yang digunakan.
+
+Hal yang diperhatikan:
+
+tujuan,
+alat dan bahan,
+langkah-langkah,
+urutan kegiatan,
+kata kerja perintah,
+konjungsi urutan/waktu.
+I. Menyimak Video atau Teks Prosedur yang Dibacakan
+
+Menyimak berarti mendengarkan dengan penuh perhatian untuk memahami informasi.
+
+Saat menyimak, catat:
+
+tujuan,
+alat/bahan,
+langkah-langkah,
+informasi penting,
+urutan proses.
+J. Mempraktikkan Prosedur Menulis Esai
+
+Esai adalah tulisan yang membahas suatu topik berdasarkan gagasan, pendapat, dan alasan penulis.
+
+Langkah menulis esai:
+
+Menentukan topik.
+Menentukan gagasan utama.
+Mengumpulkan informasi/argumen.
+Membuat kerangka.
+Menulis pendahuluan.
+Mengembangkan isi dengan alasan atau bukti.
+Membuat kesimpulan.
+Mengoreksi tulisan.
+🔥 INTI YANG WAJIB DIINGAT
+
+Teks deskripsi → memahami dan menggambarkan objek.
+Kosakata serapan → kata dari bahasa daerah/asing yang masuk ke bahasa Indonesia.
+Teks prosedur → berisi langkah-langkah melakukan/membuat sesuatu.
+Infografik → informasi dalam bentuk teks + visual.
+Membaca nyaring → membaca dengan lafal, intonasi, jeda, dan volume yang tepat.
+Poster → media gambar + tulisan untuk informasi/ajakan.
+Wawancara → memperoleh informasi melalui tanya jawab dengan narasumber.
+Analisis prosedur → memahami tujuan, struktur, langkah, dan kebahasaannya.
+Menyimak → mendengarkan untuk memahami informasi.
+Esai → tulisan yang mengembangkan gagasan/pendapat tentang suatu topik.
+      <!-- SELESAI CATATAN B.INDO MATERI 2 -->
+    </div>
+    <div data-id="bindo-2">
+      <!-- TULIS CATATAN B.INDO MATERI 3 DI BAWAH INI -->
+KOMUNIKASI UJUNG JARI
+A. Memahami Informasi dalam Teks Rekon
+
+Teks rekon (rekonstruksi) adalah teks yang menceritakan kembali peristiwa atau pengalaman yang sudah terjadi secara runtut.
+
+Tujuannya adalah memberikan informasi atau menceritakan kembali suatu kejadian berdasarkan urutan waktu.
+
+Struktur teks rekon:
+Orientasi → mengenalkan siapa, kapan, di mana, dan situasi awal.
+Rangkaian peristiwa → menceritakan kejadian secara berurutan.
+Reorientasi → penutup atau kesan terhadap peristiwa.
+B. Membedakan Fakta, Opini, dan Asumsi dalam Teks Rekon
+1. Fakta
+
+Informasi yang benar-benar terjadi dan dapat dibuktikan.
+
+Ciri:
+
+berdasarkan kenyataan,
+dapat diverifikasi,
+biasanya memiliki data, waktu, tempat, atau bukti.
+
+Contoh:
+
+Sekolah mengadakan kegiatan pada hari Senin.
+
+2. Opini
+
+Pendapat atau penilaian seseorang yang belum tentu disepakati semua orang.
+
+Ciri:
+
+bersifat subjektif,
+dapat berbeda antara satu orang dan lainnya.
+sering menggunakan kata seperti menurut saya, sebaiknya, paling bagus.
+
+Contoh:
+
+Menurut saya, kegiatan itu sangat menarik.
+
+3. Asumsi
+
+Anggapan atau dugaan yang dianggap benar, tetapi belum memiliki bukti yang cukup.
+
+Contoh:
+
+Kemungkinan kegiatan tersebut akan diadakan lagi tahun depan.
+
+🔑 Ingat:
+
+Fakta = bisa dibuktikan
+Opini = pendapat
+Asumsi = dugaan/anggapan
+
+C. Mengelaborasi Teks Rekon dalam Diskusi
+
+Mengelaborasi berarti mengembangkan atau memperjelas informasi dari teks.
+
+Dalam diskusi, kita dapat:
+
+menjelaskan kembali isi teks,
+memberikan pendapat,
+menambahkan informasi,
+memberikan alasan atau bukti,
+menghubungkan isi teks dengan pengalaman atau keadaan lain.
+
+Saat berdiskusi harus:
+
+menyampaikan pendapat dengan jelas,
+menggunakan alasan yang logis,
+menghargai pendapat orang lain,
+tidak memaksakan pendapat.
+D. Menyimak Teks Rekon dalam Sajian Video
+
+Menyimak adalah mendengarkan dengan sungguh-sungguh untuk memahami informasi.
+
+Saat menyimak video teks rekon, perhatikan:
+
+siapa yang terlibat,
+apa yang terjadi,
+kapan terjadi,
+di mana terjadi,
+bagaimana urutan peristiwa,
+informasi penting dan kesimpulan.
+
+🧠 Kunci: cari urutan kejadian dari awal sampai akhir.
+
+E. Menelaah Kosakata Teks Rekon dalam Media Sosial
+
+Kosakata adalah kumpulan kata yang digunakan dalam suatu bahasa atau teks.
+
+Dalam media sosial, teks rekon dapat menggunakan:
+
+bahasa sehari-hari,
+singkatan,
+istilah khusus,
+kata serapan,
+kata yang sedang populer.
+
+Namun, kita perlu memperhatikan makna dan konteks kata agar tidak salah memahami informasi.
+
+Contoh:
+
+“Aku upload foto kegiatan kemarin.”
+
+Kata upload merupakan istilah yang sering digunakan dalam media sosial.
+
+F. Menggunakan Kamus
+
+Kamus digunakan untuk mencari informasi tentang kata, seperti:
+
+arti/makna kata,
+ejaan,
+bentuk baku,
+pelafalan,
+kelas kata,
+penggunaan kata.
+Cara menggunakan kamus:
+Tentukan kata yang ingin dicari.
+Perhatikan huruf awal kata.
+Cari berdasarkan urutan alfabet.
+Baca arti dan keterangan kata.
+Sesuaikan makna dengan konteks kalimat.
+Penting:
+
+Satu kata dapat memiliki lebih dari satu makna, sehingga konteks kalimat harus diperhatikan.
+
+G. Mengenali dan Menggunakan Kosakata Serapan dalam Teks Rekon
+
+Kosakata serapan adalah kata yang berasal dari bahasa lain dan digunakan dalam bahasa Indonesia.
+
+Sumbernya dapat berasal dari:
+
+bahasa daerah,
+bahasa asing.
+
+Contoh:
+
+computer → komputer
+television → televisi
+information → informasi
+activity → aktivitas
+
+Kosakata serapan dapat mengalami penyesuaian ejaan dan pengucapan agar sesuai dengan kaidah bahasa Indonesia.
+
+H. Menulis Surat/ Surel Tanggapan Menggunakan Teks Rekon
+
+Surat/surel tanggapan adalah tulisan yang digunakan untuk memberikan tanggapan terhadap suatu informasi atau teks.
+
+Tanggapan dapat berupa:
+
+pendapat,
+persetujuan,
+ketidaksetujuan,
+komentar,
+saran.
+Struktur umum:
+Pembuka → salam dan tujuan menulis.
+Isi → tanggapan terhadap informasi/peristiwa.
+Alasan → menjelaskan dasar tanggapan.
+Penutup → kesimpulan, harapan, atau salam penutup.
+Hal yang perlu diperhatikan:
+gunakan bahasa yang sopan dan jelas,
+tanggapan harus sesuai dengan isi teks,
+berikan alasan yang logis,
+hindari kata-kata yang menyinggung.
+🔥 RANGKUMAN SUPER INTI
+
+Teks rekon → menceritakan kembali peristiwa yang sudah terjadi secara runtut.
+Fakta → dapat dibuktikan.
+Opini → pendapat.
+Asumsi → dugaan/anggapan.
+Elaborasi → mengembangkan atau memperjelas informasi.
+Menyimak → mendengarkan untuk memahami informasi.
+Kamus → mencari arti, ejaan, dan informasi tentang kata.
+Kosakata serapan → kata dari bahasa lain yang digunakan dalam bahasa Indonesia.
+Surat/surel tanggapan → tulisan untuk memberikan pendapat, komentar, atau tanggapan terhadap suatu informasi.
+      <!-- SELESAI CATATAN B.INDO MATERI 3 -->
+    </div>
+    <div data-id="bindo-3">
+      <!-- TULIS CATATAN B.INDO MATERI 4 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 4 -->
+    </div>
+    <div data-id="bindo-4">
+      <!-- TULIS CATATAN B.INDO MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 5 -->
+    </div>
+    <div data-id="bindo-5">
+      <!-- TULIS CATATAN B.INDO MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 6 -->
+    </div>
+    <div data-id="bindo-6">
+      <!-- TULIS CATATAN B.INDO MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 7 -->
+    </div>
+    <div data-id="bindo-7">
+      <!-- TULIS CATATAN B.INDO MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 8 -->
+    </div>
+    <div data-id="bindo-8">
+      <!-- TULIS CATATAN B.INDO MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 9 -->
+    </div>
+    <div data-id="bindo-9">
+      <!-- TULIS CATATAN B.INDO MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.INDO MATERI 10 -->
+    </div>
+    <div data-id="bing-0">
+      <!-- TULIS CATATAN B.ING MATERI 1 DI BAWAH INI -->
+Celebratory Expression
+Ungkapan untuk merayakan atau memberi selamat
+
+Celebratory expressions are used to congratulate someone or celebrate a happy event.
+
+Ungkapan ini dipakai untuk memberi selamat atau merayakan kejadian yang menyenangkan.
+
+Common expressions
+Congratulations!
+Selamat!
+
+Well done!
+Kerja yang bagus!
+
+I'm happy for you.
+Saya ikut senang untukmu.
+
+Happy birthday!
+Selamat ulang tahun!
+
+That's great news!
+Itu kabar yang bagus!
+
+You deserve it.
+Kamu pantas mendapatkannya.
+Example dialogue
+A: I won the class speech contest.
+A: Saya memenangkan lomba pidato kelas.
+
+B: Congratulations! I'm proud of you.
+B: Selamat! Saya bangga padamu.
+Intinya: celebratory expression dipakai saat seseorang berhasil atau berhari besar.
+
+Contoh paling umum: Congratulations, Well done, dan Happy birthday.
+      <!-- SELESAI CATATAN B.ING MATERI 1 -->
+    </div>
+    <div data-id="bing-1">
+      <!-- TULIS CATATAN B.ING MATERI 2 DI BAWAH INI -->
+Decisive Expression
+Ungkapan untuk menyatakan keputusan
+
+Decisive expressions are used when someone makes a choice or states a firm decision.
+
+Ungkapan ini dipakai saat seseorang menentukan pilihan atau menyatakan keputusan yang pasti.
+
+Common expressions
+I decide to join the club.
+Saya memutuskan untuk ikut klub itu.
+
+I agree with you.
+Saya setuju denganmu.
+
+I don't think so.
+Saya tidak berpikir begitu.
+
+I'm sure about it.
+Saya yakin akan hal itu.
+
+I refuse the offer.
+Saya menolak tawaran itu.
+
+Let's do it.
+Ayo kita lakukan.
+Example dialogue
+A: Will you come to the library?
+A: Apakah kamu akan datang ke perpustakaan?
+
+B: I decide to stay and finish my task.
+B: Saya memutuskan untuk tetap di sini dan menyelesaikan tugas.
+Intinya: decisive expression menunjukkan setuju, menolak, atau sudah menentukan pilihan.
+
+Kata kuncinya: decide, agree, refuse, dan I'm sure.
+      <!-- SELESAI CATATAN B.ING MATERI 2 -->
+    </div>
+    <div data-id="bing-2">
+      <!-- TULIS CATATAN B.ING MATERI 3 DI BAWAH INI -->
+Report Text
+Teks laporan tentang sesuatu secara umum
+
+A report text gives general information about a thing, animal, place, or phenomenon.
+
+Report text memberi informasi umum tentang benda, hewan, tempat, atau gejala alam.
+
+Structure
+General classification: introduces the topic.
+Memperkenalkan topik secara umum.
+Description: explains parts, habits, uses, or facts.
+Menjelaskan bagian, kebiasaan, kegunaan, atau fakta.
+Language features
+It uses simple present tense and general nouns, not a personal story.
+
+Teks ini memakai simple present dan kata benda umum, bukan cerita pribadi.
+
+Komodo dragons live in Indonesia.
+Komodo hidup di Indonesia.
+
+They have strong tails and sharp claws.
+Mereka memiliki ekor yang kuat dan cakar yang tajam.
+Short example
+Bees are insects. They live in colonies.
+Lebah adalah serangga. Mereka hidup dalam koloni.
+
+They collect nectar and make honey.
+Mereka mengumpulkan nektar dan membuat madu.
+Intinya: report text menjelaskan fakta umum, bukan kejadian yang dialami satu orang.
+
+Strukturnya: klasifikasi umum, lalu deskripsi. Tensenya simple present.
+      <!-- SELESAI CATATAN B.ING MATERI 3 -->
+    </div>
+    <div data-id="bing-3">
+      <!-- TULIS CATATAN B.ING MATERI 4 DI BAWAH INI -->
+Passive Voice
+Kalimat pasif
+
+Passive voice is used when the object of an active sentence becomes the subject.
+
+Kalimat pasif dipakai saat objek pada kalimat aktif menjadi subjek.
+
+Formulas
+Present: is / am / are + verb 3
+Sekarang: is / am / are + kata kerja bentuk ketiga.
+
+Past: was / were + verb 3
+Lampau: was / were + kata kerja bentuk ketiga.
+Examples
+Active: Mother cooks rice.
+Aktif: Ibu memasak nasi.
+
+Passive: Rice is cooked by Mother.
+Pasif: Nasi dimasak oleh Ibu.
+
+Active: They built the bridge.
+Aktif: Mereka membangun jembatan itu.
+
+Passive: The bridge was built.
+Pasif: Jembatan itu dibangun.
+The word "by" can be left out if the doer is not important.
+
+Kata "by" boleh dihilangkan jika pelakunya tidak penting.
+
+Intinya: passive voice menonjolkan objek yang dikenai perbuatan.
+
+Present memakai is/am/are + V3. Past memakai was/were + V3.
+      <!-- SELESAI CATATAN B.ING MATERI 4 -->
+    </div>
+    <div data-id="bing-4">
+      <!-- TULIS CATATAN B.ING MATERI 5 DI BAWAH INI -->
+Continuous Tenses
+Waktu yang menunjukkan kegiatan sedang berlangsung
+
+Continuous tenses show an action that is, was, or will be in progress.
+
+Continuous tense menunjukkan kegiatan yang sedang, tadinya sedang, atau akan sedang berlangsung.
+
+Present continuous
+is / am / are + verb-ing
+Untuk kegiatan yang sedang terjadi sekarang.
+She is reading a book.
+Dia sedang membaca buku.
+Past continuous
+was / were + verb-ing
+Untuk kegiatan yang sedang terjadi di waktu lampau.
+They were playing football at 4 p.m.
+Mereka sedang bermain sepak bola pukul 4 sore.
+Future continuous
+will be + verb-ing
+Untuk kegiatan yang akan sedang terjadi.
+I will be studying tonight.
+Saya akan sedang belajar malam ini.
+Intinya: continuous selalu memakai kata kerja berakhiran -ing.
+
+Present: is/am/are. Past: was/were. Future: will be.
+      <!-- SELESAI CATATAN B.ING MATERI 5 -->
+    </div>
+    <div data-id="bing-5">
+      <!-- TULIS CATATAN B.ING MATERI 6 DI BAWAH INI -->
+Present and Past Perfect Tenses
+Waktu yang menunjukkan kegiatan sudah selesai
+
+Present perfect
+Present perfect links a past action to the present.
+
+Present perfect menghubungkan perbuatan lampau dengan keadaan sekarang.
+
+has / have + verb 3
+has untuk he, she, it. have untuk I, you, we, they.
+She has finished her homework.
+Dia sudah menyelesaikan pekerjaan rumahnya.
+
+We have lived here for five years.
+Kami sudah tinggal di sini selama lima tahun.
+Past perfect
+Past perfect shows an action that finished before another past action.
+
+Past perfect menunjukkan kegiatan yang selesai sebelum kegiatan lampau yang lain.
+
+had + verb 3
+The class had started before I arrived.
+Kelas sudah dimulai sebelum saya tiba.
+Intinya: perfect memakai kata kerja bentuk ketiga.
+
+Present perfect: has/have + V3. Past perfect: had + V3.
+      <!-- SELESAI CATATAN B.ING MATERI 6 -->
+    </div>
+    <div data-id="bing-6">
+      <!-- TULIS CATATAN B.ING MATERI 7 DI BAWAH INI -->
+Conjunction
+Kata penghubung
+
+A conjunction joins words, phrases, or sentences.
+
+Conjunction menghubungkan kata, frasa, atau kalimat.
+
+Common conjunctions
+and = dan
+I buy a book and a pen.
+Saya membeli buku dan pulpen.
+
+but = tetapi
+He is tired, but he studies.
+Dia lelah, tetapi dia belajar.
+
+or = atau
+Do you want tea or milk?
+Kamu mau teh atau susu?
+
+because = karena
+I stay home because it is raining.
+Saya di rumah karena hujan.
+
+so = jadi
+She was sick, so she rested.
+Dia sakit, jadi dia beristirahat.
+
+although = meskipun
+Although it was late, they finished the task.
+Meskipun sudah larut, mereka menyelesaikan tugas.
+Intinya: conjunction menggabungkan ide.
+
+and menambah, but mengontraskan, because memberi alasan, so memberi akibat.
+      <!-- SELESAI CATATAN B.ING MATERI 7 -->
+    </div>
+    <div data-id="bing-7">
+      <!-- TULIS CATATAN B.ING MATERI 8 DI BAWAH INI -->
+Question Tag
+Pertanyaan singkat di akhir kalimat
+
+A question tag is a short question added at the end of a sentence to ask for confirmation.
+
+Question tag adalah pertanyaan singkat di akhir kalimat untuk meminta penegasan.
+
+Rule
+Positive sentence, negative tag.
+Kalimat positif, tag-nya negatif.
+
+Negative sentence, positive tag.
+Kalimat negatif, tag-nya positif.
+
+The pronoun follows the subject.
+Kata ganti mengikuti subjek.
+Examples
+She is a student, isn't she?
+Dia seorang siswa, bukan?
+
+They play football, don't they?
+Mereka bermain sepak bola, bukan?
+
+He doesn't like coffee, does he?
+Dia tidak suka kopi, ya?
+
+You were late, weren't you?
+Kamu tadi terlambat, bukan?
+
+Rina can swim, can't she?
+Rina bisa berenang, bukan?
+Intinya: question tag kebalikan dari kalimat utamanya.
+
+Positif dibalas negatif. Negatif dibalas positif. Akhiri dengan tanda tanya.
+      <!-- SELESAI CATATAN B.ING MATERI 8 -->
+    </div>
+    <div data-id="bing-8">
+      <!-- TULIS CATATAN B.ING MATERI 9 DI BAWAH INI -->
+Daily Expression
+Ungkapan yang dipakai sehari-hari
+
+Daily expressions are short phrases used in everyday conversation.
+
+Daily expression adalah ungkapan singkat yang dipakai dalam percakapan sehari-hari.
+
+Greeting and leaving
+Good morning.
+Selamat pagi.
+
+How are you?
+Apa kabar?
+
+I'm fine, thank you.
+Saya baik, terima kasih.
+
+See you tomorrow.
+Sampai jumpa besok.
+Polite expressions
+Thank you.
+Terima kasih.
+
+You're welcome.
+Sama-sama.
+
+I'm sorry.
+Maaf.
+
+Excuse me.
+Permisi.
+
+Please help me.
+Tolong bantu saya.
+Asking and answering
+What time is it?
+Jam berapa sekarang?
+
+Where is the library?
+Di mana perpustakaannya?
+
+Can I borrow your pen?
+Bolehkah saya meminjam pulpenmu?
+
+Of course.
+Tentu.
+Intinya: daily expression mencakup sapaan, terima kasih, minta maaf, dan bertanya.
+
+Pakai ungkapan singkat agar percakapan terdengar sopan.
+      <!-- SELESAI CATATAN B.ING MATERI 9 -->
+    </div>
+    <div data-id="bing-9">
+      <!-- TULIS CATATAN B.ING MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.ING MATERI 10 -->
+    </div>
+    <div data-id="bjawa-0">
+      <!-- TULIS CATATAN B.JAWA MATERI 1 DI BAWAH INI -->
+Crita Wayang Ramayana Lakon Anoman Duta
+Bahasa Jawa Kelas IX
+
+A. Isi Cerita
+Anoman Duta adalah lakon wayang dari kisah Ramayana. Prabu Rama mengutus Anoman ke Ngalengka untuk mencari Dewi Sinta yang diculik Prabu Rahwana.
+
+Anoman melompat ke Ngalengka, menyamar, lalu bertemu Sinta di taman. Ia menyerahkan cincin tanda dari Rama. Sinta percaya dan menitipkan surat serta cundhuk sebagai balasan.
+
+Anoman lalu tertangkap prajurit Ngalengka. Ekornya dibakar, tetapi ia malah meloncat dan membakar bagian kota. Setelah itu ia kembali kepada Rama dan melaporkan bahwa Sinta masih setia.
+
+B. Unsur Intrinsik
+Tema: kesetiaan, keberanian, dan tugas sebagai utusan.
+Tokoh utama: Anoman, Prabu Rama, Dewi Sinta, Prabu Rahwana.
+Penokohan: Anoman berani dan setia. Rama bijaksana. Sinta tabah. Rahwana angkuh.
+Alur: Rama mengutus Anoman, Anoman bertemu Sinta, Anoman tertangkap, ekornya dibakar, lalu ia kembali membawa kabar.
+Latar tempat: Pancawati dan Ngalengka. Latar waktu: masa pengasingan Rama.
+Sudut pandang: orang ketiga, dalang yang menceritakan para tokoh.
+Amanat: jalankan tugas dengan jujur, tetap setia, dan jangan mudah menyerah.
+C. Menelaah Isi
+Siapa yang mengutus Anoman? Prabu Rama.
+Apa tugas Anoman? Mencari Sinta dan menyampaikan pesan.
+Apa bukti yang dibawa? Cincin Rama, lalu surat dan cundhuk dari Sinta.
+Apa akibat ekor Anoman dibakar? Api itu dipakai untuk membakar Ngalengka.
+D. Ungkapan Simpati, Empati, dan Peduli
+Setelah membaca cerita, penghargaan ditulis dengan kalimat yang menunjukkan rasa ikut merasakan.
+
+Simpati: Anoman pantas dipuji karena berani menjalankan tugas yang berat.
+Empati: Sinta pasti sedih dan kesepian saat berada di Ngalengka.
+Peduli: Kita perlu membantu teman yang sedang kesulitan, seperti Anoman yang tidak meninggalkan tugasnya.
+Intinya: Anoman Duta bercerita tentang Anoman yang diutus Rama untuk menemui Sinta di Ngalengka.
+
+Unsur intrinsik yang perlu disebut: tema, tokoh, penokohan, alur, latar, sudut pandang, dan amanat.
+      <!-- SELESAI CATATAN B.JAWA MATERI 1 -->
+    </div>
+    <div data-id="bjawa-1">
+      <!-- TULIS CATATAN B.JAWA MATERI 2 DI BAWAH INI -->
+Aksara Jawa: Rekan dan Murda
+Bahasa Jawa Kelas IX
+
+A. Aksara Rekan
+Aksara rekan dipakai untuk menulis bunyi serapan yang tidak ada pada aksara nglegena. Jumlahnya ada lima.
+
+kha, dibaca kha
+dza, dibaca dza
+fa, dibaca fa atau va
+za, dibaca za
+gha, dibaca gha
+Contoh kata: fakir, zakat, khaliq, maghrib, dzikir.
+Aksara rekan biasanya diberi tiga cecak di atasnya agar berbeda dari aksara biasa.
+B. Aksara Murda
+Aksara murda dipakai seperti huruf kapital, yaitu untuk nama orang, gelar, atau nama tempat yang dihormati. Jumlahnya ada delapan.
+
+Na, Ka, Ta, Sa, Pa, Nya, Ga, Ba
+Nama yang boleh memakai murda: Rama, Sinta, Gathotkaca, Bagus, Pandhawa.
+Murda hanya dipakai pada huruf pertama nama, tidak pada setiap suku kata.
+Jika huruf pertama tidak punya murda, murda dipakai pada huruf berikutnya yang tersedia.
+C. Cara Membaca
+Bacalah aksara dari kiri ke kanan.
+Kenali dulu apakah huruf itu nglegena, murda, atau rekan.
+Sandhangan tetap dibaca seperti biasa: wulu = i, suku = u, taling = e, pepet = e lemah.
+Aksara rekan dibaca sesuai bunyi serapannya, bukan bunyi Jawa biasa.
+fa + pepet + kir dibaca fakir.
+za + ka + taling-tarung dibaca zakat.
+Nama Rama: Ra memakai aksara biasa, lalu ma. Jika ingin menghormati, huruf yang punya murda dipakai pada posisi yang sesuai.
+Intinya: aksara rekan untuk bunyi serapan, ada 5. Aksara murda untuk nama yang dihormati, ada 8.
+
+Rekan: kha, dza, fa, za, gha. Murda: Na, Ka, Ta, Sa, Pa, Nya, Ga, Ba.
+      <!-- SELESAI CATATAN B.JAWA MATERI 2 -->
+    </div>
+    <div data-id="bjawa-2">
+      <!-- TULIS CATATAN B.JAWA MATERI 3 DI BAWAH INI -->
+Geguritan
+Bahasa Jawa Kelas IX
+
+A. Pengertian
+Geguritan adalah puisi Jawa modern. Isinya mengungkapkan perasaan, pikiran, atau pengalaman. Geguritan tidak terikat paugeran tembang macapat, jadi jumlah baris, suku kata, dan vokal akhir bebas.
+
+B. Ciri-Ciri
+Bahasanya singkat, tetapi maknanya padat.
+Sering memakai kiasan atau perumpamaan.
+Tipografinya bebas, barisnya tidak harus sama panjang.
+Tidak wajib punya guru gatra, guru lagu, dan guru wilangan.
+C. Kata Sulit
+Kata sulit diartikan sesuai isi baris, bukan hanya menurut kamus.
+
+nitih = naik atau menaiki
+memala = bernyala atau berapi
+tansah = selalu
+kanthi = dengan
+praupane = wajahnya
+sumuk = gerah atau sesak
+D. Amanat
+Amanat adalah pesan yang ingin disampaikan penyair. Cara menemukannya: baca seluruh geguritan, cari perasaan utama, lalu tuliskan pesannya dalam kalimat lengkap.
+
+Jika geguritan banyak menyebut sekolah, guru, dan buku, amanatnya bisa berupa ajakan rajin belajar.
+Jika banyak menyebut ibu dan pengorbanan, amanatnya berupa hormat serta sayang kepada orang tua.
+Intinya: geguritan adalah puisi Jawa modern yang bebas, tidak terikat aturan macapat.
+
+Yang dinilai: arti kata sulit dan amanat yang sesuai isi puisi.
+      <!-- SELESAI CATATAN B.JAWA MATERI 3 -->
+    </div>
+    <div data-id="bjawa-3">
+      <!-- TULIS CATATAN B.JAWA MATERI 4 DI BAWAH INI -->
+Serat Wulangreh Pupuh Durma
+Bahasa Jawa Kelas IX
+
+A. Pengertian
+Serat Wulangreh adalah karya Sri Susuhunan Pakubuwana IV. Isinya nasihat tentang perilaku, belajar, dan kehidupan. Pupuh Durma adalah salah satu metrum tembang macapat yang dipakai untuk nasihat tegas, semangat, atau suasana serius.
+
+B. Paugeran Durma
+Guru gatra: 7 baris setiap bait.
+Guru wilangan: 12, 7, 6, 7, 8, 5, 7.
+Guru lagu: a, i, a, a, i, a, i.
+Baris 1 berakhir a, jumlah suku kata 12.
+Baris 2 berakhir i, jumlah suku kata 7.
+Baris 3 berakhir a, jumlah suku kata 6.
+Baris 4 berakhir a, jumlah suku kata 7.
+Baris 5 berakhir i, jumlah suku kata 8.
+Baris 6 berakhir a, jumlah suku kata 5.
+Baris 7 berakhir i, jumlah suku kata 7.
+C. Kata Sulit
+wulang = ajaran
+reh = jalan atau cara
+dipun = supaya atau hendaknya
+ngudi = berusaha mencari
+luhur = mulia
+ala = buruk
+becik = baik
+D. Amanat
+Amanat pupuh Durma dalam Wulangreh umumnya mengingatkan agar orang memilih jalan yang baik, menjauhi perbuatan buruk, dan berani menjaga kehormatan.
+
+Contoh rumusan amanat: carilah ilmu dan pergaulan yang baik, karena teman serta kebiasaan dapat mengubah perilaku.
+Intinya: Durma punya 7 baris, guru wilangan 12-7-6-7-8-5-7, dan guru lagu a-i-a-a-i-a-i.
+
+Isi Wulangreh berupa nasihat. Amanat dicari dari pesan utama baitnya.
+      <!-- SELESAI CATATAN B.JAWA MATERI 4 -->
+    </div>
+    <div data-id="bjawa-4">
+      <!-- TULIS CATATAN B.JAWA MATERI 5 DI BAWAH INI -->
+Serat Wulangreh Pupuh Dhandhanggula
+Bahasa Jawa Kelas IX
+
+A. Pengertian
+Dhandhanggula adalah tembang macapat yang nadanya manis dan lentur. Dalam Serat Wulangreh, pupuh ini biasa dipakai untuk nasihat yang halus tentang watak, belajar, dan tata krama.
+
+B. Paugeran Dhandhanggula
+Guru gatra: 10 baris setiap bait.
+Guru wilangan: 10, 10, 8, 7, 9, 7, 6, 8, 12, 7.
+Guru lagu: i, a, e, u, i, a, u, a, i, a.
+Baris 1 berakhir i, 10 suku kata.
+Baris 2 berakhir a, 10 suku kata.
+Baris 3 berakhir e, 8 suku kata.
+Baris 4 berakhir u, 7 suku kata.
+Baris 5 berakhir i, 9 suku kata.
+Baris 6 berakhir a, 7 suku kata.
+Baris 7 berakhir u, 6 suku kata.
+Baris 8 berakhir a, 8 suku kata.
+Baris 9 berakhir i, 12 suku kata.
+Baris 10 berakhir a, 7 suku kata.
+C. Kata Sulit
+gemi = hemat
+nastiti = teliti
+ngati-ati = berhati-hati
+watak = sifat
+sembah = hormat
+guru = orang yang patut diteladani, juga bisa berarti pelajaran
+D. Amanat dan Penyampaian Lisan
+Amanat Dhandhanggula biasanya mengajak orang hidup tertib, hormat kepada orang tua dan guru, serta menjaga ucapan.
+
+Saat menyampaikan secara lisan: sebut judul pupuh, bacakan satu bait, artikan kata sulit, lalu tutup dengan amanat dalam bahasa yang jelas.
+Intinya: Dhandhanggula punya 10 baris, guru wilangan 10-10-8-7-9-7-6-8-12-7, dan guru lagu i-a-e-u-i-a-u-a-i-a.
+
+Suasananya lebih halus daripada Durma. Amanatnya berupa nasihat perilaku.
+      <!-- SELESAI CATATAN B.JAWA MATERI 5 -->
+    </div>
+    <div data-id="bjawa-5">
+      <!-- TULIS CATATAN B.JAWA MATERI 6 DI BAWAH INI -->
+Teks Sesorah
+Bahasa Jawa Kelas IX
+
+A. Pengertian
+Sesorah adalah pidato berbahasa Jawa. Isinya menyampaikan gagasan kepada pendengar pada acara tertentu, misalnya perpisahan, ulang tahun sekolah, atau upacara adat.
+
+B. Unsur Sesorah
+Salam pembuka: assalamualaikum atau salam sesuai acara.
+Purwaka: pembukaan, sapaan tamu, dan ucapan terima kasih.
+Surasa basa: isi pidato, yaitu gagasan pokok.
+Wasana basa: penutup dan kesimpulan.
+Pamit: permintaan maaf dan salam penutup.
+C. Menelaah Isi
+Yang dicari saat menelaah:
+Siapa yang berpidato dan kepada siapa.
+Acara apa yang sedang berlangsung.
+Apa gagasan pokok di bagian surasa basa.
+Apa harapan yang diucapkan pada wasana basa.
+Contoh isi: sesorah perpisahan kelas IX.
+Gagasan pokoknya adalah terima kasih kepada guru dan ajakan menjaga nama baik sekolah.
+Kesimpulannya: ilmu yang sudah didapat harus diamalkan.
+D. Unggah-ungguh
+Karena pendengarnya campuran, sesorah resmi memakai basa krama. Krama alus dipakai saat menyebut orang yang dihormati.
+
+ngoko: aku mangan
+krama: kula nedha
+krama alus untuk orang lain: panjenengan dhahar
+Intinya: sesorah terdiri atas salam, purwaka, surasa basa, wasana basa, dan pamit.
+
+Isi utamanya ada di surasa basa. Bahasa yang dipakai pada acara resmi adalah krama.
+      <!-- SELESAI CATATAN B.JAWA MATERI 6 -->
+    </div>
+    <div data-id="bjawa-6">
+      <!-- TULIS CATATAN B.JAWA MATERI 7 DI BAWAH INI -->
+Teks Sandhiwara
+Bahasa Jawa Kelas IX
+
+A. Pengertian
+Sandhiwara adalah naskah drama berbahasa Jawa. Ceritanya disampaikan melalui dialog tokoh dan petunjuk pentas, lalu dapat dimainkan di depan penonton.
+
+B. Unsur Intrinsik
+Tema: gagasan pokok, misalnya persahabatan atau tanggung jawab.
+Tokoh dan penokohan: pelaku cerita serta sifatnya.
+Alur: awal masalah, konflik, dan penyelesaian.
+Latar: tempat, waktu, dan suasana.
+Dialog: percakapan antar tokoh.
+Amanat: pesan yang dapat dipetik.
+C. Isi yang Ditelaah
+Siapa tokoh yang berkonflik.
+Masalah apa yang terjadi.
+Bagaimana masalah itu diselesaikan.
+Pesan apa yang tersisa di akhir cerita.
+D. Unggah-ungguh dalam Dialog
+Ragam bahasa mengikuti hubungan tokoh.
+
+Anak kepada orang tua memakai krama alus.
+Teman sebaya dapat memakai ngoko.
+Murid kepada guru memakai krama.
+Contoh: "Bu, kula badhe nyuwun pirsa." Itu krama, cocok untuk anak kepada ibu.
+Intinya: sandhiwara adalah drama Jawa. Unsur yang disebut: tema, tokoh, alur, latar, dialog, dan amanat.
+
+Dialognya harus sesuai unggah-ungguh, yaitu siapa yang berbicara kepada siapa.
+      <!-- SELESAI CATATAN B.JAWA MATERI 7 -->
+    </div>
+    <div data-id="bjawa-7">
+      <!-- TULIS CATATAN B.JAWA MATERI 8 DI BAWAH INI -->
+Teks Deskripsi Upacara Adat
+Bahasa Jawa Kelas IX
+
+A. Pengertian
+Teks deskripsi menggambarkan suatu hal secara jelas. Pada materi ini, objeknya adalah upacara adat, misalnya tedhak siten, manten, sekaten, atau bersih desa.
+
+B. Pokok Isi yang Disampaikan
+Nama upacara.
+Tujuan upacara.
+Waktu dan tempat.
+Orang yang mengikuti.
+Urutan acara dan perlengkapan.
+Makna bagi masyarakat.
+Tedhak siten dilakukan saat anak mulai turun tanah.
+Tujuannya mendoakan agar anak tumbuh sehat dan siap berjalan.
+Perlengkapan yang biasa digambarkan: jadah tujuh warna, kurungan, dan tangga tebu.
+C. Bahasa Krama
+Saat menyampaikan pokok isi, kata-kata yang menyangkut orang lain memakai krama.
+
+anak = lare
+berjalan = mlampah
+makan = nedha atau dhahar
+rumah = griya
+orang tua = tiyang sepuh
+Contoh kalimat: Upacara punika dipun tindakaken ing griya tiyang sepuh.
+D. Memahami Isi
+Setelah membaca, sebutkan fakta utama, lalu makna budayanya. Jangan hanya menyalin satu kalimat.
+
+Fakta: warga berkumpul di balai desa saat bersih desa.
+Makna: masyarakat bersyukur dan menjaga kebersihan lingkungan bersama.
+Intinya: deskripsi upacara adat menjelaskan nama, tujuan, tempat, perlengkapan, dan makna.
+
+Penyampaiannya memakai bahasa Jawa krama, terutama untuk orang dan kegiatan yang dihormati.
+      <!-- SELESAI CATATAN B.JAWA MATERI 8 -->
+    </div>
+    <div data-id="bjawa-8">
+      <!-- TULIS CATATAN B.JAWA MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.JAWA MATERI 9 -->
+    </div>
+    <div data-id="bjawa-9">
+      <!-- TULIS CATATAN B.JAWA MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN B.JAWA MATERI 10 -->
+    </div>
+    <div data-id="ipa-0">
+      <!-- TULIS CATATAN IPA MATERI 1 DI BAWAH INI -->
+      TEKANAN ZAT PADAT
+
+1. Pengertian
+
+Tekanan zat padat adalah besarnya gaya yang bekerja pada setiap satuan luas permukaan benda.
+
+2. Rumus Tekanan
+
+P = F / A
+
+Keterangan:
+P = tekanan (Pascal/Pa)
+F = gaya tekan (Newton/N)
+A = luas permukaan (m²)
+
+3. Rumus Mencari Besaran Lain
+
+Untuk mencari tekanan:
+P = F / A
+
+Untuk mencari gaya:
+F = P × A
+
+Untuk mencari luas permukaan:
+A = F / P
+
+Cara mudah mengingat:
+P = F ÷ A
+F = P × A
+A = F ÷ P
+
+4. Hubungan Gaya, Luas, dan Tekanan
+
+* Semakin besar gaya, semakin besar tekanan.
+* Semakin kecil gaya, semakin kecil tekanan.
+* Semakin besar luas permukaan, semakin kecil tekanan.
+* Semakin kecil luas permukaan, semakin besar tekanan.
+
+Jadi:
+Gaya bertambah → tekanan bertambah
+Gaya berkurang → tekanan berkurang
+Luas bertambah → tekanan berkurang
+Luas berkurang → tekanan bertambah
+
+5. Contoh Penerapan dalam Kehidupan Sehari-hari
+
+* Paku dibuat runcing agar luas permukaannya kecil sehingga menghasilkan tekanan besar dan mudah menembus kayu.
+* Pisau yang tajam lebih mudah memotong karena bagian ujungnya memiliki luas permukaan kecil sehingga tekanannya besar.
+* Jarum memiliki ujung yang sangat kecil sehingga tekanannya besar dan mudah menembus kain.
+* Sepatu salju dibuat dengan permukaan yang lebar agar tekanan pada salju lebih kecil sehingga tidak mudah tenggelam.
+* Kaki meja yang memiliki luas permukaan lebih besar memberikan tekanan yang lebih kecil pada lantai.
+
+6. Satuan
+
+Tekanan menggunakan satuan Pascal (Pa).
+
+1 Pa = 1 N/m²
+
+Gaya menggunakan satuan Newton (N).
+
+Luas permukaan menggunakan satuan meter persegi (m²).
+
+7. Contoh Perhitungan
+
+Contoh 1: Mencari tekanan
+
+Diketahui:
+F = 100 N
+A = 2 m²
+
+P = F / A
+P = 100 / 2
+P = 50 Pa
+
+Jadi, tekanannya adalah 50 Pa.
+
+Contoh 2: Mencari gaya
+
+Diketahui:
+P = 500 Pa
+A = 2 m²
+
+F = P × A
+F = 500 × 2
+F = 1000 N
+
+Jadi, gayanya adalah 1000 N.
+
+Contoh 3: Mencari luas permukaan
+
+Diketahui:
+F = 200 N
+P = 100 Pa
+
+A = F / P
+A = 200 / 100
+A = 2 m²
+
+Jadi, luas permukaannya adalah 2 m².
+
+8. Inti yang Perlu Diingat
+
+Tekanan adalah gaya yang bekerja pada setiap satuan luas permukaan.
+
+P = F / A
+
+F = P × A
+
+A = F / P
+
+Gaya semakin besar → tekanan semakin besar.
+Luas permukaan semakin besar → tekanan semakin kecil.
+Luas permukaan semakin kecil → tekanan semakin besar.
+
+      <!-- SELESAI CATATAN IPA MATERI 1 -->
+    </div>
+    <div data-id="ipa-1">
+      <!-- TULIS CATATAN IPA MATERI 2 DI BAWAH INI -->
+TEKANAN ZAT CAIR
+
+1. Pengertian
+
+Tekanan zat cair adalah tekanan yang diberikan oleh zat cair pada suatu permukaan.
+
+Tekanan pada zat cair yang diam disebut tekanan hidrostatis. Tekanan hidrostatis terjadi karena berat zat cair di atas suatu titik.
+
+2. Rumus Tekanan Hidrostatis
+
+Ph = ρ × g × h
+
+Keterangan:
+Ph = tekanan hidrostatis (Pa)
+ρ = massa jenis zat cair (kg/m³)
+g = percepatan gravitasi (m/s²)
+h = kedalaman dari permukaan zat cair (m)
+
+Dalam soal ini digunakan:
+g = 10 m/s²
+
+3. Rumus Mencari Besaran Lain
+
+Untuk mencari tekanan:
+Ph = ρ × g × h
+
+Untuk mencari massa jenis:
+ρ = Ph / (g × h)
+
+Untuk mencari kedalaman:
+h = Ph / (ρ × g)
+
+4. Faktor yang Memengaruhi Tekanan Hidrostatis
+
+Tekanan hidrostatis dipengaruhi oleh:
+
+* Massa jenis zat cair
+* Percepatan gravitasi
+* Kedalaman zat cair
+
+Semakin besar massa jenis → semakin besar tekanan.
+
+Semakin besar gravitasi → semakin besar tekanan.
+
+Semakin dalam posisi dari permukaan → semakin besar tekanan.
+
+5. Sifat-Sifat Tekanan Hidrostatis
+
+* Tekanan hidrostatis semakin besar jika kedalaman semakin besar.
+* Pada kedalaman yang sama dalam zat cair yang sama, tekanan hidrostatisnya sama.
+* Tekanan zat cair bekerja ke segala arah.
+* Tekanan hidrostatis tidak bergantung pada bentuk wadah.
+* Tekanan hidrostatis bergantung pada massa jenis zat cair, gravitasi, dan kedalaman.
+
+6. Contoh dalam Kehidupan Sehari-hari
+
+* Dinding bendungan dibuat lebih tebal di bagian bawah karena tekanan air semakin besar pada kedalaman yang lebih besar.
+* Telinga terasa semakin tertekan ketika menyelam semakin dalam.
+* Air dari lubang yang lebih rendah pada sebuah wadah dapat menyembur lebih jauh karena tekanan air di lubang tersebut lebih besar.
+* Penyelam merasakan tekanan air yang semakin besar ketika menyelam lebih dalam.
+
+7. Satuan
+
+Tekanan hidrostatis = Pascal (Pa)
+
+Massa jenis = kg/m³
+
+Percepatan gravitasi = m/s²
+
+Kedalaman = meter (m)
+
+8. Contoh Soal Sulit 1: Mencari Massa Jenis
+
+Sebuah cairan memberikan tekanan hidrostatis sebesar 27.450 Pa pada sebuah titik yang berada 3,5 m di bawah permukaan cairan. Jika gravitasi 10 m/s², tentukan massa jenis cairan tersebut.
+
+Diketahui:
+Ph = 27.450 Pa
+h = 3,5 m
+g = 10 m/s²
+
+Ditanya:
+ρ = ?
+
+Gunakan rumus:
+
+ρ = Ph / (g × h)
+
+Masukkan nilai:
+
+ρ = 27.450 / (10 × 3,5)
+
+Hitung bagian penyebut:
+
+10 × 3,5 = 35
+
+Maka:
+
+ρ = 27.450 / 35
+
+ρ = 784,2857... kg/m³
+
+Jadi, massa jenis cairan tersebut sekitar 784,29 kg/m³.
+
+9. Contoh Soal Sulit 2: Mencari Kedalaman
+
+Sebuah zat cair memiliki massa jenis 875 kg/m³. Tekanan hidrostatis pada suatu titik adalah 31.062,5 Pa. Jika gravitasi 10 m/s², berapakah kedalaman titik tersebut?
+
+Diketahui:
+ρ = 875 kg/m³
+Ph = 31.062,5 Pa
+g = 10 m/s²
+
+Ditanya:
+h = ?
+
+Gunakan:
+
+h = Ph / (ρ × g)
+
+Masukkan nilai:
+
+h = 31.062,5 / (875 × 10)
+
+Hitung penyebut:
+
+875 × 10 = 8.750
+
+Maka:
+
+h = 31.062,5 / 8.750
+
+h = 3,55 m
+
+Jadi, kedalaman titik tersebut adalah 3,55 m.
+
+10. Contoh Soal Sulit 3: Membandingkan Dua Titik
+
+Cairan A memiliki massa jenis 1.200 kg/m³. Cairan B memiliki massa jenis 800 kg/m³.
+
+Titik X berada 2,75 m di bawah permukaan cairan A, sedangkan titik Y berada 4,125 m di bawah permukaan cairan B.
+
+Jika gravitasi 10 m/s², tentukan tekanan hidrostatis pada masing-masing titik dan tentukan selisih tekanannya.
+
+Tekanan pada X:
+
+PhX = ρ × g × h
+
+PhX = 1.200 × 10 × 2,75
+
+PhX = 33.000 Pa
+
+Tekanan pada Y:
+
+PhY = ρ × g × h
+
+PhY = 800 × 10 × 4,125
+
+PhY = 33.000 Pa
+
+Selisih:
+
+33.000 - 33.000 = 0 Pa
+
+Jadi, tekanan hidrostatis pada titik X dan Y sama besar, yaitu 33.000 Pa.
+
+11. Contoh Soal Sulit 4: Membandingkan Tekanan dengan Data Berbeda
+
+Cairan A memiliki massa jenis 960 kg/m³ dan kedalaman 3,75 m.
+
+Cairan B memiliki massa jenis 1.250 kg/m³ dan kedalaman 2,4 m.
+
+Jika gravitasi 10 m/s², tentukan tekanan hidrostatis masing-masing cairan dan tentukan cairan mana yang memiliki tekanan lebih besar.
+
+Tekanan cairan A:
+
+PhA = 960 × 10 × 3,75
+PhA = 36.000 Pa
+
+Tekanan cairan B:
+
+PhB = 1.250 × 10 × 2,4
+PhB = 30.000 Pa
+
+Selisih tekanan:
+
+36.000 - 30.000 = 6.000 Pa
+
+Jadi, tekanan hidrostatis cairan A lebih besar sebesar 6.000 Pa.
+
+12. Inti yang Perlu Diingat
+
+Ph = ρ × g × h
+
+ρ = Ph / (g × h)
+
+h = Ph / (ρ × g)
+
+Dalam rangkuman ini:
+g = 10 m/s²
+
+Massa jenis semakin besar → tekanan semakin besar.
+
+Kedalaman semakin besar → tekanan semakin besar.
+
+Bentuk wadah tidak menentukan besar tekanan hidrostatis.
+
+Tekanan hidrostatis bekerja ke segala arah.
+
+Saat mengerjakan soal, tentukan terlebih dahulu besaran yang diketahui dan besaran yang ditanyakan, lalu pilih rumus yang sesuai.
+
+      <!-- SELESAI CATATAN IPA MATERI 2 -->
+    </div>
+    <div data-id="ipa-2">
+      <!-- TULIS CATATAN IPA MATERI 3 DI BAWAH INI -->
+TEKANAN ZAT GAS
+
+1. Pengertian
+
+Tekanan zat gas adalah tekanan yang ditimbulkan oleh tumbukan partikel-partikel gas terhadap dinding wadah.
+
+Partikel gas bergerak bebas ke segala arah. Ketika partikel gas bertumbukan dengan dinding wadah, timbul gaya yang menghasilkan tekanan.
+
+Semakin sering dan semakin kuat tumbukan partikel gas terhadap dinding wadah, semakin besar tekanannya.
+
+2. Rumus Tekanan Gas
+
+P = F / A
+
+Keterangan:
+P = tekanan (Pa)
+F = gaya tekan (N)
+A = luas permukaan (m²)
+
+3. Rumus Mencari Besaran Lain
+
+Untuk mencari tekanan:
+P = F / A
+
+Untuk mencari gaya:
+F = P × A
+
+Untuk mencari luas permukaan:
+A = F / P
+
+4. Faktor yang Memengaruhi Tekanan Gas
+
+Tekanan gas dapat dipengaruhi oleh:
+
+- Gaya tumbukan partikel gas terhadap dinding wadah.
+- Luas permukaan tempat gas memberikan tekanan.
+- Suhu gas.
+- Jumlah partikel gas.
+- Volume ruang yang ditempati gas.
+
+Secara umum:
+
+Suhu naik → partikel bergerak lebih cepat → tumbukan lebih kuat → tekanan dapat meningkat jika volume tetap.
+
+Jumlah partikel bertambah → tumbukan dengan dinding semakin banyak → tekanan dapat meningkat jika volume dan suhu tetap.
+
+Volume diperkecil → partikel lebih sering bertumbukan dengan dinding → tekanan meningkat jika suhu tetap.
+
+5. Sifat-Sifat Tekanan Gas
+
+- Gas memberikan tekanan ke segala arah.
+- Gas dapat menekan dinding wadah.
+- Tekanan gas dapat berubah jika suhu, volume, atau jumlah partikel berubah.
+- Gas mengisi seluruh ruang yang tersedia di dalam wadah.
+- Gas dapat dimampatkan karena jarak antarpartikelnya relatif jauh.
+
+6. Tekanan Atmosfer
+
+Tekanan atmosfer adalah tekanan yang diberikan oleh udara atau atmosfer akibat berat udara yang berada di atas suatu permukaan.
+
+Tekanan atmosfer semakin kecil jika ketinggian tempat semakin besar.
+
+Di permukaan laut, tekanan atmosfer standar sekitar:
+
+1 atm = 76 cmHg
+1 atm = 101.325 Pa
+
+7. Pengukuran Tekanan Atmosfer
+
+Tekanan atmosfer dapat diukur menggunakan barometer.
+
+Barometer raksa menggunakan tinggi kolom raksa untuk menunjukkan besar tekanan atmosfer.
+
+Hubungan tekanan dengan kolom zat cair dapat dituliskan:
+
+P = ρ × g × h
+
+Keterangan:
+P = tekanan (Pa)
+ρ = massa jenis zat cair (kg/m³)
+g = percepatan gravitasi (m/s²)
+h = tinggi kolom zat cair (m)
+
+Untuk soal dalam rangkuman ini digunakan:
+
+g = 10 m/s²
+
+8. Contoh Penerapan Tekanan Gas
+
+- Balon dapat mengembang karena udara di dalamnya memberikan tekanan ke dinding balon.
+- Ban kendaraan dapat menjadi keras karena udara di dalam ban memberikan tekanan pada dinding ban.
+- Sedotan dapat digunakan karena perbedaan tekanan udara.
+- Suntikan dapat bekerja karena adanya perubahan tekanan di dalam tabung.
+- Kaleng atau botol dapat mengalami perubahan bentuk akibat perbedaan tekanan di dalam dan di luar wadah.
+- Pengisap (suction cup) dapat menempel karena adanya perbedaan tekanan udara.
+
+9. Contoh Soal Sulit 1: Mencari Tekanan
+
+Sebuah gas memberikan gaya sebesar 147,5 N pada permukaan seluas 0,025 m². Tentukan tekanan gas tersebut.
+
+Diketahui:
+F = 147,5 N
+A = 0,025 m²
+
+Ditanya:
+P = ?
+
+Gunakan rumus:
+
+P = F / A
+
+Masukkan nilai:
+
+P = 147,5 / 0,025
+
+Karena:
+
+0,025 = 25/1000
+
+Maka:
+
+P = 147,5 ÷ 0,025
+P = 5.900 Pa
+
+Jadi, tekanan gas tersebut adalah 5.900 Pa.
+
+10. Contoh Soal Sulit 2: Mencari Gaya
+
+Sebuah gas memiliki tekanan 12.500 Pa pada sebuah permukaan seluas 0,036 m². Berapakah gaya yang diberikan gas pada permukaan tersebut?
+
+Diketahui:
+P = 12.500 Pa
+A = 0,036 m²
+
+Ditanya:
+F = ?
+
+Gunakan:
+
+F = P × A
+
+F = 12.500 × 0,036
+
+F = 450 N
+
+Jadi, gaya yang diberikan gas adalah 450 N.
+
+11. Contoh Soal Sulit 3: Tekanan Atmosfer
+
+Sebuah barometer menggunakan raksa dengan massa jenis 13.600 kg/m³. Tinggi kolom raksa adalah 0,735 m. Jika gravitasi 10 m/s², tentukan tekanan atmosfer yang ditunjukkan barometer tersebut.
+
+Diketahui:
+ρ = 13.600 kg/m³
+h = 0,735 m
+g = 10 m/s²
+
+Gunakan:
+
+P = ρ × g × h
+
+P = 13.600 × 10 × 0,735
+
+Hitung:
+
+10 × 0,735 = 7,35
+
+Kemudian:
+
+13.600 × 7,35 = 99.960
+
+Jadi:
+
+P = 99.960 Pa
+
+Jadi, tekanan atmosfer yang ditunjukkan barometer adalah 99.960 Pa.
+
+12. Contoh Soal Sulit 4: Perbandingan Tekanan
+
+Gas A memberikan gaya 325 N pada permukaan seluas 0,052 m².
+
+Gas B memberikan gaya 288 N pada permukaan seluas 0,036 m².
+
+Tentukan tekanan masing-masing gas dan tentukan gas mana yang memberikan tekanan lebih besar.
+
+Gas A:
+
+P = F / A
+
+P = 325 / 0,052
+
+P = 6.250 Pa
+
+Gas B:
+
+P = F / A
+
+P = 288 / 0,036
+
+P = 8.000 Pa
+
+Perbandingan:
+
+8.000 - 6.250 = 1.750 Pa
+
+Jadi, gas B memberikan tekanan lebih besar dengan selisih 1.750 Pa.
+
+13. Contoh Soal Sulit 5: Mencari Tinggi Kolom Raksa
+
+Sebuah barometer menunjukkan tekanan atmosfer sebesar 98.600 Pa. Jika massa jenis raksa 13.600 kg/m³ dan gravitasi 10 m/s², tentukan tinggi kolom raksa.
+
+Diketahui:
+P = 98.600 Pa
+ρ = 13.600 kg/m³
+g = 10 m/s²
+
+Ditanya:
+h = ?
+
+Dari:
+
+P = ρ × g × h
+
+maka:
+
+h = P / (ρ × g)
+
+Masukkan nilai:
+
+h = 98.600 / (13.600 × 10)
+
+Hitung penyebut:
+
+13.600 × 10 = 136.000
+
+Maka:
+
+h = 98.600 / 136.000
+
+h = 0,725 m
+
+Jika diubah ke sentimeter:
+
+0,725 m = 72,5 cm
+
+Jadi, tinggi kolom raksa adalah 0,725 m atau 72,5 cm.
+
+14. Inti yang Perlu Diingat
+
+Tekanan gas:
+
+P = F / A
+
+Mencari gaya:
+
+F = P × A
+
+Mencari luas:
+
+A = F / P
+
+Tekanan atmosfer:
+
+P = ρ × g × h
+
+Mencari tinggi kolom:
+
+h = P / (ρ × g)
+
+Tekanan gas berasal dari tumbukan partikel gas dengan dinding wadah.
+
+Suhu naik → gerak partikel semakin cepat → tekanan dapat meningkat jika volume tetap.
+
+Jumlah partikel bertambah → jumlah tumbukan bertambah → tekanan dapat meningkat jika volume dan suhu tetap.
+
+Volume diperkecil → tumbukan semakin sering → tekanan meningkat jika suhu tetap.
+
+Tekanan atmosfer semakin kecil ketika ketinggian tempat semakin besar.
+
+1 atm = 76 cmHg = 101.325 Pa
+      <!-- SELESAI CATATAN IPA MATERI 3 -->
+    </div>
+    <div data-id="ipa-3">
+      <!-- TULIS CATATAN IPA MATERI 4 DI BAWAH INI -->
+HUKUM PASCAL
+
+1. Pengertian
+
+Hukum Pascal menyatakan bahwa tekanan yang diberikan pada zat cair dalam ruang tertutup akan diteruskan sama besar ke segala arah.
+
+Artinya, jika suatu zat cair berada di dalam wadah tertutup dan diberi tekanan pada salah satu bagian, tekanan tersebut akan diteruskan ke seluruh bagian zat cair.
+
+2. Rumus Hukum Pascal
+
+Karena tekanan pada kedua penampang sama besar:
+
+P1 = P2
+
+Karena:
+
+P = F / A
+
+Maka:
+
+F1 / A1 = F2 / A2
+
+Keterangan:
+F1 = gaya pada penampang pertama (N)
+F2 = gaya pada penampang kedua (N)
+A1 = luas penampang pertama (m²)
+A2 = luas penampang kedua (m²)
+
+3. Rumus Mencari Besaran Lain
+
+Untuk mencari gaya pertama:
+
+F1 = (F2 × A1) / A2
+
+Untuk mencari gaya kedua:
+
+F2 = (F1 × A2) / A1
+
+Untuk mencari luas penampang pertama:
+
+A1 = (F1 × A2) / F2
+
+Untuk mencari luas penampang kedua:
+
+A2 = (F2 × A1) / F1
+
+4. Prinsip Kerja Hukum Pascal
+
+Jika luas penampang kedua lebih besar daripada luas penampang pertama, gaya yang dihasilkan pada penampang kedua dapat menjadi lebih besar.
+
+Contoh:
+
+A2 > A1
+→ F2 > F1
+
+Inilah prinsip yang digunakan pada alat hidrolik untuk menghasilkan gaya besar dengan gaya awal yang lebih kecil.
+
+Namun, gaya yang lebih besar diperoleh dengan konsekuensi perpindahan penampang yang lebih kecil.
+
+5. Syarat Penerapan Hukum Pascal
+
+Hukum Pascal diterapkan pada zat cair yang:
+
+- Berada dalam ruang atau sistem tertutup.
+- Tekanannya dapat diteruskan melalui zat cair.
+- Menggunakan zat cair yang relatif sulit dimampatkan.
+
+6. Contoh Penerapan dalam Kehidupan Sehari-hari
+
+- Dongkrak hidrolik
+- Rem hidrolik pada kendaraan
+- Lift hidrolik
+- Mesin press hidrolik
+- Kursi hidrolik pada bengkel atau salon
+
+7. Keuntungan Sistem Hidrolik
+
+Dengan menggunakan perbedaan luas penampang, gaya kecil dapat digunakan untuk menghasilkan gaya yang lebih besar pada penampang yang luas.
+
+Perbandingan gaya dapat ditentukan dengan:
+
+F2 / F1 = A2 / A1
+
+Jika A2 dua kali A1, maka F2 juga dua kali F1.
+
+Jika A2 lima kali A1, maka F2 juga lima kali F1.
+
+8. Satuan
+
+Gaya = Newton (N)
+
+Luas = meter persegi (m²)
+
+Tekanan = Pascal (Pa)
+
+Jika luas diberikan dalam cm², perbandingan luas tetap dapat digunakan langsung selama A1 dan A2 menggunakan satuan yang sama.
+
+9. Contoh Soal Sulit 1: Mencari Gaya Kedua
+
+Sebuah sistem hidrolik memiliki luas penampang pertama 12,5 cm² dan luas penampang kedua 187,5 cm². Jika gaya sebesar 80 N diberikan pada penampang pertama, berapakah gaya yang dihasilkan pada penampang kedua?
+
+Diketahui:
+F1 = 80 N
+A1 = 12,5 cm²
+A2 = 187,5 cm²
+
+Ditanya:
+F2 = ?
+
+Gunakan:
+
+F1 / A1 = F2 / A2
+
+Ubah menjadi:
+
+F2 = (F1 × A2) / A1
+
+Masukkan nilai:
+
+F2 = (80 × 187,5) / 12,5
+
+Hitung perbandingan luas:
+
+187,5 / 12,5 = 15
+
+Maka:
+
+F2 = 80 × 15
+F2 = 1.200 N
+
+Jadi, gaya pada penampang kedua adalah 1.200 N.
+
+10. Contoh Soal Sulit 2: Mencari Luas Penampang
+
+Sebuah alat hidrolik menghasilkan gaya 3.600 N pada penampang kedua. Gaya yang diberikan pada penampang pertama adalah 120 N. Jika luas penampang kedua adalah 240 cm², tentukan luas penampang pertama.
+
+Diketahui:
+F1 = 120 N
+F2 = 3.600 N
+A2 = 240 cm²
+
+Ditanya:
+A1 = ?
+
+Gunakan:
+
+A1 = (F1 × A2) / F2
+
+Masukkan nilai:
+
+A1 = (120 × 240) / 3.600
+
+Hitung:
+
+120 × 240 = 28.800
+
+A1 = 28.800 / 3.600
+A1 = 8 cm²
+
+Jadi, luas penampang pertama adalah 8 cm².
+
+11. Contoh Soal Sulit 3: Angka Desimal
+
+Sebuah sistem hidrolik mempunyai luas penampang pertama 7,5 cm² dan luas penampang kedua 162,5 cm². Jika gaya 75 N diberikan pada penampang pertama, tentukan gaya yang dihasilkan pada penampang kedua.
+
+Diketahui:
+A1 = 7,5 cm²
+A2 = 162,5 cm²
+F1 = 75 N
+
+Gunakan:
+
+F2 = (F1 × A2) / A1
+
+F2 = (75 × 162,5) / 7,5
+
+Karena:
+
+162,5 / 7,5 = 21,666...
+
+Maka:
+
+F2 = 75 × 21,666...
+
+F2 = 1.625 N
+
+Jadi, gaya pada penampang kedua adalah 1.625 N.
+
+12. Contoh Soal Sulit 4: Mencari Gaya Awal
+
+Sebuah mesin press hidrolik memiliki luas penampang kecil 15,6 cm² dan luas penampang besar 468 cm². Mesin tersebut harus menghasilkan gaya sebesar 9.360 N pada penampang besar. Berapakah gaya minimum yang harus diberikan pada penampang kecil?
+
+Diketahui:
+A1 = 15,6 cm²
+A2 = 468 cm²
+F2 = 9.360 N
+
+Ditanya:
+F1 = ?
+
+Gunakan:
+
+F1 = (F2 × A1) / A2
+
+F1 = (9.360 × 15,6) / 468
+
+Hitung perbandingan:
+
+468 / 15,6 = 30
+
+Maka:
+
+F1 = 9.360 / 30
+F1 = 312 N
+
+Jadi, gaya yang harus diberikan pada penampang kecil adalah 312 N.
+
+13. Contoh Soal Sulit 5: Tekanan dan Gaya
+
+Sebuah piston kecil memiliki luas 0,004 m². Piston tersebut diberi gaya 250 N. Piston besar memiliki luas 0,16 m². Tentukan tekanan yang diberikan pada zat cair dan gaya yang dihasilkan pada piston besar.
+
+Diketahui:
+F1 = 250 N
+A1 = 0,004 m²
+A2 = 0,16 m²
+
+Langkah 1: Mencari tekanan
+
+P = F1 / A1
+
+P = 250 / 0,004
+
+P = 62.500 Pa
+
+Jadi, tekanan pada zat cair adalah 62.500 Pa.
+
+Langkah 2: Mencari gaya pada piston besar
+
+P = F2 / A2
+
+F2 = P × A2
+
+F2 = 62.500 × 0,16
+
+F2 = 10.000 N
+
+Jadi, gaya yang dihasilkan pada piston besar adalah 10.000 N.
+
+14. Hal Penting dalam Menghitung
+
+Jika mencari F2:
+
+F2 = (F1 × A2) / A1
+
+Jika mencari F1:
+
+F1 = (F2 × A1) / A2
+
+Jika mencari A2:
+
+A2 = (F2 × A1) / F1
+
+Jika mencari A1:
+
+A1 = (F1 × A2) / F2
+
+Yang paling penting adalah memperhatikan penampang mana yang memiliki luas A1 dan A2.
+
+15. Inti yang Perlu Diingat
+
+Hukum Pascal:
+
+Tekanan yang diberikan pada zat cair dalam ruang tertutup akan diteruskan sama besar ke segala arah.
+
+Rumus utama:
+
+P1 = P2
+
+F1 / A1 = F2 / A2
+
+Perbandingan gaya:
+
+F2 / F1 = A2 / A1
+
+Semakin besar perbandingan luas penampang kedua terhadap penampang pertama, semakin besar gaya yang dapat dihasilkan pada penampang kedua.
+
+Contoh penerapan:
+Dongkrak hidrolik, rem hidrolik, lift hidrolik, dan mesin press hidrolik.
+      <!-- SELESAI CATATAN IPA MATERI 4 -->
+    </div>
+    <div data-id="ipa-4">
+      <!-- TULIS CATATAN IPA MATERI 5 DI BAWAH INI -->
+HUKUM ARCHIMEDES
+
+1. Pengertian
+
+Hukum Archimedes menyatakan bahwa benda yang dicelupkan sebagian atau seluruhnya ke dalam zat cair akan mengalami gaya ke atas yang besarnya sama dengan berat zat cair yang dipindahkan oleh benda tersebut.
+
+Gaya ke atas ini disebut gaya Archimedes atau gaya apung.
+
+2. Rumus Gaya Archimedes
+
+Fa = ρ × g × V
+
+Keterangan:
+Fa = gaya ke atas/gaya Archimedes (N)
+ρ = massa jenis zat cair (kg/m³)
+g = percepatan gravitasi (m/s²)
+V = volume zat cair yang dipindahkan (m³)
+
+Dalam soal pada rangkuman ini digunakan:
+
+g = 10 m/s²
+
+3. Rumus Mencari Besaran Lain
+
+Untuk mencari gaya ke atas:
+
+Fa = ρ × g × V
+
+Untuk mencari massa jenis zat cair:
+
+ρ = Fa / (g × V)
+
+Untuk mencari volume zat cair yang dipindahkan:
+
+V = Fa / (ρ × g)
+
+4. Volume yang Digunakan
+
+Volume V pada rumus Archimedes adalah volume bagian benda yang tercelup atau volume zat cair yang dipindahkan.
+
+Jika benda tercelup seluruhnya:
+
+V zat cair yang dipindahkan = V benda
+
+Jika benda hanya tercelup sebagian:
+
+V zat cair yang dipindahkan = V bagian benda yang tercelup
+
+5. Hubungan Gaya Berat dan Gaya Apung
+
+Benda di dalam zat cair mengalami dua gaya utama:
+
+- Gaya berat (w) ke arah bawah.
+- Gaya Archimedes (Fa) ke arah atas.
+
+Rumus berat:
+
+w = m × g
+
+Keterangan:
+w = berat benda (N)
+m = massa benda (kg)
+g = gravitasi (m/s²)
+
+6. Keadaan Benda di Dalam Zat Cair
+
+A. Mengapung
+
+Benda mengapung jika massa jenis benda lebih kecil daripada massa jenis zat cair.
+
+ρ benda < ρ zat cair
+
+Saat benda mengapung dalam keadaan seimbang:
+
+Fa = w
+
+B. Melayang
+
+Benda melayang jika massa jenis benda sama dengan massa jenis zat cair.
+
+ρ benda = ρ zat cair
+
+Dalam keadaan seimbang:
+
+Fa = w
+
+C. Tenggelam
+
+Benda tenggelam jika massa jenis benda lebih besar daripada massa jenis zat cair.
+
+ρ benda > ρ zat cair
+
+Pada benda yang tenggelam:
+
+w > Fa
+
+7. Faktor yang Memengaruhi Gaya Archimedes
+
+Gaya Archimedes dipengaruhi oleh:
+
+- Massa jenis zat cair
+- Percepatan gravitasi
+- Volume zat cair yang dipindahkan
+
+Semakin besar massa jenis zat cair → semakin besar gaya Archimedes.
+
+Semakin besar volume yang tercelup → semakin besar gaya Archimedes.
+
+Semakin besar gravitasi → semakin besar gaya Archimedes.
+
+8. Contoh Penerapan dalam Kehidupan Sehari-hari
+
+- Kapal dapat mengapung di air.
+- Kapal selam dapat mengatur kondisi mengapung, melayang, atau tenggelam.
+- Pelampung dapat membantu benda atau manusia tetap mengapung.
+- Hidrometer dapat digunakan untuk mengetahui massa jenis zat cair.
+- Balon udara dapat naik karena adanya gaya ke atas dari udara.
+- Jembatan ponton dapat mengapung karena memindahkan sejumlah air sehingga menghasilkan gaya ke atas.
+
+9. Contoh Soal Sulit 1: Mencari Gaya Archimedes
+
+Sebuah benda tercelup seluruhnya di dalam cairan dengan massa jenis 850 kg/m³. Volume benda adalah 0,036 m³. Jika gravitasi 10 m/s², tentukan gaya Archimedes yang bekerja pada benda.
+
+Diketahui:
+ρ = 850 kg/m³
+V = 0,036 m³
+g = 10 m/s²
+
+Ditanya:
+Fa = ?
+
+Gunakan:
+
+Fa = ρ × g × V
+
+Masukkan nilai:
+
+Fa = 850 × 10 × 0,036
+
+Hitung:
+
+10 × 0,036 = 0,36
+
+Fa = 850 × 0,36
+Fa = 306 N
+
+Jadi, gaya Archimedes yang bekerja pada benda adalah 306 N.
+
+10. Contoh Soal Sulit 2: Mencari Volume
+
+Sebuah benda mengalami gaya Archimedes sebesar 472,5 N ketika dicelupkan seluruhnya ke dalam cairan yang memiliki massa jenis 1.050 kg/m³. Jika gravitasi 10 m/s², tentukan volume benda yang tercelup.
+
+Diketahui:
+Fa = 472,5 N
+ρ = 1.050 kg/m³
+g = 10 m/s²
+
+Ditanya:
+V = ?
+
+Gunakan:
+
+V = Fa / (ρ × g)
+
+Masukkan nilai:
+
+V = 472,5 / (1.050 × 10)
+
+V = 472,5 / 10.500
+
+V = 0,045 m³
+
+Jadi, volume benda yang tercelup adalah 0,045 m³.
+
+11. Contoh Soal Sulit 3: Mencari Massa Jenis
+
+Sebuah benda dengan volume tercelup 0,028 m³ mengalami gaya Archimedes sebesar 294 N. Jika gravitasi 10 m/s², tentukan massa jenis zat cair tersebut.
+
+Diketahui:
+Fa = 294 N
+V = 0,028 m³
+g = 10 m/s²
+
+Ditanya:
+ρ = ?
+
+Gunakan:
+
+ρ = Fa / (g × V)
+
+Masukkan nilai:
+
+ρ = 294 / (10 × 0,028)
+
+Hitung:
+
+10 × 0,028 = 0,28
+
+ρ = 294 / 0,28
+
+ρ = 1.050 kg/m³
+
+Jadi, massa jenis zat cair tersebut adalah 1.050 kg/m³.
+
+12. Contoh Soal Sulit 4: Menentukan Tenggelam, Melayang, atau Mengapung
+
+Sebuah benda memiliki massa 4,8 kg dan volume 0,006 m³. Benda dimasukkan seluruhnya ke dalam air yang memiliki massa jenis 1.000 kg/m³. Jika gravitasi 10 m/s², tentukan apakah benda mengapung, melayang, atau tenggelam.
+
+Langkah 1: Cari massa jenis benda.
+
+ρ benda = m / V
+
+ρ benda = 4,8 / 0,006
+
+ρ benda = 800 kg/m³
+
+Bandingkan:
+
+ρ benda = 800 kg/m³
+ρ air = 1.000 kg/m³
+
+Karena:
+
+800 < 1.000
+
+Maka benda cenderung mengapung.
+
+Kita juga dapat memeriksa menggunakan gaya.
+
+Gaya berat:
+
+w = m × g
+
+w = 4,8 × 10
+w = 48 N
+
+Jika seluruh benda tercelup:
+
+Fa = ρ × g × V
+
+Fa = 1.000 × 10 × 0,006
+Fa = 60 N
+
+Karena gaya apung maksimum saat seluruh benda tercelup adalah 60 N, sedangkan berat benda 48 N, benda akan naik sampai sebagian volumenya berada di atas permukaan.
+
+Jadi, benda mengapung.
+
+13. Contoh Soal Sulit 5: Menentukan Volume yang Tercelup Saat Mengapung
+
+Sebuah benda memiliki massa 6,3 kg dan volume 0,009 m³. Benda mengapung di dalam air dengan massa jenis 1.000 kg/m³. Jika gravitasi 10 m/s², tentukan volume benda yang tercelup.
+
+Karena benda mengapung dalam keadaan seimbang:
+
+Fa = w
+
+Gaya berat:
+
+w = m × g
+
+w = 6,3 × 10
+w = 63 N
+
+Karena:
+
+Fa = ρ × g × V tercelup
+
+Maka:
+
+V tercelup = Fa / (ρ × g)
+
+V tercelup = 63 / (1.000 × 10)
+
+V tercelup = 63 / 10.000
+
+V tercelup = 0,0063 m³
+
+Jadi, volume benda yang tercelup adalah 0,0063 m³.
+
+Untuk mengetahui bagian yang berada di atas air:
+
+V total = 0,009 m³
+V tercelup = 0,0063 m³
+
+V di atas air = 0,009 - 0,0063
+V di atas air = 0,0027 m³
+
+14. Contoh Soal Sulit 6: Benda Tenggelam dan Tegangan Tali
+
+Sebuah benda memiliki massa 7,2 kg dan volume 0,004 m³. Benda dicelupkan seluruhnya ke dalam air dan ditahan menggunakan tali agar tetap berada di dalam air. Jika massa jenis air 1.000 kg/m³ dan gravitasi 10 m/s², tentukan gaya tegangan tali.
+
+Langkah 1: Cari berat benda.
+
+w = m × g
+
+w = 7,2 × 10
+w = 72 N
+
+Langkah 2: Cari gaya Archimedes.
+
+Fa = ρ × g × V
+
+Fa = 1.000 × 10 × 0,004
+Fa = 40 N
+
+Karena benda memiliki berat lebih besar daripada gaya ke atas:
+
+w > Fa
+
+Maka benda cenderung tenggelam.
+
+Agar benda tetap diam, tali harus memberikan gaya ke atas.
+
+Persamaan gaya:
+
+T + Fa = w
+
+Maka:
+
+T = w - Fa
+
+T = 72 - 40
+
+T = 32 N
+
+Jadi, tegangan tali adalah 32 N.
+
+15. Inti yang Perlu Diingat
+
+Gaya Archimedes:
+
+Fa = ρ × g × V
+
+Mencari massa jenis:
+
+ρ = Fa / (g × V)
+
+Mencari volume yang tercelup:
+
+V = Fa / (ρ × g)
+
+Berat benda:
+
+w = m × g
+
+Mengapung:
+
+ρ benda < ρ zat cair
+
+Melayang:
+
+ρ benda = ρ zat cair
+
+Tenggelam:
+
+ρ benda > ρ zat cair
+
+Saat benda mengapung atau melayang dalam keadaan seimbang:
+
+Fa = w
+
+Gaya Archimedes bergantung pada massa jenis zat cair, gravitasi, dan volume zat cair yang dipindahkan.
+
+Dalam rangkuman ini digunakan:
+
+g = 10 m/s²
+      <!-- SELESAI CATATAN IPA MATERI 5 -->
+    </div>
+    <div data-id="ipa-5">
+      <!-- TULIS CATATAN IPA MATERI 6 DI BAWAH INI -->
+Bejana Berhubungan
+Rangkuman lengkap materi fisika
+
+A. Pengertian
+Bejana berhubungan adalah dua tabung atau lebih yang bagian bawahnya saling tersambung. Bentuk dan ukuran tabung boleh berbeda, tetapi zat cair di dalamnya dapat mengalir dari satu tabung ke tabung lain.
+
+Contoh sederhana adalah pipa U, teko, dan selang yang dihubungkan ke wadah air.
+
+B. Prinsip Bejana Berhubungan
+Jika bejana diisi zat cair yang sejenis dan dalam keadaan diam, permukaan zat cair pada semua tabung berada pada ketinggian yang sama. Bentuk tabung tidak mengubah ketinggian itu.
+
+Zat cair sejenis dan diam: h1 = h2 = h3 = ...
+Permukaan selalu mendatar, sejajar satu sama lain.
+Hal ini terjadi karena tekanan hidrostatis pada satu ketinggian yang sama besarnya sama. Zat cair mengalir dari tekanan tinggi ke tekanan rendah sampai tekanannya seimbang.
+
+C. Jika Zat Cairnya Berbeda
+Jika dua zat cair yang tidak bercampur dimasukkan ke pipa U, tinggi permukaannya tidak sama. Yang lebih rapat massanya akan lebih rendah.
+
+ρ1 × h1 = ρ2 × h2
+ρ = massa jenis zat cair (kg/m³)
+h = tinggi zat cair diukur dari batas pertemuan kedua zat cair
+Air massa jenis 1.000 kg/m³ tingginya 8 cm.
+Minyak di kaki lain tingginya 10 cm.
+1.000 × 8 = ρ minyak × 10
+ρ minyak = 8.000 / 10 = 800 kg/m³
+Raksa ρ = 13.600 kg/m³, tingginya 2 cm.
+Air di kaki lain:
+13.600 × 2 = 1.000 × h air
+h air = 27,2 cm
+D. Syarat yang Perlu Diperhatikan
+Zat cair dalam keadaan diam, tidak sedang mengalir deras.
+Untuk tinggi yang sama, zat cairnya harus sejenis.
+Tabung bagian bawah benar-benar tersambung.
+Jika zat cair berbeda, keduanya tidak saling larut.
+Tinggi diukur dari batas permukaan, bukan dari dasar tabung yang bentuknya berbeda.
+E. Penerapan
+Teko: mulut teko dan permukaan air di dalam teko sama tinggi. Jika mulutnya lebih rendah, air tumpah sebelum teko penuh.
+Menara air: air di rumah mengalir karena permukaan bak menara lebih tinggi daripada keran.
+Pipa ledeng: air dapat naik di rumah yang lebih rendah daripada tandon.
+Waterpass: selang bening berisi air dipakai untuk menyamakan ketinggian dua titik.
+Sumur artesis: air menyembur jika sumber air berada di tempat yang lebih tinggi.
+F. Contoh Soal
+1. Pipa U diisi air. Tabung kiri sempit, tabung kanan lebar. Bagaimana tinggi airnya?
+Jawab: sama tinggi, karena zat cairnya sejenis.
+2. Minyak 800 kg/m³ dan air 1.000 kg/m³ dimasukkan ke pipa U. Tinggi minyak 15 cm. Tinggi air?
+Jawab: 800 × 15 = 1.000 × h
+h = 12.000 / 1.000 = 12 cm
+3. Mengapa air dalam teko tidak tumpah meskipun mulut teko terbuka?
+Jawab: karena mulut teko dibuat setinggi atau lebih tinggi daripada batas air di dalam teko.
+4. Dua zat cair seimbang di pipa U. h1 = 20 cm, ρ1 = 900 kg/m³, h2 = 12 cm. Berapa ρ2?
+Jawab: 900 × 20 = ρ2 × 12
+ρ2 = 18.000 / 12 = 1.500 kg/m³
+Intinya: pada bejana berhubungan, zat cair sejenis yang diam selalu sama tinggi, walaupun bentuk tabungnya berbeda.
+
+Jika zat cairnya berbeda dan tidak bercampur, berlaku ρ1 h1 = ρ2 h2. Zat yang lebih rapat massanya memiliki tinggi yang lebih kecil.
+      <!-- SELESAI CATATAN IPA MATERI 6 -->
+    </div>
+    <div data-id="ipa-6">
+      <!-- TULIS CATATAN IPA MATERI 7 DI BAWAH INI -->
+Kelistrikan
+IPA Kelas IX
+
+A. Listrik Statis
+Listrik statis adalah muatan listrik yang diam pada suatu benda. Muatan muncul karena elektron berpindah dari satu benda ke benda lain, misalnya saat penggaris plastik digosokkan pada rambut.
+
+Proton bermuatan positif.
+Elektron bermuatan negatif.
+Muatan sejenis tolak-menolak.
+Muatan berbeda jenis tarik-menarik.
+Hukum Coulomb:
+F = k × q1 × q2 / r²
+F = gaya (newton)
+q = muatan (coulomb)
+r = jarak kedua muatan (meter)
+k = 9 × 10⁹ N·m²/C²
+Dua muatan sejenis didekatkan. Keduanya saling menolak.
+Jika jaraknya diperbesar, gaya tolaknya menjadi lebih kecil.
+B. Arus, Tegangan, dan Hambatan
+Listrik dinamis adalah muatan yang mengalir. Arus listrik adalah banyaknya muatan yang mengalir setiap sekon.
+
+I = Q / t
+I = arus (ampere, A)
+Q = muatan (coulomb, C)
+t = waktu (sekon, s)
+Tegangan mendorong muatan agar mengalir. Satuannya volt (V). Hambatan menahan aliran arus. Satuannya ohm (Ω).
+
+Muatan 20 C mengalir selama 4 s.
+I = 20 / 4 = 5 A
+C. Hukum Ohm
+Arus pada penghantar sebanding dengan tegangan dan berbanding terbalik dengan hambatan.
+
+V = I × R
+I = V / R
+R = V / I
+Lampu 12 V memiliki hambatan 6 Ω.
+I = 12 / 6 = 2 A
+D. Rangkaian Seri
+Komponen disusun pada satu jalur. Arusnya sama. Jika satu lampu putus, lampu lain ikut padam.
+
+I = I1 = I2 = I3
+V = V1 + V2 + V3
+R total = R1 + R2 + R3
+Hambatan 2 Ω, 3 Ω, dan 5 Ω disusun seri pada 20 V.
+R total = 10 Ω
+I = 20 / 10 = 2 A
+E. Rangkaian Paralel
+Komponen disusun bercabang. Tegangan setiap cabang sama. Jika satu cabang putus, cabang lain tetap menyala. Instalasi rumah memakai rangkaian paralel.
+
+V = V1 = V2 = V3
+I = I1 + I2 + I3
+1 / R total = 1 / R1 + 1 / R2 + 1 / R3
+Hambatan 4 Ω dan 4 Ω disusun paralel.
+R total = 4 / 2 = 2 Ω
+
+Hambatan 6 Ω dan 3 Ω disusun paralel.
+1 / R = 1/6 + 1/3 = 1/2
+R total = 2 Ω
+F. Daya dan Energi Listrik
+P = V × I
+W = P × t
+P = daya (watt)
+W = energi (joule)
+Untuk tagihan rumah: energi dihitung dalam kWh
+Lampu 220 V dialiri 0,5 A.
+P = 220 × 0,5 = 110 W
+
+Setrika 300 W dipakai 2 jam.
+Energi = 0,3 kW × 2 jam = 0,6 kWh
+G. Sumber dan Hemat Energi
+Sumber listrik: baterai, aki, generator, dan listrik PLN.
+PLN menghasilkan listrik dari pembangkit, lalu disalurkan ke rumah.
+Cara hemat: mematikan alat yang tidak dipakai, memakai lampu hemat energi, dan tidak menumpuk colokan pada satu stopkontak.
+H. Contoh Soal
+1. Hambatan 8 Ω dipasang pada 24 V. Berapa arusnya?
+Jawab: I = 24 / 8 = 3 A
+2. Hambatan 4 Ω dan 6 Ω disusun seri pada 20 V. Berapa arus dan tegangan pada 4 Ω?
+Jawab: R = 10 Ω, I = 2 A, tegangan pada 4 Ω = 8 V
+3. Dua lampu 10 Ω disusun paralel pada 10 V. Berapa hambatan total dan arus total?
+Jawab: R total = 5 Ω, I = 2 A
+4. Alat 500 W dipakai 4 jam. Berapa energinya?
+Jawab: 0,5 kW × 4 jam = 2 kWh
+Intinya: materi Kelas IX ini membahas listrik statis dan listrik dinamis.
+
+Muatan sejenis tolak-menolak. Arus, tegangan, dan hambatan dihubungkan dengan V = I × R.
+
+Seri: arus sama dan hambatan dijumlah. Paralel: tegangan sama dan hambatan total lebih kecil. Energi rumah dihitung dalam kWh.
+      <!-- SELESAI CATATAN IPA MATERI 7 -->
+    </div>
+    <div data-id="ipa-7">
+      <!-- TULIS CATATAN IPA MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPA MATERI 8 -->
+    </div>
+    <div data-id="ipa-8">
+      <!-- TULIS CATATAN IPA MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPA MATERI 9 -->
+    </div>
+    <div data-id="ipa-9">
+      <!-- TULIS CATATAN IPA MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPA MATERI 10 -->
+    </div>
+    <div data-id="ips-0">
+      <!-- TULIS CATATAN IPS MATERI 1 DI BAWAH INI -->
+Bab 2: Perkembangan Ekonomi Digital (Pendalaman Materi)
+
+A. Uang dan Lembaga Keuangan
+
+1. Asal Mula Uang
+
+Dulu, orang memenuhi kebutuhan dengan sistem barter, yaitu tukar-menukar barang. Tapi
+
+ini punya masalah:
+
+Sulit menemukan orang yang saling membutuhkan.
+
+Tidak ada ukuran pasti untuk nilai barang.
+
+Maka muncullah uang barang (misalnya garam, kulit kerang), kemudian uang logam (emas, perak), lalu uang kertas, dan sekarang uang digital (saldo e-wallet, kripto).
+
+Contoh:
+
+Dahulu masyarakat Papua menggunakan garam batangan sebagai alat tukar.
+
+Sekarang kita cukup transfer via GoPay, OVO, atau QRIS di warung kopi.
+
+2. Jenis-Jenis dan Fungsi Uang
+
+Jenis:
+
+o Uang kartal: uang kertas dan logam yang dikeluarkan BI.
+
+o Uang giral: uang di bank yang bisa dipakai lewat cek, bilvet giro, transfer.
+
+Fungsi:
+
+1. Alat tukar
+
+2. Satuan hitung
+
+3. Penyimpan nilai
+
+4. Alat pembayaran utang
+
+Kalau kamu beli barang di marketplace pakai ShopeePay = uang digital bentuk modern dari uang.
+
+3. Lembaga Keuangan
+
+Bank Sentral (BI): mengatur peredaran uang, menjaga stabilitas rupiah.
+
+Bank Umum: tempat menyimpan uang, meminjam, dan transfer (contoh: BCA,
+
+Mandiri).
+
+Lembaga non-bank:
+
+o Koperasi: simpan pinjam antar anggota.
+
+o Pegadaian: pinjaman dengan jaminan barang.
+
+o Asuransi: proteksi dari risiko.
+
+B. Interaksi Masyarakat Abad ke-21
+
+1. Network Society (Masyarakat Jaringan)
+
+Masyarakat sekarang hidup dalam jejaring digital. Internet mengubah cara:
+
+bekerja (WFH, freelancer online),
+
+berbelanja (e-commerce),
+
+belajar (kelas daring),
+
+berinteraksi (media sosial).
+
+Contoh:
+
+Seorang siswa bisa ikut lomba karya tulis nasional secara online lewat Google Meet.
+
+Seorang petani menjual hasil panen via WhatsApp ke tengkulak kota.
+
+2. Etika dan Literasi Digital
+
+Karena semua terhubung lewat gawai, kita butuh etika digital, seperti:
+
+Tidak menyebar hoaks.
+
+Menghargai privasi orang lain.
+
+Tidak mencuri konten orang (plagiarisme digital).
+
+Kata kunci:
+
+Beradab di dunia digital = tahu batas = cerdas + sopan online.
+
+C. Perkembangan Transaksi Ekonomi di Era Digital
+
+1. Pengaruh Teknologi terhadap Perdagangan
+
+Dulu: toko fisik Sekarang: toko daring (online shop)
+
+Contoh nyata:
+
+UMKM seperti penjual keripik bisa go nasional lewat Tokopedia.
+
+Layanan seperti ShopeeFood menggantikan cara lama memesan makanan.
+
+2. Alat Pembayaran Modern
+
+ORIS: 1 kode QR untuk semua e-wallet, Praktis dan efisien.
+
+E-wallet: OVO, GoPay, DANA, LinkAja.
+
+Internet & Mobile banking: akses perbankan dari HP.
+
+Contoh:
+
+Ibu warung pakai QRIS = tak perlu uang kembalian.
+
+Remaja bisa isi ulang pulsa tanpa ke konter, cukup lewat aplikasi bank digital.
+
+D. Literasi Finansial
+
+1. Apa itu Literasi Finansial?
+
+Kemampuan mengelola uang dengan bijak:
+
+Tahu bedanya kebutuhan vs keinginan.
+
+Bisa membuat anggaran.
+
+Mengerti soal tabungan, investasi, pinjaman, dan risiko.
+
+2. Kenapa Literasi Finansial Penting?
+
+Tanpa literasi, banyak orang:
+
+Terjebak utang paylater.
+
+Hidup dari gaji ke gaji.
+
+Tidak punya dana darurat.
+
+Contoh:
+
+Siswa yang sudah belajar literasi keuangan tahu harus menyisihkan uang jajan untuk ditabung dulu, bukan langsung habiskan buat jajan online.
+
+3. Kompetensi Literasi Finansial
+
+1. Budgeting (anggaran): rencana pemasukan dan pengeluaran.
+
+2. Saving (menabung): menyisihkan uang untuk masa depan.
+
+3. Investing: menumbuhkan uang (reksadana, emas, dll).
+
+4. Borrowing (berutang sehat): tahu bunga, cicilan, risiko.
+
+5. Risk management: tahu pentingnya asuransi dan dana darurat.
+
+Penutup dan Refleksi
+
+Apa yang perlu kamu ingat?
+
+Uang dan transaksi makin digital.
+
+Kita hidup di masyarakat jaringan butuh etika dan literasi digital.
+
+supaya tidak terjebak gaya hidup Kita harus cerdas keuangan sejak muda konsumtif dan utang.
+
+Pertanyaan pemantik refleksi:
+
+Apa perbedaan antara QRIS dan e-wallet?
+
+Menurutmu, apakah semua masyarakat Indonesia sudah siap menghadapi ekonomi
+
+digital?
+
+Pernahkah kamu melakukan transaksi digital? Apa kelebihan dan risikonya?
+
+Referensi:
+
+1. Buku IPS SMP Kelas IX-Kemendikbud (2022)
+      <!-- SELESAI CATATAN IPS MATERI 1 -->
+    </div>
+    <div data-id="ips-1">
+      <!-- TULIS CATATAN IPS MATERI 2 DI BAWAH INI -->
+PERUBAHAN SOSIAL
+- Masyarakat pasti mengalami perubahan, karena masyarakat bersifat dinamis.
+- Selo Soemardjan merumuskan perubahan sosial adl perubahan-perubahan pd lembaga-lembaga kemasyarakatan di dalam suatu masyarakat yg mempengaruhi sistem sosialnya, termasuk di dalamnya nilai-nilai, sikap & pola perilaku diantara kelompok dalam masyarakat.
+
+Bentuk dan Contoh Perubahan Sosial
+- Perubahan Berdasarkan Waktu
+1. Evolusi & Revolusi
+Evolusi = Perubahan yg terjadi secara lambat.
+Co: http://Masy.pemburu → http://masy.agraris → http://masy.industri
+Revolusi = Perubahan yg terjadi secara cepat.
+Co: Alam penjajahan → kemerdekaan → demokrasi liberal → demokrasi terpimpin → OrBa → Reformasi.
+
+EVOLUSI
+[Gambat 3 foto: manusia purba, petani di sawah, pekerja pabrik industri]
+
+REVOLUSI
+[Gambar 4 foto: perjuangan penjajahan, proklamasi, reformasi dll]
+
+Wawasan!
+Revolusi Industri 5.0
+Memasuki dekade kedua abad ke21, dunia ramai memperbincangkan lahirnya tahapan industri terbaru yang disebut dengan Industri 4.0. Istilah ini pertama kali dipopulerkan oleh Jerman pada tahun 2011 saat memublikasikan rencana pembangunannya. Konsep Revolusi Industri 4.0 membagi tahapan perkembangan industri sebagai berikut:
+- Industri 1.0: Ditandai dengan penemuan mesin uap yang mengubah tenaga otot manusia menjadi tenaga mesin dalam proses produksi.
+- Industri 2.0: Ditandai dengan penemuan mekanisme produksi massal dan pengembangan energi listrik.
+- Industri 3.0: Ditandai dengan penemuan teknologi digital dan sistem komputerisasi
+- Industri 4.0: Ditandai dengan penemuan teknologi internet, jaringan nirkabel, dan kecerdasan buatan.
+Perkembangan terbaru terjadi di tahun 2019 ketika negara Jepang memberikan gagasan mengenai Society 5.0 sebagai kelanjutan dari keempat tahapan industri sebelumnya. Society 5.0 ditandai dengan upaya menitikberatkan perkembangan teknologi pada kebutuhan manusia, bukan pada perkembangan alat-alat industri.
+
+2. Perubahan berdasarkan cakupannya
+- Perubahan yg kecil adl perubahan-perubahan yg terjadi pd unsur-unsur struktur sosial yg tdk membawa pengaruh langsung / berarti kepada masyarakat.
+- co: Perubahan pd Mode Pakaian.
+- Perubahan yg besar, adl perubahan-perubahan yg terjadi dan membawa pengaruh besar kepada masyarakat.
+co: Perubahan pd dunia Industri (Pabrik), VALAS.
+
+c. Perubahan Berdasarkan Perencanaan
+- Perubahan direncanakan
+- Co: pengurangan penggunaan kantong plastik
+- Perubahan yang tidak direncanakan
+- Co: maraknya media sosial
+
+d. Perubahan Berdasarkan Arah Perkembangan
+- Perubahan progress adalah perubahan yang menuju ke arah kemajuan
+- Co: berubahnya pola pikir dan kesadaran masyarakat seiring dengan perkembangan ilmu pengetahuan.
+- perubahan regress adalah perubahan yang menuju ke arah kemunduran
+- Co: berubahnya kesadaran dan sikap masyarakat terhadap alam seiring dengan perkembangan zaman
+
+Ada juga yang mengelompokkan penyebab perubahan sosial dari dua penyebab, yaitu:
+1. Penyebab dari masyarakat itu sendiri, seperti bertambahnya atau berkurangnya penduduk, penemuan baru, revolusi.
+2. Penyebab dari luar masyarakat itu sendiri, seperti lingkungan alam, peperangan, pengaruh kebudayaan masyarakat lain.
+
+---
+File kamu ada 15 halaman total, tapi yang terdeteksi ada isinya hanya 9 slide di atas. Sisa 6 halaman terakhir kosong / tidak ada teksnya saat di-scan.
+      <!-- SELESAI CATATAN IPS MATERI 2 -->
+    </div>
+    <div data-id="ips-2">
+      <!-- TULIS CATATAN IPS MATERI 3 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 3 -->
+    </div>
+    <div data-id="ips-3">
+      <!-- TULIS CATATAN IPS MATERI 4 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 4 -->
+    </div>
+    <div data-id="ips-4">
+      <!-- TULIS CATATAN IPS MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 5 -->
+    </div>
+    <div data-id="ips-5">
+      <!-- TULIS CATATAN IPS MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 6 -->
+    </div>
+    <div data-id="ips-6">
+      <!-- TULIS CATATAN IPS MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 7 -->
+    </div>
+    <div data-id="ips-7">
+      <!-- TULIS CATATAN IPS MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 8 -->
+    </div>
+    <div data-id="ips-8">
+      <!-- TULIS CATATAN IPS MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 9 -->
+    </div>
+    <div data-id="ips-9">
+      <!-- TULIS CATATAN IPS MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN IPS MATERI 10 -->
+    </div>
+    <div data-id="mtk-0">
+      <!-- TULIS CATATAN MTK MATERI 1 DI BAWAH INI -->
+Bilangan Berpangkat dan Bentuk Akar
+Rangkuman materi matematika
+
+A. Bilangan Berpangkat
+Bilangan berpangkat adalah perkalian berulang dari bilangan yang sama. Jika a dipangkatkan n, ditulis an, artinya a dikali a sebanyak n kali.
+
+an = a × a × a × ... × a (sebanyak n faktor)
+Contoh: 23 = 2 × 2 × 2 = 8
+a disebut bilangan pokok, n disebut pangkat.
+
+Pangkat khusus
+Pangkat nol: a0 = 1, asal a tidak sama dengan 0. Contoh: 50 = 1.
+Pangkat negatif: a−n = 1 / an. Contoh: 2−3 = 1 / 8.
+Pangkat pecahan: a1/n = akar pangkat n dari a. Contoh: 91/2 = 3.
+Sifat-sifat bilangan berpangkat
+Perkalian pangkat sama pokok: am × an = am+n. Contoh: 23 × 22 = 25 = 32.
+Pembagian pangkat sama pokok: am / an = am−n. Contoh: 35 / 32 = 33 = 27.
+Pangkat dari pangkat: (am)n = am×n. Contoh: (23)2 = 26 = 64.
+Perkalian dipangkatkan: (a × b)n = an × bn. Contoh: (2 × 3)2 = 4 × 9 = 36.
+Pembagian dipangkatkan: (a / b)n = an / bn. Contoh: (6 / 2)2 = 36 / 4 = 9.
+B. Bentuk Akar
+Bentuk akar adalah kebalikan dari perpangkatan. Akar pangkat n dari a adalah bilangan yang jika dipangkatkan n hasilnya a.
+
+√a = a1/2
+³√a = a1/3
+Contoh: √16 = 4 karena 42 = 16. ³√8 = 2 karena 23 = 8.
+Menyederhanakan bentuk akar
+Pecah bilangan di dalam akar menjadi faktor kuadrat, lalu keluarkan faktor yang bisa diakarkan.
+
+√12 = √(4 × 3) = 2√3
+√50 = √(25 × 2) = 5√2
+√72 = √(36 × 2) = 6√2
+Operasi bentuk akar
+Penjumlahan dan pengurangan: hanya bisa jika bentuk akarnya sama. Contoh: 3√2 + 5√2 = 8√2. Contoh lain: 2√3 + 4√5 tidak bisa digabung.
+Perkalian: √a × √b = √(a × b). Contoh: √3 × √12 = √36 = 6.
+Pembagian: √a / √b = √(a / b). Contoh: √18 / √2 = √9 = 3.
+Kuadrat akar: (√a)2 = a. Contoh: (√7)2 = 7.
+Merasionalkan penyebut
+Jika penyebut masih berbentuk akar, kalikan pembilang dan penyebut dengan akar yang sama supaya penyebut menjadi bilangan bulat.
+
+1 / √2 = √2 / 2
+3 / √5 = 3√5 / 5
+4 / √8 = 4 / (2√2) = 2 / √2 = √2
+Intinya: pangkat adalah perkalian berulang, akar adalah kebalikannya. Saat menghitung, samakan pokok untuk pangkat, dan samakan bentuk akar untuk menjumlahkan. Bentuk akar yang masih bisa diakarkan harus disederhanakan.
+      <!-- SELESAI CATATAN MTK MATERI 1 -->
+    </div>
+    <div data-id="mtk-1">
+      <!-- TULIS CATATAN MTK MATERI 2 DI BAWAH INI -->
+Transformasi Geometri
+Rangkuman lengkap materi matematika
+
+A. Pengertian Transformasi
+Transformasi geometri adalah perubahan posisi, bentuk, atau ukuran suatu bangun pada bidang koordinat. Titik asal disebut titik awal. Titik hasil perubahan disebut bayangan, biasanya diberi tanda aksen, misalnya A menjadi A'.
+
+Ada empat transformasi utama: translasi, refleksi, rotasi, dan dilatasi. Translasi, refleksi, dan rotasi tidak mengubah ukuran. Dilatasi dapat memperbesar atau memperkecil bangun.
+
+B. Translasi (Pergeseran)
+Translasi menggeser setiap titik sejauh dan searah yang sama. Ukuran dan bentuk bangun tidak berubah.
+
+Translasi T = (a, b)
+(x, y) → (x + a, y + b)
+a = geser mendatar. Positif ke kanan, negatif ke kiri.
+b = geser tegak. Positif ke atas, negatif ke bawah.
+Titik A(2, 3) ditranslasi T = (4, −1).
+A' = (2 + 4, 3 + (−1)) = (6, 2)
+
+Titik B(−1, 5) ditranslasi T = (−3, 2).
+B' = (−1 − 3, 5 + 2) = (−4, 7)
+
+Bayangan titik (7, 1) adalah (3, 6). Translasi yang dipakai:
+a = 3 − 7 = −4, b = 6 − 1 = 5, jadi T = (−4, 5)
+C. Refleksi (Pencerminan)
+Refleksi menghasilkan bayangan seperti di cermin. Jarak titik ke cermin sama dengan jarak bayangan ke cermin. Ukuran bangun tidak berubah.
+
+Terhadap sumbu-x
+(x, y) → (x, −y)
+A(3, 4) dicerminkan terhadap sumbu-x menjadi A'(3, −4).
+Terhadap sumbu-y
+(x, y) → (−x, y)
+B(5, −2) dicerminkan terhadap sumbu-y menjadi B'(−5, −2).
+Terhadap garis y = x
+(x, y) → (y, x)
+C(2, 6) dicerminkan terhadap y = x menjadi C'(6, 2).
+Terhadap garis y = −x
+(x, y) → (−y, −x)
+D(3, 1) dicerminkan terhadap y = −x menjadi D'(−1, −3).
+Terhadap titik asal O(0, 0)
+(x, y) → (−x, −y)
+E(4, −5) dicerminkan terhadap O(0, 0) menjadi E'(−4, 5).
+Terhadap garis x = h
+(x, y) → (2h − x, y)
+F(1, 4) dicerminkan terhadap garis x = 3.
+F' = (2 × 3 − 1, 4) = (5, 4)
+Terhadap garis y = k
+(x, y) → (x, 2k − y)
+G(2, 1) dicerminkan terhadap garis y = 4.
+G' = (2, 2 × 4 − 1) = (2, 7)
+D. Rotasi (Perputaran)
+Rotasi memutar titik sebesar sudut tertentu terhadap suatu pusat. Arah positif adalah berlawanan arah jarum jam. Arah negatif adalah searah jarum jam.
+
+Pusat O(0, 0)
+90° berlawanan jarum jam: (x, y) → (−y, x)
+180°: (x, y) → (−x, −y)
+270° berlawanan jarum jam: (x, y) → (y, −x)
+90° searah jarum jam sama dengan 270° berlawanan jarum jam.
+P(2, 5) diputar 90° berlawanan jarum jam terhadap O.
+P' = (−5, 2)
+
+P(2, 5) diputar 180° terhadap O.
+P' = (−2, −5)
+
+P(2, 5) diputar 270° berlawanan jarum jam terhadap O.
+P' = (5, −2)
+Pusat P(a, b), sudut 90°, 180°, atau 270°
+Geser dulu titik terhadap pusat, putar, lalu geser kembali.
+
+1. Ubah menjadi (x − a, y − b).
+2. Putar seperti pusat O(0, 0).
+3. Tambahkan kembali (a, b).
+Q(4, 6) diputar 90° berlawanan jarum jam terhadap P(1, 2).
+Selisih: (4 − 1, 6 − 2) = (3, 4)
+Putar 90°: (−4, 3)
+Q' = (−4 + 1, 3 + 2) = (−3, 5)
+R(5, 3) diputar 180° terhadap P(2, 1).
+Selisih: (5 − 2, 3 − 1) = (3, 2)
+Putar 180°: (−3, −2)
+R' = (−3 + 2, −2 + 1) = (−1, −1)
+E. Dilatasi (Perkalian)
+Dilatasi mengubah ukuran bangun terhadap suatu pusat. Faktor skala k menentukan hasilnya.
+
+k > 1: diperbesar.
+0 < k < 1: diperkecil.
+k = 1: tetap.
+k negatif: diperbesar atau diperkecil, sekaligus dibalik arahnya terhadap pusat.
+Pusat O(0, 0), faktor k
+(x, y) → (kx, ky)
+A(2, 3) didilatasi terhadap O dengan k = 3.
+A' = (6, 9)
+
+B(4, −2) didilatasi terhadap O dengan k = 1/2.
+B' = (2, −1)
+
+C(1, 4) didilatasi terhadap O dengan k = −2.
+C' = (−2, −8)
+Pusat P(a, b), faktor k
+(x, y) → (a + k(x − a), b + k(y − b))
+D(5, 7) didilatasi terhadap P(1, 3) dengan k = 2.
+x' = 1 + 2(5 − 1) = 1 + 8 = 9
+y' = 3 + 2(7 − 3) = 3 + 8 = 11
+D' = (9, 11)
+
+E(6, 2) didilatasi terhadap P(2, 2) dengan k = 1/2.
+x' = 2 + (1/2)(6 − 2) = 2 + 2 = 4
+y' = 2 + (1/2)(2 − 2) = 2
+E' = (4, 2)
+F. Komposisi Transformasi
+Komposisi adalah dua transformasi atau lebih yang dikerjakan berurutan. Yang ditulis di kanan dikerjakan lebih dulu.
+
+Titik A(1, 2) ditranslasi T = (3, 1), lalu dicerminkan terhadap sumbu-x.
+Translasi dulu: (1 + 3, 2 + 1) = (4, 3)
+Cermin sumbu-x: (4, −3)
+Jadi bayangan akhir A'(4, −3)
+Titik B(2, 4) diputar 90° berlawanan jarum jam terhadap O, lalu didilatasi k = 2 terhadap O.
+Rotasi: (−4, 2)
+Dilatasi: (−8, 4)
+Jadi bayangan akhir B'(−8, 4)
+G. Contoh Soal
+1. Bayangan titik (3, −2) oleh translasi T = (5, 4) adalah ...
+Jawab: (3 + 5, −2 + 4) = (8, 2)
+2. Bayangan titik (−4, 6) oleh refleksi terhadap sumbu-y adalah ...
+Jawab: (4, 6)
+3. Bayangan titik (5, 1) oleh rotasi 180° terhadap O(0, 0) adalah ...
+Jawab: (−5, −1)
+4. Bayangan titik (2, −3) oleh dilatasi [O, 4] adalah ...
+Jawab: (8, −12)
+5. Titik (1, 5) dicerminkan terhadap garis y = 2. Bayangannya adalah ...
+Jawab: (1, 2 × 2 − 5) = (1, −1)
+6. Titik (3, 4) ditranslasi (2, −1), lalu diputar 90° berlawanan jarum jam terhadap O. Bayangan akhirnya adalah ...
+Jawab: translasi dulu (5, 3), lalu rotasi (−3, 5)
+Intinya: translasi menggeser, refleksi mencerminkan, rotasi memutar, dan dilatasi mengubah ukuran.
+
+Translasi, refleksi, dan rotasi menjaga bentuk serta ukuran. Dilatasi mengubah ukuran sesuai faktor k.
+
+Pada komposisi, kerjakan transformasi yang urutannya lebih dulu, lalu lanjutkan ke transformasi berikutnya.
+      <!-- SELESAI CATATAN MTK MATERI 2 -->
+    </div>
+    <div data-id="mtk-2">
+      <!-- TULIS CATATAN MTK MATERI 3 DI BAWAH INI -->
+Kesebangunan dan Kongruensi
+Rangkuman lengkap materi matematika
+
+A. Pengertian Kesebangunan
+Dua bangun dikatakan sebangun jika bentuknya sama, tetapi ukurannya boleh berbeda. Sudut-sudut yang bersesuaian sama besar, dan sisi-sisi yang bersesuaian sebanding.
+
+Bangun sebangun jika:
+1. Sudut yang bersesuaian sama besar.
+2. Perbandingan sisi yang bersesuaian sama.
+Contoh sehari-hari: foto yang diperbesar, bayangan benda oleh cahaya, miniatur bangunan, dan peta. Bentuknya sama, ukurannya berbeda.
+
+B. Kesebangunan Bangun Datar
+Pada dua bangun yang sebangun, sisi yang panjangnya saling berpadanan disebut sisi bersesuaian. Sudut yang besarnya sama disebut sudut bersesuaian.
+
+Jika bangun A sebangun dengan bangun B, ditulis A ~ B.
+Perbandingan sisi = panjang sisi A / panjang sisi B yang bersesuaian.
+Persegi panjang 4 cm × 6 cm dan persegi panjang 8 cm × 12 cm.
+8 / 4 = 2 dan 12 / 6 = 2.
+Perbandingannya sama, sudutnya sama-sama siku-siku, jadi kedua bangun sebangun.
+
+Persegi panjang 4 cm × 6 cm dan persegi panjang 8 cm × 10 cm.
+8 / 4 = 2, tetapi 10 / 6 tidak sama dengan 2.
+Jadi tidak sebangun.
+C. Kesebangunan Segitiga
+Dua segitiga sebangun jika memenuhi salah satu syarat berikut.
+
+Sudut-sudut: ketiga sudut yang bersesuaian sama besar. Jika dua sudut sudah sama, sudut ketiga otomatis sama.
+Sisi-sudut-sisi: dua sisi yang bersesuaian sebanding, dan sudut di antara kedua sisi itu sama besar.
+Sisi-sisi-sisi: ketiga pasang sisi yang bersesuaian sebanding.
+Jika segitiga ABC ~ segitiga DEF, maka:
+sudut A = sudut D, sudut B = sudut E, sudut C = sudut F
+AB / DE = BC / EF = AC / DF
+Segitiga ABC dan DEF sebangun.
+AB = 6 cm, DE = 9 cm, BC = 8 cm. Panjang EF?
+AB / DE = BC / EF
+6 / 9 = 8 / EF
+6 × EF = 72
+EF = 12 cm
+Segitiga PQR dan STU sebangun.
+PQ / ST = 2 / 5, QR = 6 cm. Panjang TU?
+2 / 5 = 6 / TU
+2 × TU = 30
+TU = 15 cm
+D. Garis Tinggi dan Kesebangunan pada Segitiga Siku-siku
+Jika pada segitiga siku-siku dibuat garis tinggi ke sisi miring, terbentuk tiga segitiga yang saling sebangun: segitiga besar dan dua segitiga kecil.
+
+Pada segitiga siku-siku ABC, siku-siku di C, garis tinggi CD ke sisi miring AB.
+Segitiga ACD ~ segitiga ABC ~ segitiga CBD
+Akibatnya: CD² = AD × BD
+AC² = AD × AB
+BC² = BD × AB
+AD = 4 cm dan BD = 9 cm. Panjang garis tinggi CD?
+CD² = 4 × 9 = 36
+CD = 6 cm
+E. Pengertian Kongruensi
+Dua bangun dikatakan kongruen jika bentuk dan ukurannya sama. Bangun yang kongruen bisa saling menempati bila ditumpuk. Semua sisi dan sudut yang bersesuaian sama besar.
+
+Bangun kongruen jika:
+1. Sisi yang bersesuaian sama panjang.
+2. Sudut yang bersesuaian sama besar.
+Ditulis dengan tanda ≅.
+Setiap bangun yang kongruen pasti sebangun. Bangun yang sebangun belum tentu kongruen, karena ukurannya boleh berbeda.
+
+F. Kongruensi Segitiga
+Dua segitiga kongruen jika memenuhi salah satu syarat berikut.
+
+Sisi-sisi-sisi (S-S-S): ketiga pasang sisi yang bersesuaian sama panjang.
+Sisi-sudut-sisi (S-Sd-S): dua sisi dan sudut di antara kedua sisi itu sama dengan yang bersesuaian.
+Sudut-sisi-sudut (Sd-S-Sd): dua sudut dan sisi di antara kedua sudut itu sama dengan yang bersesuaian.
+Sisi-sudut-sudut (S-Sd-Sd): satu sisi dan dua sudut yang bersesuaian sama. Sisi itu tidak harus berada di antara kedua sudut.
+Segitiga ABC dan DEF.
+AB = DE = 5 cm, BC = EF = 7 cm, AC = DF = 8 cm.
+Syarat S-S-S terpenuhi, jadi segitiga ABC ≅ segitiga DEF.
+Segitiga PQR dan STU.
+PQ = ST, sudut Q = sudut T, QR = TU.
+Dua sisi dan sudut apitnya sama, jadi syarat S-Sd-S terpenuhi. Kedua segitiga kongruen.
+Dua sisi dan sudut di luar kedua sisi itu belum cukup untuk memastikan kongruen. Sudutnya harus sudut apit, kecuali syarat S-Sd-Sd yang memakai dua sudut.
+
+G. Kongruensi Segitiga Siku-siku
+Pada segitiga siku-siku ada syarat tambahan.
+
+Sisi miring dan satu sisi siku-siku sama. Syarat ini sering disebut sisi miring-sisi siku.
+Sisi miring dan satu sudut lancip sama.
+Dua segitiga siku-siku.
+Sisi miring keduanya 10 cm, dan satu sisi siku-siku keduanya 6 cm.
+Kedua segitiga kongruen.
+H. Perbedaan Kesebangunan dan Kongruensi
+Kesebangunan: bentuk sama, ukuran boleh berbeda. Sudut sama, sisi sebanding.
+Kongruensi: bentuk dan ukuran sama. Sudut sama, sisi sama panjang.
+Kongruen selalu sebangun. Sebangun belum tentu kongruen.
+Perbandingan sisi pada kongruen selalu 1 : 1.
+Dua segitiga sama sisi, sisi 3 cm dan 6 cm.
+Sudutnya sama-sama 60°, perbandingan sisi 1 : 2.
+Jadi sebangun, tetapi tidak kongruen.
+
+Dua segitiga sama sisi, sisi keduanya 5 cm.
+Bentuk dan ukuran sama, jadi kongruen sekaligus sebangun.
+I. Contoh Soal
+1. Segitiga ABC ~ segitiga PQR. AB = 4 cm, PQ = 10 cm, BC = 6 cm. Panjang QR?
+Jawab: 4 / 10 = 6 / QR, jadi QR = 15 cm.
+2. Dua persegi panjang berukuran 3 cm × 5 cm dan 9 cm × 15 cm. Apakah sebangun?
+Jawab: 9 / 3 = 3 dan 15 / 5 = 3. Perbandingan sama, jadi sebangun.
+3. Pada segitiga siku-siku, AD = 9 cm dan BD = 4 cm. Panjang garis tinggi CD?
+Jawab: CD² = 9 × 4 = 36, jadi CD = 6 cm.
+4. Segitiga KLM dan NOP memiliki KL = NO, LM = OP, dan KM = NP. Apa hubungannya?
+Jawab: syarat S-S-S terpenuhi, jadi kedua segitiga kongruen.
+5. Dua segitiga memiliki sudut 40° dan 60°. Apakah pasti sebangun?
+Jawab: ya. Sudut ketiga keduanya 80°, jadi sudut-sudut bersesuaian sama.
+6. Segitiga sebangun dengan perbandingan sisi 2 : 3. Sisi kecil 8 cm. Panjang sisi yang bersesuaian pada segitiga besar?
+Jawab: 2 / 3 = 8 / x, jadi x = 12 cm.
+Intinya: sebangun berarti bentuk sama dan sisi sebanding. Kongruen berarti bentuk dan ukuran sama.
+
+Pada segitiga, cek sudut yang sama atau perbandingan sisi untuk kesebangunan. Cek sisi dan sudut yang benar-benar sama untuk kongruensi.
+
+Setiap yang kongruen pasti sebangun, tetapi yang sebangun belum tentu kongruen.
+      <!-- SELESAI CATATAN MTK MATERI 3 -->
+    </div>
+    <div data-id="mtk-3">
+      <!-- TULIS CATATAN MTK MATERI 4 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 4 -->
+    </div>
+    <div data-id="mtk-4">
+      <!-- TULIS CATATAN MTK MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 5 -->
+    </div>
+      <div data-id="mtk-4">
+      <!-- TULIS CATATAN MTK MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 5 -->
+    </div>
+    <div data-id="mtk-5">
+      <!-- TULIS CATATAN MTK MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 6 -->
+    </div>
+    <div data-id="mtk-6">
+      <!-- TULIS CATATAN MTK MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 7 -->
+    </div>
+    <div data-id="mtk-7">
+      <!-- TULIS CATATAN MTK MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 8 -->
+    </div>
+    <div data-id="mtk-8">
+      <!-- TULIS CATATAN MTK MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 9 -->
+    </div>
+    <div data-id="mtk-9">
+      <!-- TULIS CATATAN MTK MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN MTK MATERI 10 -->
+    </div>
+    <div data-id="pag-0">
+      <!-- TULIS CATATAN PAG MATERI 1 DI BAWAH INI -->
+Semangat Keilmuan
+Ayat Al-Qur'an dan hadis tentang pentingnya menuntut ilmu
+
+A. Dasar Hukum Menuntut Ilmu
+Islam memerintahkan umatnya untuk belajar. Ilmu dipakai agar seseorang mengenal Allah, mampu beribadah dengan benar, dan berguna bagi orang lain.
+
+Q.S. Al-Mujadilah ayat 11: Allah mengangkat derajat orang yang beriman dan berilmu.
+
+Q.S. At-Taubah ayat 122: tidak semua orang harus pergi ke medan yang sama. Sebagian perlu tetap belajar agama agar dapat mengajarkan kaumnya.
+
+Hadis: menuntut ilmu wajib bagi setiap Muslim.
+Belajar tidak terbatas di sekolah. Membaca, bertanya, dan mengamati juga termasuk menuntut ilmu.
+Ilmu yang dicari meliputi ilmu agama dan ilmu dunia.
+Orang berilmu bertanggung jawab menyampaikan dan mengamalkan ilmunya.
+B. Ilmu di Tengah Perkembangan Teknologi
+Teknologi mempercepat pencarian informasi, tetapi tidak semua informasi benar. Orang yang berilmu mampu memilih sumber, memeriksa fakta, dan memakai teknologi untuk hal yang bermanfaat.
+
+Contoh manfaat: belajar lewat buku digital, berdiskusi dengan guru, dan membuat karya.
+Contoh yang harus dihindari: menyalin tugas orang lain, menyebarkan berita yang belum jelas, dan memakai teknologi untuk merugikan teman.
+Semangat keilmuan berarti rajin belajar, jujur saat mengerjakan tugas, dan memakai ilmu untuk kebaikan.
+
+Intinya: menuntut ilmu diperintahkan dalam Al-Qur'an dan hadis.
+
+Di masa teknologi, ilmu dibutuhkan agar kita tidak mudah tertipu dan dapat memakai alat digital dengan bertanggung jawab.
+      <!-- SELESAI CATATAN PAG MATERI 1 -->
+    </div>
+    <div data-id="pag-1">
+      <!-- TULIS CATATAN PAG MATERI 2 DI BAWAH INI -->
+Iman kepada Hari Akhir
+Makna iman dan rangkaian peristiwa kehidupan di akhirat
+
+A. Iman kepada Hari Akhir
+Iman kepada hari akhir berarti percaya bahwa kehidupan dunia akan berakhir dan setiap orang akan menerima balasan atas perbuatannya. Ini termasuk rukun iman.
+
+Dunia adalah tempat beramal, bukan tempat tinggal selamanya.
+Semua perbuatan dicatat, baik yang terlihat maupun yang tersembunyi.
+Keyakinan ini mendorong orang berhati-hati dalam berkata dan bertindak.
+Contoh sikap: jujur saat ujian, tidak menyakiti teman, dan segera memperbaiki kesalahan.
+B. Rangkaian Peristiwa di Akhirat
+Sakaratul maut: saat nyawa dicabut dan kehidupan dunia berakhir.
+Alam barzakh: alam kubur, tempat manusia menunggu hari kebangkitan.
+Hari kiamat: kehancuran alam semesta sebagai tanda berakhirnya dunia.
+Yaumul ba'ats: manusia dibangkitkan dari kubur.
+Yaumul mahsyar: manusia dikumpulkan di padang mahsyar.
+Yaumul hisab: semua amal diperhitungkan.
+Yaumul mizan: amal ditimbang.
+Shiratal mustaqim: jembatan menuju tempat balasan.
+Surga atau neraka: tempat balasan sesuai amal.
+Intinya: iman kepada hari akhir adalah percaya bahwa dunia berakhir dan amal akan dibalas.
+
+Urutannya: kematian, alam barzakh, kiamat, kebangkitan, mahsyar, hisab, mizan, lalu surga atau neraka.
+      <!-- SELESAI CATATAN PAG MATERI 2 -->
+    </div>
+    <div data-id="pag-2">
+      <!-- TULIS CATATAN PAG MATERI 3 DI BAWAH INI -->
+Kasih Sayang terhadap Sesama
+Makna kasih sayang dan praktiknya
+
+A. Makna Kasih Sayang dalam Islam
+Kasih sayang dalam Islam disebut rahmah. Artinya sikap lembut, peduli, dan ingin orang lain selamat serta bahagia. Kasih sayang tidak hanya diucapkan, tetapi terlihat dalam perbuatan.
+
+Allah bersifat Maha Pengasih dan Maha Penyayang.
+Orang yang beriman diajarkan menyayangi keluarga, teman, tetangga, dan orang yang membutuhkan.
+Kasih sayang juga berarti tidak menyakiti, tidak menghina, dan tidak menyebarkan aib orang lain.
+B. Bentuk Kasih Sayang dan Praktiknya
+Kepada orang tua: berbicara sopan, membantu pekerjaan rumah, dan mendoakan mereka.
+Kepada saudara dan teman: berbagi, menolong saat kesulitan, dan menjaga perasaan.
+Kepada tetangga: menyapa, tidak berisik mengganggu, dan membantu jika diperlukan.
+Kepada orang yang lemah: menyantuni, tidak mengejek, dan memberi tempat.
+Kepada lingkungan: tidak merusak tanaman, tidak membuang sampah sembarangan.
+Praktik di sekolah: meminjamkan catatan kepada teman yang sakit, tidak menertawakan kesalahan orang lain, dan berbicara dengan guru secara sopan.
+Intinya: kasih sayang adalah peduli yang dibuktikan dengan perbuatan.
+
+Bentuknya meliputi hormat kepada orang tua, tolong-menolong, menjaga tetangga, dan tidak menyakiti sesama.
+      <!-- SELESAI CATATAN PAG MATERI 3 -->
+    </div>
+    <div data-id="pag-3">
+      <!-- TULIS CATATAN PAG MATERI 4 DI BAWAH INI -->
+Penyembelihan, Kurban, dan Akikah
+Ketentuan hewan, kurban, dan akikah
+
+A. Ketentuan Penyembelihan Hewan
+Penyembelihan membuat hewan halal untuk dimakan jika syaratnya terpenuhi.
+
+Hewannya termasuk hewan yang dihalalkan, misalnya kambing, sapi, atau ayam.
+Penyembelih beragama Islam dan mampu melakukan penyembelihan.
+Alatnya tajam agar prosesnya cepat.
+Saat menyembelih membaca basmalah.
+Yang dipotong adalah saluran pernapasan, saluran makanan, dan dua urat leher.
+Hewan tidak disiksa sebelum disembelih.
+Hewan yang mati tanpa disembelih, atau disembelih tanpa menyebut nama Allah, tidak memenuhi ketentuan ini.
+B. Kurban dan Akikah
+Kurban
+Kurban adalah ibadah menyembelih hewan pada Iduladha dan hari tasyrik sebagai bentuk ketaatan dan kepedulian kepada sesama.
+
+Waktunya tanggal 10 sampai 13 Zulhijah.
+Hewannya kambing, domba, sapi, atau unta yang sehat dan cukup umur.
+Kambing atau domba untuk satu orang. Sapi atau unta dapat untuk tujuh orang.
+Dagingnya dibagikan kepada yang berkurban, kerabat, dan orang yang membutuhkan.
+Akikah
+Akikah adalah penyembelihan hewan sebagai tanda syukur atas kelahiran bayi.
+
+Biasanya dilakukan pada hari ketujuh.
+Untuk anak laki-laki dua ekor kambing, untuk anak perempuan satu ekor kambing.
+Dagingnya dibagikan dan dapat diadakan selamatan.
+Intinya: hewan halal dimakan jika disembelih sesuai syarat, dengan alat tajam dan membaca basmalah.
+
+Kurban dilaksanakan saat Iduladha. Akikah dilaksanakan sebagai syukur atas kelahiran anak.
+      <!-- SELESAI CATATAN PAG MATERI 4 -->
+    </div>
+    <div data-id="pag-4">
+      <!-- TULIS CATATAN PAG MATERI 5 DI BAWAH INI -->
+Peradaban Dinasti Safawi
+Berdirinya daulah dan kemajuan peradabannya
+
+A. Sejarah Berdirinya Daulah Safawi
+Daulah Safawi berdiri di Persia, sekarang wilayah Iran, pada awal abad ke-16. Pendirinya Syah Ismail I. Ia mempersatukan wilayah Persia dan menetapkan Syiah Itsna Asyariyah sebagai mazhab resmi kerajaan.
+
+Tahun berdiri yang biasa disebut: 1501 M.
+Ibu kota awalnya Tabriz, kemudian berkembang ke Isfahan.
+Nama Safawi berasal dari nama Safiyuddin Ishak, leluhur gerakan tersebut.
+Puncak kejayaan terjadi pada masa Syah Abbas I.
+B. Kemajuan Peradaban
+Pemerintahan: Syah Abbas I menata tentara, memindahkan pusat kekuasaan, dan memperkuat hubungan dagang.
+Kota Isfahan: dibangun sebagai pusat pemerintahan yang tertata, dengan masjid, jalan, dan pasar.
+Seni dan bangunan: masjid, jembatan, keramik, dan kaligrafi berkembang pesat.
+Ilmu dan sastra: karya tulis, filsafat, dan bahasa Persia berkembang di lingkungan istana.
+Ekonomi: perdagangan sutra dan hasil kerajinan menjadi sumber kemakmuran.
+Setelah masa Syah Abbas I, pemerintahan melemah karena perebutan kekuasaan dan tekanan dari luar. Daulah Safawi kemudian runtuh pada abad ke-18.
+Intinya: Daulah Safawi didirikan Syah Ismail I di Persia sekitar tahun 1501 M.
+
+Kemajuannya paling tampak pada masa Syah Abbas I, terutama di Isfahan, dalam bidang bangunan, seni, ilmu, dan perdagangan.
+      <!-- SELESAI CATATAN PAG MATERI 5 -->
+    </div>
+    <div data-id="pag-5">
+      <!-- TULIS CATATAN PAG MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAG MATERI 6 -->
+    </div>
+    <div data-id="pag-6">
+      <!-- TULIS CATATAN PAG MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAG MATERI 7 -->
+    </div>
+    <div data-id="pag-7">
+      <!-- TULIS CATATAN PAG MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAG MATERI 8 -->
+    </div>
+    <div data-id="pag-8">
+      <!-- TULIS CATATAN PAG MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAG MATERI 9 -->
+    </div>
+    <div data-id="pag-9">
+      <!-- TULIS CATATAN PAG MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAG MATERI 10 -->
+    </div>
+    <div data-id="pan-0">
+      <!-- TULIS CATATAN PAN MATERI 1 DI BAWAH INI -->
+HUBUNGAN PANCASILA DENGAN UUD, BHINNEKA TUNGGAL IKA, DAN NKRI
+A. Semangat Pancasila dalam Kehidupan Bernegara
+
+Pancasila menjadi dasar dan pedoman dalam kehidupan berbangsa dan bernegara.
+
+Penerapannya antara lain:
+
+menghargai perbedaan,
+menjaga persatuan dan kesatuan,
+menghormati hak orang lain,
+bermusyawarah dalam mengambil keputusan,
+berlaku adil,
+melaksanakan kewajiban sebagai warga negara.
+B. Hubungan Pancasila dengan UUD NRI Tahun 1945
+
+Pancasila dan UUD NRI Tahun 1945 memiliki hubungan yang sangat erat.
+
+Pancasila → menjadi dasar negara dan sumber nilai dalam penyelenggaraan negara.
+UUD NRI Tahun 1945 → menjadi hukum dasar/konstitusi yang mengatur kehidupan bernegara.
+
+Nilai-nilai Pancasila dijabarkan dalam berbagai ketentuan UUD NRI Tahun 1945.
+
+🧠 Mudahnya:
+
+Pancasila = dasar/nilai
+UUD 1945 = aturan dasar untuk menjalankan negara
+
+C. Hubungan Pancasila dengan Bhinneka Tunggal Ika
+
+Bhinneka Tunggal Ika berarti “Berbeda-beda tetapi tetap satu.”
+
+Hubungannya dengan Pancasila:
+
+Pancasila mengajarkan persatuan.
+Bhinneka Tunggal Ika menegaskan bahwa perbedaan tidak boleh menjadi alasan untuk terpecah.
+Keduanya mendorong masyarakat untuk menghargai keberagaman suku, agama, budaya, bahasa, dan daerah.
+
+Contohnya:
+
+Tetap berteman dan bekerja sama meskipun berbeda suku, agama, atau budaya.
+
+D. Hubungan Pancasila dengan Negara Kesatuan Republik Indonesia
+
+NKRI adalah bentuk negara Indonesia.
+
+Pancasila berperan sebagai dasar negara dan pemersatu bangsa, sehingga nilai-nilainya penting untuk menjaga keutuhan NKRI.
+
+Penerapannya:
+
+menjaga persatuan,
+mencintai tanah air,
+menaati aturan,
+menghargai keberagaman,
+mengutamakan kepentingan bersama,
+tidak melakukan tindakan yang dapat memecah persatuan.
+🔥 INTI YANG WAJIB DIINGAT
+
+Pancasila + UUD 1945 → dasar dan aturan kehidupan bernegara.
+Pancasila + Bhinneka Tunggal Ika → persatuan dalam keberagaman.
+Pancasila + NKRI → dasar dan pemersatu untuk menjaga keutuhan Indonesia.
+      <!-- SELESAI CATATAN PAN MATERI 1 -->
+    </div>
+    <div data-id="pan-1">
+      <!-- TULIS CATATAN PAN MATERI 2 DI BAWAH INI -->
+🇮🇩 HAK DAN KEWAJIBAN WARGA NEGARA
+A. Memahami Hak dan Kewajiban
+1. Hak
+
+Hak adalah sesuatu yang seharusnya diterima atau diperoleh seseorang.
+
+Contoh hak warga negara:
+
+mendapatkan pendidikan,
+memperoleh perlindungan hukum,
+mendapatkan pekerjaan dan penghidupan yang layak,
+menyampaikan pendapat,
+mendapatkan pelayanan kesehatan.
+2. Kewajiban
+
+Kewajiban adalah sesuatu yang harus dilakukan dengan penuh tanggung jawab.
+
+Contoh kewajiban warga negara:
+
+menaati hukum dan peraturan,
+menghormati hak orang lain,
+menjaga persatuan,
+ikut serta dalam usaha pertahanan dan keamanan negara,
+membayar pajak sesuai ketentuan.
+3. Hubungan Hak dan Kewajiban
+
+Hak dan kewajiban harus dilaksanakan secara seimbang.
+
+Jangan hanya menuntut hak tetapi melupakan kewajiban.
+
+Contoh:
+
+Siswa memiliki hak mendapatkan pendidikan, tetapi juga memiliki kewajiban mengikuti pembelajaran dan menaati tata tertib sekolah.
+
+B. Hak dan Kewajiban Warga Negara dalam UUD NRI Tahun 1945
+
+Hak dan kewajiban warga negara diatur dalam UUD NRI Tahun 1945.
+
+Beberapa contohnya:
+
+📌 Pasal 27
+Ayat (1) → semua warga negara memiliki kedudukan yang sama di dalam hukum dan pemerintahan serta wajib menjunjung hukum.
+Ayat (2) → warga negara berhak atas pekerjaan dan penghidupan yang layak.
+Ayat (3) → setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.
+📌 Pasal 28A–28J
+
+Mengatur berbagai hak asasi manusia, seperti hak hidup, kebebasan, perlindungan diri, berpendapat, dan hak lainnya.
+
+Namun, pelaksanaan hak juga harus menghormati hak orang lain serta tunduk pada batasan yang ditetapkan undang-undang.
+
+📌 Pasal 29
+
+Mengatur kebebasan beragama dan beribadah menurut agama dan kepercayaan masing-masing.
+
+📌 Pasal 30
+
+Mengatur hak dan kewajiban warga negara dalam pertahanan dan keamanan negara.
+
+📌 Pasal 31
+
+Mengatur hak mendapatkan pendidikan serta kewajiban mengikuti pendidikan dasar.
+
+🔥 INTI YANG WAJIB DIINGAT
+
+Hak = sesuatu yang kita terima/peroleh.
+Kewajiban = sesuatu yang harus kita lakukan.
+Hak dan kewajiban harus seimbang.
+UUD NRI Tahun 1945 mengatur berbagai hak dan kewajiban warga negara.
+
+🧠 Pasal penting:
+
+27 → hukum, pekerjaan, pembelaan negara
+28A–28J → HAM
+29 → agama
+30 → pertahanan & keamanan
+31 → pendidikan
+      <!-- SELESAI CATATAN PAN MATERI 2 -->
+    </div>
+    <div data-id="pan-2">
+      <!-- TULIS CATATAN PAN MATERI 3 DI BAWAH INI -->
+🗣️ KEMERDEKAAN BERPENDAPAT WARGA NEGARA PADA ERA KETERBUKAAN INFORMASI
+A. Makna Kemerdekaan Berpendapat Warga Negara
+1. Kemerdekaan Berpendapat Warga Negara
+Kemerdekaan berpendapat adalah hak setiap warga negara untuk menyampaikan pikiran, gagasan, atau pendapat secara bebas dan bertanggung jawab.
+
+Pendapat dapat disampaikan secara:
+
+lisan,
+
+tulisan,
+
+maupun melalui berbagai media.
+
+Kebebasan berpendapat penting karena masyarakat dapat menyampaikan aspirasi, kritik, dan saran dalam kehidupan bernegara.
+
+Namun, kebebasan berpendapat tidak berarti bebas tanpa batas. Pelaksanaannya harus menghormati hak orang lain, menjaga ketertiban, dan menaati hukum.
+
+2. Jaminan Kemerdekaan Berpendapat di Indonesia
+Kemerdekaan berpendapat dijamin oleh UUD NRI Tahun 1945.
+
+Salah satunya terdapat dalam Pasal 28E ayat (3):
+
+Setiap orang berhak atas kebebasan berserikat, berkumpul, dan mengeluarkan pendapat.
+
+Kemerdekaan menyampaikan pendapat juga diatur lebih lanjut dalam UU No. 9 Tahun 1998 tentang Kemerdekaan Menyampaikan Pendapat di Muka Umum.
+
+Jadi, negara menjamin kebebasan berpendapat, tetapi pelaksanaannya tetap harus sesuai dengan hukum dan bertanggung jawab.
+
+3. Bentuk Penyampaian Pendapat
+Pendapat di muka umum dapat disampaikan melalui beberapa bentuk:
+
+Unjuk rasa/demonstrasi → menyampaikan pendapat secara bersama-sama di muka umum.
+
+Pawai → menyampaikan pendapat dengan cara bergerak bersama dalam suatu tempat/rute.
+
+Rapat umum → pertemuan terbuka untuk menyampaikan pendapat dengan tema tertentu.
+
+Mimbar bebas → menyampaikan pendapat secara bebas dan terbuka tanpa tema tertentu yang mengikat.
+
+🔓 B. Keterbukaan Informasi Publik
+1. Pertimbangan Perlunya Undang-Undang Keterbukaan Informasi Publik
+Keterbukaan informasi diperlukan karena masyarakat memiliki hak untuk mengetahui informasi yang berkaitan dengan penyelenggaraan negara.
+
+Keterbukaan informasi dapat:
+
+meningkatkan transparansi pemerintah,
+
+membuat penyelenggaraan negara lebih terbuka,
+
+meningkatkan partisipasi masyarakat,
+
+mendorong pengawasan terhadap pemerintah,
+
+menciptakan pemerintahan yang lebih bertanggung jawab.
+
+Hal ini kemudian diatur dalam UU No. 14 Tahun 2008 tentang Keterbukaan Informasi Publik (KIP).
+
+2. Pengertian Keterbukaan Informasi Publik
+Keterbukaan informasi publik adalah prinsip bahwa masyarakat mempunyai hak untuk memperoleh informasi publik dari badan publik sesuai dengan ketentuan yang berlaku.
+
+Informasi publik adalah informasi yang dihasilkan, disimpan, dikelola, dikirim, atau diterima oleh badan publik yang berkaitan dengan penyelenggaraan negara dan kepentingan publik.
+
+🧠 Gampangnya:
+
+Masyarakat berhak tahu informasi yang memang menjadi hak publik.
+
+3. Tujuan Pengaturan Keterbukaan Informasi Publik
+Tujuannya antara lain:
+
+menjamin hak masyarakat untuk mengetahui informasi publik,
+
+mendorong partisipasi masyarakat dalam proses pengambilan kebijakan,
+
+meningkatkan peran aktif masyarakat dalam pengawasan penyelenggaraan negara,
+
+mewujudkan penyelenggaraan negara yang transparan, efektif, efisien, dan dapat dipertanggungjawabkan,
+
+mengetahui alasan di balik kebijakan publik,
+
+meningkatkan kualitas pengelolaan dan pelayanan informasi.
+
+4. Informasi yang Termasuk Informasi Publik dan Pengecualiannya
+Informasi publik
+Informasi publik pada dasarnya dapat diakses masyarakat sesuai ketentuan.
+
+Contohnya:
+
+informasi mengenai kebijakan pemerintah,
+
+informasi mengenai kegiatan badan publik,
+
+informasi mengenai anggaran dan keuangan tertentu,
+
+informasi mengenai pelayanan publik,
+
+informasi mengenai peraturan dan keputusan badan publik.
+
+Informasi yang dikecualikan
+Tidak semua informasi boleh dibuka kepada publik.
+
+Informasi tertentu dapat dikecualikan apabila membukanya dapat menimbulkan dampak yang merugikan, misalnya berkaitan dengan:
+
+keamanan negara,
+
+penegakan hukum,
+
+kepentingan pribadi,
+
+rahasia jabatan,
+
+rahasia dagang,
+
+informasi lain yang ditentukan oleh undang-undang.
+
+🧠 Kuncinya:
+
+Terbuka bukan berarti semua informasi wajib dibuka. Ada informasi yang memang dilindungi.
+
+5. Hak dan Kewajiban Masyarakat Terkait Informasi Publik
+Hak masyarakat
+Masyarakat berhak:
+
+memperoleh informasi publik,
+
+melihat dan mengetahui informasi,
+
+menghadiri pertemuan publik yang terbuka,
+
+mendapatkan salinan informasi publik sesuai ketentuan,
+
+menyebarluaskan informasi publik sesuai peraturan.
+
+Kewajiban masyarakat
+Masyarakat juga wajib:
+
+menggunakan informasi secara bertanggung jawab,
+
+menghormati hukum,
+
+menghormati hak orang lain,
+
+tidak menyalahgunakan informasi,
+
+tidak menyebarkan informasi yang dapat merugikan orang lain secara melawan hukum.
+
+6. Menyerap Informasi Publik dan Praktik Menyampaikan Pendapat di Muka Umum
+Menyerap informasi publik
+Masyarakat perlu mencari, membaca, memahami, dan menilai informasi sebelum menggunakannya.
+
+Terutama di era media sosial, jangan langsung percaya atau menyebarkan informasi.
+
+Hal yang perlu dilakukan:
+
+Cek sumbernya.
+
+Periksa apakah informasi berasal dari sumber yang dapat dipercaya.
+
+Bandingkan dengan sumber lain.
+
+Bedakan fakta, opini, dan dugaan.
+
+Jangan langsung menyebarkan informasi yang belum terbukti.
+
+Praktik menyampaikan pendapat di muka umum
+Ketika menyampaikan pendapat:
+
+gunakan cara yang damai,
+
+sampaikan pendapat dengan jelas,
+
+hormati hak orang lain,
+
+menaati aturan,
+
+tidak melakukan kekerasan,
+
+bertanggung jawab terhadap pendapat yang disampaikan.
+
+🔥 RANGKUMAN SUPER INTI
+A. Kemerdekaan Berpendapat
+1. Kemerdekaan berpendapat → hak menyampaikan pikiran/gagasan secara bebas dan bertanggung jawab.
+2. Jaminan → dijamin UUD NRI 1945 dan diatur antara lain dalam UU No. 9 Tahun 1998.
+3. Bentuknya → unjuk rasa/demonstrasi, pawai, rapat umum, mimbar bebas.
+
+B. Keterbukaan Informasi Publik
+1. Perlunya UU KIP → menjamin hak masyarakat memperoleh informasi dan mendorong transparansi.
+2. Pengertian → keterbukaan bagi masyarakat untuk memperoleh informasi publik sesuai aturan.
+3. Tujuan → transparansi, partisipasi, pengawasan, dan pemerintahan yang bertanggung jawab.
+4. Informasi publik → dapat diakses sesuai ketentuan; informasi tertentu dikecualikan untuk melindungi kepentingan yang dilindungi hukum.
+5. Hak & kewajiban masyarakat → berhak memperoleh informasi, tetapi wajib menggunakannya secara bertanggung jawab.
+6. Menyerap informasi & berpendapat → cek informasi, pahami isinya, bedakan fakta/opini, lalu sampaikan pendapat secara damai dan bertanggung jawab.
+      <!-- SELESAI CATATAN PAN MATERI 3 -->
+    </div>
+    <div data-id="pan-3">
+      <!-- TULIS CATATAN PAN MATERI 4 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 4 -->
+    </div>
+    <div data-id="pan-4">
+      <!-- TULIS CATATAN PAN MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 5 -->
+    </div>
+    <div data-id="pan-5">
+      <!-- TULIS CATATAN PAN MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 6 -->
+    </div>
+    <div data-id="pan-6">
+      <!-- TULIS CATATAN PAN MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 7 -->
+    </div>
+    <div data-id="pan-7">
+      <!-- TULIS CATATAN PAN MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 8 -->
+    </div>
+    <div data-id="pan-8">
+      <!-- TULIS CATATAN PAN MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 9 -->
+    </div>
+    <div data-id="pan-9">
+      <!-- TULIS CATATAN PAN MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PAN MATERI 10 -->
+    </div>
+    <div data-id="penjas-0">
+      <!-- TULIS CATATAN PENJAS MATERI 1 DI BAWAH INI -->
+BOLA VOLI
+A. TEKNIK DASAR PASSING, BLOCKING, DAN SMASH
+1. Passing
+
+Passing adalah teknik mengoper atau menerima bola agar dapat dimainkan oleh tim.
+
+Passing bawah dilakukan menggunakan kedua lengan bagian bawah. Biasanya digunakan untuk menerima servis atau bola yang datang rendah.
+
+Passing atas dilakukan menggunakan jari-jari tangan di atas kepala. Biasanya digunakan untuk mengatur bola sebelum melakukan serangan.
+
+Kunci passing: posisi tubuh siap, pandangan mengikuti bola, dan arahkan bola kepada teman.
+
+2. Blocking
+
+Blocking adalah teknik membendung serangan lawan, terutama smash, dengan menggunakan kedua tangan di dekat net.
+
+Tujuannya adalah:
+
+Menghalangi bola agar tidak masuk ke daerah sendiri.
+Memperlambat atau mengarahkan kembali serangan lawan.
+
+Blocking membutuhkan ketepatan waktu melompat dan posisi tangan.
+
+3. Smash
+
+Smash adalah pukulan keras dan menukik ke daerah lawan untuk menghasilkan serangan.
+
+Tahapan sederhananya:
+Awalan → tolakan/lompatan → pukulan → pendaratan
+
+Smash membutuhkan koordinasi antara langkah, lompatan, ayunan tangan, dan pukulan bola.
+
+B. KOMBINASI PASSING, BLOCKING, DAN SMASH DALAM PERMAINAN SEDERHANA
+
+Dalam permainan bola voli, teknik dasar tidak selalu dilakukan secara terpisah. Beberapa teknik dapat dikombinasikan untuk membangun serangan atau mempertahankan daerah sendiri.
+
+Contoh kombinasi serangan
+
+Bola dari lawan → passing bawah → passing atas → smash
+
+Misalnya:
+
+Pemain A menerima bola dengan passing bawah.
+Pemain B mengatur bola dengan passing atas.
+Pemain C melakukan smash ke daerah lawan.
+
+Kombinasi tersebut membuat permainan menjadi lebih teratur dan memungkinkan tim melakukan serangan.
+
+Contoh kombinasi pertahanan
+
+Serangan lawan → blocking → bola diterima dengan passing → disusun menjadi serangan
+
+Jadi, satu teknik dapat dilanjutkan dengan teknik lainnya sesuai keadaan permainan.
+
+VARIASI DAN KOMBINASI
+
+Variasi = menggunakan atau melakukan suatu teknik dengan bentuk atau kondisi yang berbeda sesuai situasi.
+
+Kombinasi = menggabungkan dua atau lebih teknik dalam suatu rangkaian permainan.
+
+Contoh:
+
+Passing bawah → passing atas → smash
+
+Itu merupakan kombinasi karena beberapa teknik digunakan secara berurutan.
+
+INTI YANG PERLU DIINGAT
+
+PASSING = menerima atau mengoper bola.
+
+Passing bawah → menggunakan lengan bawah.
+Passing atas → menggunakan jari-jari tangan.
+
+BLOCKING = membendung serangan lawan di dekat net.
+
+SMASH = pukulan keras dan menukik untuk menyerang lawan.
+
+KOMBINASI = beberapa teknik dilakukan dalam satu rangkaian.
+
+Contoh kombinasi serangan:
+
+Passing bawah → Passing atas → Smash
+
+Kuncinya:
+
+PASSING = MENGUASAI/MENGOPER → BLOCKING = MEMBENDUNG → SMASH = MENYERANG.
+      <!-- SELESAI CATATAN PENJAS MATERI 1 -->
+    </div>
+    <div data-id="penjas-1">
+      <!-- TULIS CATATAN PENJAS MATERI 2 DI BAWAH INI -->
+TENIS MEJA
+
+ A. TEKNIK DASAR STANCE, SERVIS, DAN PENGEMBALIAN SERVIS
+
+ 1. Stance
+
+*Stance* adalah sikap atau posisi tubuh yang digunakan sebagai persiapan sebelum dan saat bermain tenis meja.
+
+Posisi yang baik:
+
+* Kaki dibuka kira-kira selebar bahu.
+* Lutut sedikit ditekuk.
+* Badan sedikit condong ke depan.
+* Berat badan seimbang.
+* Bet berada dalam posisi siap.
+
+Stance yang baik membantu pemain *bergerak cepat dan menjangkau bola*.
+
+2. Servis
+
+*Servis* adalah pukulan pertama untuk memulai permainan. Bola dipukul sehingga memantul di meja sendiri terlebih dahulu, kemudian melewati net dan memantul di meja lawan.
+
+Beberapa jenis servis dapat dibedakan berdasarkan arah, kecepatan, dan putaran bola.
+
+Contohnya:
+
+* *Servis forehand*
+* *Servis backhand*
+* *Servis dengan putaran (spin)*
+
+Tujuan servis bukan hanya memulai permainan, tetapi juga dapat *menyulitkan lawan dan mempersiapkan serangan berikutnya*.
+
+ 3. Pengembalian Servis
+
+*Pengembalian servis* adalah tindakan menerima dan mengembalikan bola setelah lawan melakukan servis.
+
+Pemain perlu memperhatikan:
+
+* Arah bola.
+* Kecepatan bola.
+* Putaran bola.
+* Posisi tubuh dan kaki.
+
+Pengembalian dapat dilakukan dengan teknik seperti *push, drive, chop, atau flick*, sesuai dengan jenis servis yang diterima.
+
+---
+
+ B. KOMBINASI STANCE, SERVIS, DAN PENGEMBALIAN SERVIS DALAM PERMAINAN
+
+Ketiga hal tersebut saling berkaitan dalam permainan.
+
+Contoh rangkaiannya:
+
+*Stance siap → melakukan servis → lawan mengembalikan → bersiap dengan stance → menerima dan mengembalikan bola*
+
+Pemain harus terus menyesuaikan posisi tubuh dan kaki dengan arah bola. Jadi, stance bukan hanya dilakukan sebelum permainan, tetapi juga digunakan untuk bersiap menghadapi pukulan berikutnya .
+
+ Contoh situasi
+
+Seorang pemain melakukan servis pendek. Lawan mengembalikan bola dengan push. Pemain kemudian menyesuaikan posisi dan dapat melakukan drive untuk melanjutkan serangan.
+
+Rangkaian tersebut menunjukkan bahwa teknik dalam tenis meja digunakan *secara berkelanjutan*, bukan secara terpisah.
+
+---
+
+ HAL YANG PERLU DIPAHAMI
+
+*STANCE* = posisi siap tubuh untuk bermain dan bergerak.
+
+*SERVIS* = pukulan untuk memulai permainan.
+
+*PENGEMBALIAN SERVIS* = mengembalikan bola setelah lawan melakukan servis.
+
+*KOMBINASI* = menggunakan beberapa teknik secara berurutan sesuai situasi permainan.
+
+INTI YANG PERLU DIINGAT
+
+> *STANCE = SIAP*
+> *SERVIS = MEMULAI*
+> *PENGEMBALIAN SERVIS = MENERIMA & MENGEMBALIKAN*
+> *KOMBINASI = MENGGABUNGKAN TEKNIK SESUAI SITUASI*
+
+*Kunci permainan:*
+*Posisi siap → servis → baca bola lawan → sesuaikan posisi → kembalikan bola.*
+      <!-- SELESAI CATATAN PENJAS MATERI 2 -->
+    </div>
+    <div data-id="penjas-2">
+      <!-- TULIS CATATAN PENJAS MATERI 3 DI BAWAH INI -->
+A. Teknik dasar lempar cakram gaya menyamping
+Gaya menyamping artinya badan berdiri miring ke arah sasaran, bukan membelakangi.
+Cara memegang cakram
+Cakram diletakkan di ruas jari, bukan di telapak tangan. Empat jari memegang tepi cakram, ibu jari menahan di atas supaya seimbang. Saat dilepas, cakram berputar searah jarum jam, lepas dari jari kelingking lalu jari telunjuk.
+Sikap awalan
+Berdiri di dalam lingkaran, badan menyamping ke arah lemparan.
+Kaki kiri di depan lurus menuju sasaran, kaki kanan di belakang, lutut agak ditekuk.
+Berat badan di kaki kanan, badan condong ke kanan.
+Tangan kanan memegang cakram di samping badan, lengan lurus dan lemas.
+Tangan kiri ditekuk di depan untuk menjaga keseimbangan.
+Pandangan ke arah lemparan.
+Ayunan dan lemparan
+Ayunkan cakram ke belakang kanan 2–3 kali, badan ikut memutar, lutut direndahkan.
+Ayunan terakhir dilanjutkan dengan menolakkan kaki kanan dan badan ke depan atas.
+Lepaskan cakram saat lengan lurus serong ke atas, sudut lemparan kira-kira 45 derajat.
+Sumbu putaran ada di ujung kaki kiri. Lengan kanan tetap di belakang sampai saat melempar.
+B. Sikap akhir dan keseimbangan setelah melempar
+Tujuannya supaya badan tidak jatuh ke depan atau keluar lingkaran.
+Setelah cakram lepas, kaki kanan segera melangkah ke depan dan berpijak di bekas tempat kaki kiri.
+Kaki kanan sedikit ditekuk untuk menahan badan.
+Kaki kiri diangkat lemas ke belakang.
+Badan membungkuk ke depan, tangan kiri ke belakang, tangan kanan ditekuk di depan.
+Pandangan mengikuti jatuhnya cakram.
+Keluar lingkaran hanya lewat bagian belakang, setelah cakram jatuh, tanpa lari atau melompat.
+Lemparan sah jika cakram jatuh di dalam sektor dan pelempar tidak menyentuh luar lingkaran sebelum cakram mendarat. Diameter lingkaran lempar adalah 2,5 meter.
+      <!-- SELESAI CATATAN PENJAS MATERI 3 -->
+    </div>
+    <div data-id="penjas-3">
+      <!-- TULIS CATATAN PENJAS MATERI 4 DI BAWAH INI -->
+KEBUGARAN JASMANI
+A. Pengertian dan Komponen Kebugaran Jasmani
+Kebugaran jasmani adalah kemampuan tubuh untuk melakukan aktivitas sehari-hari dengan baik tanpa mengalami kelelahan berlebihan.
+
+Komponen kebugaran jasmani meliputi:
+
+Kekuatan → kemampuan otot melakukan kerja.
+
+Daya tahan → kemampuan tubuh melakukan aktivitas dalam waktu lama.
+
+Kecepatan → kemampuan bergerak dalam waktu singkat.
+
+Kelentukan → kemampuan persendian bergerak dengan luas.
+
+Kelincahan → kemampuan mengubah arah dengan cepat dan tepat.
+
+Keseimbangan → kemampuan mempertahankan posisi tubuh.
+
+Koordinasi → kemampuan menggabungkan beberapa gerakan dengan baik.
+
+Daya ledak → kemampuan menghasilkan kekuatan secara cepat.
+
+B. Pentingnya Kebugaran Jasmani bagi Kesehatan
+Kebugaran jasmani penting karena dapat:
+
+menjaga kesehatan dan kebugaran tubuh,
+
+meningkatkan kekuatan dan daya tahan,
+
+membantu tubuh melakukan aktivitas dengan lebih mudah,
+
+mengurangi risiko berbagai gangguan kesehatan,
+
+meningkatkan kemampuan melakukan aktivitas fisik.
+
+C. Tes Kebugaran Jasmani Indonesia (TKJI)
+TKJI adalah serangkaian tes yang digunakan untuk mengetahui tingkat kebugaran jasmani seseorang.
+
+Tes biasanya mengukur beberapa kemampuan fisik seperti:
+
+kecepatan,
+
+kekuatan,
+
+daya tahan,
+
+daya ledak,
+
+dan kemampuan fisik lainnya.
+
+Intinya:
+
+Kebugaran jasmani = kemampuan tubuh beraktivitas secara efektif tanpa cepat lelah, yang dipengaruhi oleh berbagai komponen fisik dan dapat diukur melalui TKJI.
+      <!-- SELESAI CATATAN PENJAS MATERI 4 -->
+    </div>
+    <div data-id="penjas-4">
+      <!-- TULIS CATATAN PENJAS MATERI 5 DI BAWAH INI -->
+RENANG GAYA PUNGGUNG
+A. Teknik Gerakan Gaya Punggung
+
+Renang gaya punggung dilakukan dengan posisi tubuh telentang, sehingga wajah berada di atas permukaan air.
+
+B. Gerakan Kaki dan Lengan
+Gerakan kaki dilakukan secara bergantian ke atas dan ke bawah.
+Gerakan kaki membantu mendorong tubuh dan menjaga keseimbangan.
+Gerakan lengan dilakukan bergantian dengan mengayunkan lengan ke belakang melewati atas kepala, kemudian menarik air untuk menghasilkan dorongan.
+C. Rentang Gaya Punggung
+
+Rentang gerakan harus dilakukan secara teratur dan terkoordinasi agar tubuh dapat bergerak maju dengan efektif.
+
+D. Teknik Pernapasan
+
+Pada gaya punggung, wajah berada di atas air sehingga pernapasan lebih mudah dilakukan. Pernapasan perlu disesuaikan dengan irama gerakan lengan dan tubuh.
+
+E. Teknik Pernapasan dan Koordinasi Gerak
+
+Gerakan kaki, lengan, posisi tubuh, dan pernapasan harus dikoordinasikan agar renang menjadi lebih efisien.
+
+Intinya:
+
+Gaya punggung = berenang telentang + kaki bergerak naik-turun bergantian + lengan mengayun bergantian + koordinasi tubuh dan pernapasan.
+      <!-- SELESAI CATATAN PENJAS MATERI 5 -->
+    </div>
+    <div data-id="penjas-5">
+      <!-- TULIS CATATAN PENJAS MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PENJAS MATERI 6 -->
+    </div>
+    <div data-id="penjas-6">
+      <!-- TULIS CATATAN PENJAS MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PENJAS MATERI 7 -->
+    </div>
+    <div data-id="penjas-7">
+      <!-- TULIS CATATAN PENJAS MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PENJAS MATERI 8 -->
+    </div>
+    <div data-id="penjas-8">
+      <!-- TULIS CATATAN PENJAS MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PENJAS MATERI 9 -->
+    </div>
+    <div data-id="penjas-9">
+      <!-- TULIS CATATAN PENJAS MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN PENJAS MATERI 10 -->
+    </div>
+    <div data-id="tik-0">
+      <!-- TULIS CATATAN TIK MATERI 1 DI BAWAH INI -->
+MEDIA PERS DIGITAL
+A. PEMAHAMAN TENTANG MEDIA PERS DIGITAL
+Pengertian
+
+Media pers digital adalah media pers yang menggunakan teknologi digital dan internet untuk mencari, mengolah, menyampaikan, dan menyebarkan informasi atau berita kepada masyarakat.
+
+Media pers digital memungkinkan berita diterima dengan cepat dan dapat diakses melalui berbagai perangkat, seperti komputer, tablet, dan ponsel.
+
+Bentuk Media Pers Digital
+
+Contohnya:
+
+Situs atau portal berita online
+Surat kabar digital
+Majalah digital
+Aplikasi berita
+Media sosial yang digunakan sebagai sarana penyebaran berita
+Ciri-ciri
+Menggunakan teknologi digital dan internet.
+Informasi dapat diakses dengan cepat dan luas.
+Dapat memuat berbagai bentuk informasi, seperti teks, foto, audio, dan video.
+Informasi dapat diperbarui dengan cepat.
+Pembaca dapat berinteraksi melalui komentar, tanggapan, atau berbagi informasi.
+Perbedaan dengan Media Pers Konvensional
+
+Media pers konvensional seperti koran dan majalah cetak membutuhkan media fisik untuk menyampaikan berita. Sementara itu, media pers digital menggunakan teknologi dan internet sehingga informasi dapat disebarkan dan diperbarui dengan lebih cepat.
+
+B. EKOSISTEM MEDIA DIGITAL
+
+Ekosistem media digital adalah kumpulan unsur yang saling berhubungan dalam proses pembuatan, penyebaran, dan penerimaan informasi melalui media digital.
+
+Unsur-unsur dalam Ekosistem Media Digital
+
+1. Pembuat informasi
+Meliputi wartawan, penulis, fotografer, editor, dan pembuat konten yang menghasilkan informasi.
+
+2. Media atau platform
+Menjadi tempat informasi diterbitkan dan disebarkan, seperti situs berita, aplikasi, dan media sosial.
+
+3. Teknologi dan internet
+Menjadi sarana yang memungkinkan informasi dibuat, diakses, dan disebarkan.
+
+4. Audiens atau pengguna
+Orang yang membaca, menonton, mendengarkan, memberikan tanggapan, atau membagikan informasi.
+
+Alur Sederhana
+
+Pembuat informasi → pengolahan dan pemeriksaan → penerbitan → pengguna menerima → pengguna dapat membagikan kembali
+
+Karena pengguna juga dapat menyebarkan informasi, masyarakat tidak hanya menjadi penerima informasi, tetapi juga dapat menjadi penyebar informasi.
+
+C. DAMPAK DAN TANTANGAN MEDIA PERS DIGITAL
+Dampak Positif
+Informasi dapat diperoleh dengan cepat.
+Berita dapat diakses kapan saja dan di mana saja.
+Jangkauan informasi menjadi lebih luas.
+Berita dapat menggunakan teks, gambar, suara, dan video.
+Masyarakat dapat memberikan tanggapan dan berinteraksi dengan media.
+Dampak Negatif
+Hoaks atau informasi palsu dapat menyebar dengan cepat.
+Informasi yang belum terbukti dapat menjadi viral.
+Munculnya judul clickbait yang dibuat untuk menarik perhatian.
+Privasi seseorang dapat lebih mudah tersebar atau dilanggar.
+Informasi yang terlalu banyak dapat membuat masyarakat sulit menentukan mana yang benar.
+Tantangan Media Pers Digital
+
+Kecepatan dan ketepatan
+Berita dituntut cepat, tetapi tetap harus diperiksa agar tidak menyebarkan kesalahan.
+
+Kredibilitas
+Media harus menjaga kepercayaan pembaca dengan menyampaikan informasi yang benar dan bertanggung jawab.
+
+Hoaks dan misinformasi
+Informasi yang salah dapat menyebar dengan cepat melalui internet.
+
+Etika dan privasi
+Penyebaran informasi harus memperhatikan hak, privasi, dan kepentingan orang lain.
+
+Persaingan mendapatkan perhatian
+Banyaknya informasi membuat media harus menarik perhatian pembaca tanpa mengorbankan kebenaran dan kualitas berita.
+
+SIKAP YANG PERLU DITERAPKAN
+
+Sebagai pengguna media digital, kita harus menjadi pembaca yang kritis.
+
+Sebelum mempercayai atau membagikan suatu berita:
+
+Periksa sumber informasinya.
+Perhatikan tanggal dan konteks berita.
+Bedakan fakta dengan opini.
+Jangan mudah percaya pada judul yang provokatif.
+Bandingkan informasi dengan sumber terpercaya.
+Jangan langsung menyebarkan informasi yang belum terbukti.
+INTI YANG PERLU DIINGAT
+
+MEDIA PERS DIGITAL = pers yang menggunakan teknologi digital dan internet untuk membuat dan menyebarkan informasi.
+
+EKOSISTEM MEDIA DIGITAL = pembuat informasi → media/platform → teknologi & internet → pengguna → informasi dapat disebarkan kembali.
+
+KELEBIHAN = cepat, mudah diakses, luas, interaktif, dan dapat menggunakan berbagai bentuk media.
+
+RISIKO = hoaks, misinformasi, clickbait, pelanggaran privasi, dan informasi berlebihan.
+
+TANTANGAN UTAMA = menjaga kecepatan, kebenaran, kredibilitas, dan etika.
+
+SEBAGAI PENGGUNA:
+CEK SUMBER → CEK FAKTA → BEDAKAN FAKTA & OPINI → BARU BAGIKAN.
+      <!-- SELESAI CATATAN TIK MATERI 1 -->
+    </div>
+    <div data-id="tik-1">
+      <!-- TULIS CATATAN TIK MATERI 2 DI BAWAH INI -->
+INFORMASI PRIBADI DAN HUKUM PRIVASI
+A. MEMAHAMI INFORMASI PRIVAT DAN PUBLIK
+Informasi Pribadi
+
+Informasi pribadi adalah informasi yang berkaitan dengan seseorang dan dapat digunakan untuk mengenali atau mengidentifikasi dirinya.
+
+Contohnya:
+
+Nama lengkap
+Alamat
+Nomor telepon
+Foto pribadi
+Data sekolah
+Kata sandi
+Data akun
+Informasi keuangan
+
+Informasi pribadi tidak boleh dibagikan sembarangan karena dapat disalahgunakan.
+
+Informasi Publik
+
+Informasi publik adalah informasi yang memang ditujukan untuk diketahui atau diakses oleh masyarakat.
+
+Contohnya:
+
+Pengumuman sekolah
+Jadwal kegiatan umum
+Informasi pelayanan publik
+Berita yang diterbitkan media
+
+Hal penting: tidak semua informasi yang kita miliki boleh dipublikasikan. Kita harus membedakan informasi yang bersifat pribadi dan informasi yang memang boleh diketahui publik.
+
+B. PERLINDUNGAN DATA PRIBADI
+
+Perlindungan data pribadi adalah upaya untuk menjaga data seseorang agar tidak digunakan, disebarkan, atau diakses oleh pihak yang tidak berhak.
+
+Cara Melindungi Data Pribadi
+Jangan memberikan kata sandi kepada orang lain.
+Hindari membagikan data pribadi secara sembarangan.
+Gunakan kata sandi yang kuat.
+Periksa siapa yang meminta data sebelum memberikannya.
+Jangan sembarangan mengklik tautan yang mencurigakan.
+Atur privasi akun media sosial.
+Jangan mengunggah dokumen yang berisi data sensitif.
+Mengapa Data Pribadi Harus Dilindungi?
+
+Data pribadi yang jatuh ke tangan yang salah dapat digunakan untuk berbagai tindakan yang merugikan, seperti penipuan, penyamaran identitas, atau mengambil alih akun.
+
+Karena itu, kita harus berhati-hati ketika memberikan data kepada aplikasi, situs web, maupun orang lain.
+
+C. RUANG PUBLIK VIRTUAL DAN DAMPAKNYA
+Pengertian
+
+Ruang publik virtual adalah ruang di internet yang memungkinkan orang berkomunikasi, bertukar informasi, menyampaikan pendapat, dan berinteraksi dengan orang lain.
+
+Contohnya:
+
+Media sosial
+Forum online
+Kolom komentar
+Grup diskusi
+Platform berbagi video
+Dampak Positif
+Memudahkan komunikasi dan berdiskusi.
+Memudahkan penyebaran informasi.
+Menjadi tempat untuk berbagi pengetahuan dan karya.
+Memungkinkan orang menyampaikan pendapat.
+Dampak Negatif
+Penyebaran hoaks dan informasi palsu.
+Perundungan di dunia maya atau cyberbullying.
+Penyalahgunaan data pribadi.
+Ujaran yang dapat merugikan atau menyakiti orang lain.
+Jejak digital yang dapat tersimpan dan sulit dihilangkan.
+Etika di Ruang Publik Virtual
+
+Saat menggunakan ruang publik virtual, kita perlu:
+
+Menghormati orang lain.
+Memikirkan dampak sebelum mengunggah sesuatu.
+Tidak menyebarkan data pribadi orang lain tanpa izin.
+Tidak menyebarkan informasi yang belum terbukti benar.
+Menggunakan bahasa yang sopan dan bertanggung jawab.
+INTI YANG PERLU DIINGAT
+
+INFORMASI PRIBADI = informasi tentang diri seseorang yang harus dijaga dan tidak dibagikan sembarangan.
+
+INFORMASI PUBLIK = informasi yang memang dapat diketahui atau diakses oleh masyarakat.
+
+DATA PRIBADI harus dilindungi agar tidak disalahgunakan.
+
+RUANG PUBLIK VIRTUAL = tempat berinteraksi dan berbagi informasi melalui internet.
+
+MANFAAT = komunikasi, informasi, diskusi, dan berbagi karya.
+
+RISIKO = hoaks, cyberbullying, penyalahgunaan data, dan jejak digital.
+
+ATURAN SEDERHANANYA:
+
+JAGA DATA PRIBADI → PIKIR SEBELUM MEMBAGIKAN → CEK INFORMASI → HORMATI ORANG LAIN.
+      <!-- SELESAI CATATAN TIK MATERI 2 -->
+    </div>
+    <div data-id="tik-2">
+      <!-- TULIS CATATAN TIK MATERI 3 DI BAWAH INI -->
+# PSEUDOCODE
+
+## A. PEMAHAMAN TENTANG PSEUDOCODE
+
+### Pengertian
+
+**Pseudocode** adalah cara menuliskan langkah-langkah penyelesaian suatu masalah atau algoritma menggunakan bahasa yang sederhana dan terstruktur, tanpa terikat aturan khusus dari bahasa pemrograman tertentu.
+
+Pseudocode digunakan untuk **merancang logika program terlebih dahulu** sebelum dibuat menjadi kode program.
+
+### Tujuan Pseudocode
+
+* Mempermudah memahami alur suatu program.
+* Membantu merancang solusi sebelum menulis kode.
+* Memudahkan menemukan kesalahan dalam logika.
+* Dapat diterjemahkan ke berbagai bahasa pemrograman.
+
+### Ciri-ciri Pseudocode
+
+1. Menggunakan bahasa yang mudah dipahami.
+2. Langkah-langkah ditulis secara berurutan.
+3. Tidak memiliki aturan sintaks yang seketat bahasa pemrograman.
+4. Dapat menggunakan kata seperti **INPUT, OUTPUT, IF, ELSE, dan REPEAT**.
+
+### Contoh Sederhana
+
+Masalah: menentukan apakah nilai siswa lulus.
+
+```text
+INPUT nilai
+IF nilai >= 75 THEN
+    OUTPUT "Lulus"
+ELSE
+    OUTPUT "Tidak Lulus"
+END IF
+```
+
+Artinya, program menerima nilai. Jika nilainya minimal 75, hasilnya **Lulus**. Jika kurang dari 75, hasilnya **Tidak Lulus**.
+
+---
+
+# B. PENERAPAN PSEUDOCODE DENGAN BAHASA PEMROGRAMAN
+
+Pseudocode bukan program yang langsung dijalankan komputer. Pseudocode perlu **diterjemahkan menjadi bahasa pemrograman** seperti Python, JavaScript, Java, atau C++.
+
+Contoh pseudocode:
+
+```text
+INPUT nama
+OUTPUT "Halo", nama
+```
+
+Jika diterapkan dalam JavaScript:
+
+```javascript
+let nama = prompt("Masukkan nama:");
+console.log("Halo", nama);
+```
+
+Keduanya memiliki **logika yang sama**, tetapi penulisannya berbeda karena bahasa pemrograman mempunyai aturan sintaks masing-masing.
+
+### Struktur Logika yang Sering Digunakan
+
+**1. Urutan (sequence)**
+Perintah dijalankan dari langkah pertama hingga terakhir.
+
+**2. Percabangan (selection)**
+Program memilih tindakan berdasarkan kondisi, misalnya:
+
+```text
+IF kondisi THEN
+    tindakan
+ELSE
+    tindakan lain
+END IF
+```
+
+**3. Perulangan (iteration)**
+Perintah dijalankan berulang kali selama kondisi tertentu terpenuhi.
+
+```text
+REPEAT 5 TIMES
+    OUTPUT "Halo"
+END REPEAT
+```
+
+---
+
+# INTI YANG PERLU DIINGAT
+
+**PSEUDOCODE = rancangan langkah/logika program sebelum dibuat menjadi kode.**
+
+**Tujuan:** memahami alur, merancang solusi, dan mengurangi kesalahan sebelum coding.
+
+**CIRI:** sederhana, terstruktur, berurutan, dan tidak terikat sintaks bahasa pemrograman tertentu.
+
+**3 LOGIKA UTAMA:**
+
+* **SEQUENCE** = menjalankan langkah secara berurutan.
+* **SELECTION** = memilih berdasarkan kondisi (`IF/ELSE`).
+* **ITERATION** = mengulang perintah.
+
+**PENTING:**
+
+> **Pseudocode bukan bahasa pemrograman. Pseudocode adalah rancangan logika yang kemudian dapat diterjemahkan ke bahasa pemrograman.**
+
+      <!-- SELESAI CATATAN TIK MATERI 3 -->
+    </div>
+    <div data-id="tik-3">
+      <!-- TULIS CATATAN TIK MATERI 4 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 4 -->
+    </div>
+    <div data-id="tik-4">
+      <!-- TULIS CATATAN TIK MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 5 -->
+    </div>
+    <div data-id="tik-5">
+      <!-- TULIS CATATAN TIK MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 6 -->
+    </div>
+    <div data-id="tik-6">
+      <!-- TULIS CATATAN TIK MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 7 -->
+    </div>
+    <div data-id="tik-7">
+      <!-- TULIS CATATAN TIK MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 8 -->
+    </div>
+    <div data-id="tik-8">
+      <!-- TULIS CATATAN TIK MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 9 -->
+    </div>
+    <div data-id="tik-9">
+      <!-- TULIS CATATAN TIK MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN TIK MATERI 10 -->
+    </div>
+    <div data-id="sbd-0">
+      <!-- TULIS CATATAN SBD MATERI 1 DI BAWAH INI -->
+💃 RANGKUMAN SENI TARI
+A. Konsep Kreasi Tari
+
+Kreasi tari adalah proses menciptakan atau mengembangkan gerakan tari menjadi sebuah karya yang memiliki nilai seni.
+
+Dalam membuat tari, seorang koreografer dapat:
+
+menciptakan gerakan baru,
+mengembangkan gerakan tari yang sudah ada,
+menggabungkan berbagai gerakan,
+menyesuaikan gerakan dengan tema dan musik.
+Tahapan umum kreasi tari:
+Menentukan ide atau tema
+Mencari dan mengeksplorasi gerakan
+Memilih gerakan yang sesuai
+Menyusun gerakan menjadi koreografi
+Melakukan latihan
+Melakukan evaluasi dan penyempurnaan
+Menampilkan karya tari
+🎨 B. Pokok-Pokok Nilai Estetika Tari
+
+Nilai estetika adalah nilai keindahan yang terdapat dalam suatu karya tari.
+
+Keindahan tari dapat dilihat dari:
+
+Gerakan → indah, teratur, dan sesuai dengan tema.
+Irama → kesesuaian gerakan dengan musik atau tempo.
+Ekspresi → kemampuan penari menunjukkan perasaan atau karakter.
+Komposisi → susunan gerakan dan posisi penari.
+Kostum dan tata rias → mendukung karakter dan tema tari.
+🏛️ C. Tradisi
+
+Tari tradisional adalah tari yang berkembang dan diwariskan dari generasi ke generasi dalam suatu masyarakat.
+
+Ciri-cirinya:
+
+memiliki aturan atau pola tertentu,
+berkaitan dengan budaya daerah,
+diwariskan secara turun-temurun,
+menggunakan gerak, musik, dan kostum yang khas.
+
+Contoh:
+
+Tari Saman → Aceh
+Tari Piring → Sumatra Barat
+Tari Kecak → Bali
+Tari Jaipong → Jawa Barat
+Berdasarkan perkembangannya:
+
+1. Tari tradisional klasik
+Berkembang di lingkungan kerajaan atau memiliki aturan yang relatif kuat.
+
+2. Tari tradisional rakyat
+Berkembang di masyarakat dan biasanya lebih sederhana.
+
+3. Tari kreasi baru
+Mengembangkan unsur tari tradisional dengan kreativitas baru.
+
+4. Tari kontemporer
+Lebih bebas dan dapat mengeksplorasi gerakan serta konsep baru.
+
+💃 D. Ciri-Ciri Tari
+
+Ciri-ciri tari antara lain:
+
+menggunakan gerak tubuh sebagai media utama,
+memiliki irama atau ritme,
+memiliki ruang dan waktu,
+memiliki ekspresi,
+memiliki tujuan atau tema tertentu,
+dapat menggunakan musik sebagai pengiring.
+
+Gerakan tari tidak hanya sekadar bergerak, tetapi disusun sehingga memiliki makna dan keindahan.
+
+✨ E. Nilai Estetis Tari
+
+Nilai estetis tari merupakan keindahan yang terdapat dalam keseluruhan penyajian tari.
+
+Nilai estetis dapat muncul dari:
+
+1. Wiraga
+
+Kemampuan penari melakukan gerakan dengan baik dan tepat.
+
+2. Wirama
+
+Kemampuan menyesuaikan gerakan dengan irama atau musik.
+
+3. Wirasa
+
+Kemampuan menampilkan ekspresi dan penghayatan sesuai karakter tari.
+
+🧠 Mudah diingat:
+
+Wiraga = gerakan
+Wirama = irama
+Wirasa = perasaan/ekspresi
+
+📝 F. Koreografi Tari
+
+Koreografi adalah seni atau proses menyusun dan mengatur gerakan tari menjadi suatu rangkaian yang utuh.
+
+Orang yang membuat atau menyusun koreografi disebut koreografer.
+
+Dalam koreografi diperhatikan:
+
+gerakan,
+pola lantai,
+arah hadap,
+level gerak,
+tempo,
+ruang,
+waktu,
+tenaga,
+hubungan antarpenari.
+🎭 G. Fungsi Tari
+
+Tari memiliki berbagai fungsi, antara lain:
+
+1. Fungsi upacara
+
+Digunakan dalam kegiatan adat atau keagamaan.
+
+2. Fungsi hiburan
+
+Ditampilkan untuk memberikan kesenangan kepada penonton.
+
+3. Fungsi pertunjukan
+
+Tari ditampilkan sebagai karya seni yang dinikmati keindahannya.
+
+4. Fungsi pendidikan
+
+Digunakan untuk mengajarkan nilai, budaya, disiplin, kerja sama, dan kreativitas.
+
+5. Fungsi pergaulan
+
+Digunakan sebagai sarana interaksi dan hubungan sosial masyarakat.
+
+🕺 H. Jenis Tari
+
+Tari dapat dikelompokkan berdasarkan berbagai hal.
+
+Berdasarkan jumlah penari:
+Tari tunggal → dilakukan satu orang.
+Tari berpasangan → dilakukan dua orang.
+Tari kelompok → dilakukan oleh beberapa orang.
+Tari massal → dilakukan oleh banyak penari.
+Berdasarkan perkembangannya:
+tari tradisional,
+tari kreasi baru,
+tari kontemporer.
+🎵 I. Unsur Pendukung Tari
+
+Unsur pendukung membantu membuat pertunjukan tari menjadi lebih menarik dan jelas.
+
+1. Musik pengiring
+
+Mengatur irama, tempo, suasana, dan membantu penari mengikuti gerakan.
+
+2. Tata rias
+
+Membantu memperjelas karakter dan ekspresi penari.
+
+3. Tata busana/kostum
+
+Menunjukkan karakter, tema, dan identitas tari.
+
+4. Properti
+
+Benda yang digunakan dalam tari, misalnya:
+
+kipas,
+selendang,
+piring,
+payung,
+topeng.
+5. Tata panggung
+
+Mengatur tempat dan suasana pertunjukan.
+
+6. Tata cahaya
+
+Memberikan pencahayaan sekaligus membangun suasana pertunjukan.
+
+7. Pola lantai
+
+Garis atau formasi yang digunakan penari ketika bergerak, misalnya:
+
+garis lurus,
+diagonal,
+lingkaran,
+zig-zag.
+🔥 INTI YANG WAJIB INGAT
+
+Kreasi tari → proses menciptakan/mengembangkan tari.
+Estetika → nilai keindahan tari.
+Tradisi → diwariskan turun-temurun.
+Ciri tari → gerak, irama, ruang, waktu, dan ekspresi.
+Wiraga → gerakan.
+Wirama → irama.
+Wirasa → penghayatan/perasaan.
+Koreografi → penyusunan gerakan tari.
+Fungsi tari → upacara, hiburan, pertunjukan, pendidikan, dan pergaulan.
+Jenis tari → tunggal, berpasangan, kelompok/massal serta berdasarkan perkembangannya.
+Unsur pendukung → musik, rias, busana, properti, panggung, cahaya, dan pola lantai.
+      <!-- SELESAI CATATAN SBD MATERI 1 -->
+    </div>
+    <div data-id="sbd-1">
+      <!-- TULIS CATATAN SBD MATERI 2 DI BAWAH INI -->
+💃 Eksplorasi Gerak Tari Berdasarkan Nilai, Jenis, dan Fungsi
+A. Eksplorasi Gerak Tari Berdasarkan Nilai Estetis
+
+Eksplorasi gerak tari adalah kegiatan mencari, mencoba, dan mengembangkan berbagai gerakan untuk menghasilkan gerak tari yang indah dan sesuai dengan tujuan tari.
+
+Dalam mengeksplorasi gerak, penari dapat memperhatikan:
+
+Bentuk gerak → bagaimana gerakan dilakukan.
+Ruang → tempat dan arah gerakan.
+Waktu → cepat atau lambatnya gerakan.
+Tenaga → kuat atau lembutnya gerakan.
+Ekspresi → perasaan yang ditampilkan.
+
+Nilai estetis muncul ketika gerakan terlihat indah, harmonis, sesuai irama, dan mampu menyampaikan karakter atau makna tari.
+
+B. Pokok-Pokok Materi Eksplorasi Gerak Tari Berdasarkan Ruang Gerak
+
+Ruang gerak adalah tempat atau wilayah yang digunakan tubuh ketika melakukan gerakan tari.
+
+Ruang gerak dapat dilihat dari:
+
+1. Arah
+
+Gerakan dapat dilakukan ke:
+
+depan,
+belakang,
+samping,
+diagonal,
+atau berbagai arah lainnya.
+2. Level
+Level rendah → gerakan dilakukan dekat dengan lantai, seperti duduk atau jongkok.
+Level sedang → gerakan dilakukan dalam posisi berdiri.
+Level tinggi → gerakan dilakukan dengan tubuh terangkat, seperti melompat.
+3. Pola lantai
+
+Pola atau garis yang dibentuk oleh perpindahan posisi penari, misalnya:
+
+garis lurus,
+diagonal,
+zig-zag,
+lingkaran,
+lengkung.
+
+🧠 Intinya: ruang membuat gerakan tari memiliki arah, posisi, jarak, dan pola.
+
+C. Pokok-Pokok Materi Eksplorasi Gerak Tari Berdasarkan Penggunaan Tenaga
+
+Tenaga adalah kekuatan yang digunakan tubuh ketika melakukan gerakan tari.
+
+Penggunaan tenaga dapat dibedakan berdasarkan:
+
+1. Intensitas
+
+Menunjukkan kuat atau lemahnya gerakan.
+
+kuat → gerakan terlihat tegas,
+lemah → gerakan terlihat lembut.
+2. Tekanan
+
+Memberikan penekanan pada gerakan tertentu sehingga terlihat lebih menonjol.
+
+3. Kualitas
+
+Cara tenaga digunakan dalam suatu gerakan, misalnya:
+
+lembut,
+kuat,
+ringan,
+berat,
+cepat,
+atau tertahan.
+
+Penggunaan tenaga harus disesuaikan dengan karakter, tema, dan suasana tari.
+
+D. Pokok-Pokok Materi Analisis Gerak Tari Tradisi Berdasarkan Unsur Utama, Nilai, Jenis, dan Fungsi
+
+Untuk menganalisis sebuah tari tradisional, kita dapat melihat beberapa hal berikut.
+
+1. Unsur utama
+Gerak → gerakan tubuh yang menjadi dasar tari.
+Ruang → tempat, arah, level, dan pola gerak.
+Waktu → tempo, ritme, dan durasi.
+Tenaga → kuat-lemahnya atau kualitas gerakan.
+2. Nilai
+
+Melihat nilai estetis dan makna yang terdapat dalam tari.
+
+Contohnya:
+
+keindahan gerakan,
+makna simbolis,
+nilai budaya,
+nilai sosial.
+3. Jenis
+
+Menentukan jenis tari berdasarkan:
+
+jumlah penari,
+perkembangan tari,
+atau karakteristik tari.
+
+Misalnya tari tunggal, berpasangan, dan kelompok.
+
+4. Fungsi
+
+Menentukan tujuan tari dalam masyarakat, seperti:
+
+upacara,
+hiburan,
+pertunjukan,
+pendidikan,
+dan pergaulan.
+🔥 INTI MATERI
+
+Eksplorasi gerak = mencari dan mengembangkan gerakan tari.
+
+Ruang = di mana dan ke arah mana gerakan dilakukan.
+
+Tenaga = seberapa kuat/lembut gerakan dilakukan.
+
+Nilai estetis = keindahan yang muncul dari gerakan dan penyajiannya.
+
+Analisis tari = melihat unsur utama + nilai + jenis + fungsi.
+
+🧠 Rumus gampang:
+
+Ruang = tempat gerak
+Waktu = kapan/tempo gerak
+Tenaga = kekuatan gerak
+Estetika = keindahan gerak
+      <!-- SELESAI CATATAN SBD MATERI 2 -->
+    </div>
+    <div data-id="sbd-2">
+      <!-- TULIS CATATAN SBD MATERI 3 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 3 -->
+    </div>
+    <div data-id="sbd-3">
+      <!-- TULIS CATATAN SBD MATERI 4 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 4 -->
+    </div>
+    <div data-id="sbd-4">
+      <!-- TULIS CATATAN SBD MATERI 5 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 5 -->
+    </div>
+    <div data-id="sbd-5">
+      <!-- TULIS CATATAN SBD MATERI 6 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 6 -->
+    </div>
+    <div data-id="sbd-6">
+      <!-- TULIS CATATAN SBD MATERI 7 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 7 -->
+    </div>
+    <div data-id="sbd-7">
+      <!-- TULIS CATATAN SBD MATERI 8 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 8 -->
+    </div>
+    <div data-id="sbd-8">
+      <!-- TULIS CATATAN SBD MATERI 9 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 9 -->
+    </div>
+    <div data-id="sbd-9">
+      <!-- TULIS CATATAN SBD MATERI 10 DI BAWAH INI -->
+
+      <!-- SELESAI CATATAN SBD MATERI 10 -->
+    </div>
+  </div>
+  <script>
+    const subjects = [
+      { id: "bindo", short: "B.INDO", name: "Bahasa Indonesia" },
+      { id: "bing", short: "B.ING", name: "Bahasa Inggris" },
+      { id: "bjawa", short: "B.JAWA", name: "Bahasa Jawa" },
+      { id: "ipa", short: "IPA", name: "Ilmu Pengetahuan Alam" },
+      { id: "ips", short: "IPS", name: "Ilmu Pengetahuan Sosial" },
+      { id: "mtk", short: "MTK", name: "Matematika" },
+      { id: "pag", short: "PAG", name: "Pendidikan Agama" },
+      { id: "pan", short: "PAN", name: "Pendidikan Pancasila" },
+      { id: "penjas", short: "PENJAS", name: "Pendidikan Jasmani" },
+      { id: "tik", short: "TIK", name: "Teknologi Informasi" },
+      { id: "sbd", short: "SBD", name: "Seni Budaya" }
+    ];
+    const jumlahMateri = 10;
+    const schedule = [
+      { day: "SENIN:", items: [["IPA", "07:40-09:40"], ["MTK", "10:00-12:00"], ["B.INDO", "12:50-14:10"]] },
+      { day: "SELASA:", items: [["B.ING", "07:00-07:40"], ["TIK", "07:40-09:00"], ["IPS", "10:00-12:00"], ["IPA", "12:50-14:10"]] },
+      { day: "RABU:", items: [["B.JAWA", "07:00-08:20"], ["PAG", "08:20-09:00"], ["PAN", "10:00-12:00"], ["B.ING", "12:50-14:10"]] },
+      { day: "KAMIS:", items: [["B.INDO", "07:40-09:40"], ["PENJAS", "10:00-12:00"], ["PAG", "12:50-14:10"]] },
+      { day: "JUM'AT:", items: [["SBD", "07:40-09:00"], ["MTK", "09:50-11:10"]] }
+    ];
+    let tab = "tugas";
+    let view = "main";
+    let subjectId = null;
+    const titleEl = document.getElementById("title");
+    const subtitleEl = document.getElementById("subtitle");
+    const contentEl = document.getElementById("content");
+    const backBtn = document.getElementById("backBtn");
+    const tabsEl = document.getElementById("tabs");
+    const toastEl = document.getElementById("toast");
+
+    function namaMateri(id, index) {
+      const box = document.querySelector("#nama-materi [data-id='" + id + "'] [data-no='" + index + "']");
+      const subject = subjects.find((item) => item.id === id);
+      return box && box.textContent.trim() ? box.textContent.trim() : "materi " + subject.short + " " + (index + 1);
+    }
+    function baca(id, jenis) {
+      const box = document.querySelector("#sumber-" + jenis + " [data-id='" + id + "']");
+      return box ? box.textContent.trim() : "";
+    }
+    function showToast(text) {
+      toastEl.textContent = text;
+      toastEl.classList.add("show");
+      setTimeout(() => toastEl.classList.remove("show"), 1300);
+    }
+    async function salin(text) {
+      const bersih = text.trim();
+      if (!bersih || bersih === "—") { showToast("Belum ada tulisan"); return; }
+      try { await navigator.clipboard.writeText(bersih); }
+      catch (err) {
+        const area = document.createElement("textarea");
+        area.value = bersih;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+      showToast("Tulisan tersalin");
+    }
+    function setMain() {
+      view = "main";
+      subjectId = null;
+      backBtn.hidden = true;
+      tabsEl.hidden = false;
+      titleEl.textContent = "CLASS IXH";
+      subtitleEl.textContent = tab === "jadwal" ? "trimakasih telah brkunjung" : tab === "catatan" ? "trimakasih telah brkunjung" : "trimakasih telah brkunjung";
+      document.querySelectorAll(".tab").forEach((button) => button.classList.toggle("active", button.dataset.tab === tab));
+    }
+    function renderTugas() {
+      setMain();
+      contentEl.innerHTML = '<section class="card"><div class="head"><span>plajaran</span><span>tugas</span></div>' +
+        subjects.map((item) => {
+          const text = baca(item.id, "tugas");
+          return '<article class="item"><div class="nama">' + item.short + ' =</div><div class="isi' + (text ? "" : " kosong") + '">' + (text || "—") + '</div><button class="salin" data-copy="' + item.id + '" data-jenis="tugas">Salin</button></article>';
+        }).join("") + "</section>";
+    }
+    function renderJadwal() {
+      setMain();
+      contentEl.innerHTML = '<h2 class="section-title"></h2><section class="card">' +
+        schedule.map((block) => '<div class="day"><strong>' + block.day + '</strong><div class="slot">' +
+          block.items.map((item) => "<span>" + item[0] + "</span>").join("") +
+          '</div><div class="time slot">' + block.items.map((item) => "<span>" + item[1] + "</span>").join("") +
+          "</div></div>").join("") + "</section>";
+    }
+    function renderCatatan() {
+      setMain();
+      contentEl.innerHTML = '<div class="list">' + subjects.map((item) =>
+        '<button class="pick" data-subject="' + item.id + '"><div><b>' + item.short + '</b><span>' + item.name + '</span></div><div>›</div></button>'
+      ).join("") + "</div>";
+    }
+    function renderSubject(id) {
+      const subject = subjects.find((item) => item.id === id);
+      view = "subject";
+      subjectId = id;
+      backBtn.hidden = false;
+      tabsEl.hidden = true;
+      titleEl.textContent = subject.short;
+      subtitleEl.textContent = subject.name;
+      contentEl.innerHTML = '<div class="list">' + Array.from({length: jumlahMateri}, (_, index) =>
+        '<button class="pick" data-materi="' + index + '"><div><b>' + namaMateri(id, index) + '</b><span>lembar putih</span></div><div>›</div></button>'
+      ).join("") + "</div>";
+    }
+    function renderMateri(index) {
+      const subject = subjects.find((item) => item.id === subjectId);
+      view = "materi";
+      backBtn.hidden = false;
+      tabsEl.hidden = true;
+      titleEl.textContent = namaMateri(subjectId, index);
+      subtitleEl.textContent = subject.short;
+      const text = baca(subjectId + "-" + index, "catatan");
+      contentEl.innerHTML = '<section class="lembar"><div class="isi' + (text ? "" : " kosong") + '">' +
+        (text || "Lembar putih") + '</div><button class="salin" id="salinLembar">Salin tulisan</button></section>';
+      document.getElementById("salinLembar").onclick = () => salin(text);
+    }
+    function render() {
+      if (tab === "jadwal") renderJadwal();
+      else if (tab === "catatan") renderCatatan();
+      else renderTugas();
+    }
+    tabsEl.onclick = (event) => {
+      const button = event.target.closest(".tab");
+      if (!button) return;
+      tab = button.dataset.tab;
+      render();
+    };
+    contentEl.onclick = (event) => {
+      const copyBtn = event.target.closest("[data-copy]");
+      if (copyBtn) { salin(baca(copyBtn.dataset.copy, copyBtn.dataset.jenis)); return; }
+      const subjectBtn = event.target.closest("[data-subject]");
+      if (subjectBtn) { renderSubject(subjectBtn.dataset.subject); return; }
+      const materiBtn = event.target.closest("[data-materi]");
+      if (materiBtn) renderMateri(Number(materiBtn.dataset.materi));
+    };
+    backBtn.onclick = () => { if (view === "materi") renderSubject(subjectId); else render(); };
+    render();
+  </script>
+</body>
+</html>
